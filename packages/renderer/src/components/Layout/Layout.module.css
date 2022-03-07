@@ -1,0 +1,10 @@
+.root {
+	display: flex;
+	overflow: hidden;
+}
+
+.main {
+	width: calc(100% - 50px);
+	background-color: #25292d;
+	color: #fff;
+}

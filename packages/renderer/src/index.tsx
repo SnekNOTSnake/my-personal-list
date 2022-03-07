@@ -1,11 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { RecoilRoot } from 'recoil'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import App from '@/App'
+import App from './pages/App'
+import { initializeSettings } from './util/settings'
+import '@fontsource/roboto'
+import './index.css'
+
+initializeSettings()
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<RecoilRoot>
+			<Router>
+				<App />
+			</Router>
+		</RecoilRoot>
 	</React.StrictMode>,
 	document.querySelector('#root'),
 )

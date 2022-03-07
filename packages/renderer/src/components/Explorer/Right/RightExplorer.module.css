@@ -1,0 +1,82 @@
+/* Scrollbar */
+.root ::-webkit-scrollbar {
+	width: 10px;
+}
+.root ::-webkit-scrollbar-track {
+	background: #191c1f;
+}
+.root ::-webkit-scrollbar-thumb {
+	background: #454c53;
+}
+
+.root {
+	display: flex;
+	flex-direction: column;
+	background-color: #191c1f;
+	padding: 1px;
+}
+
+.root .search {
+	position: relative;
+	margin-bottom: 1px;
+	background-color: #25292d;
+}
+
+.root .search input {
+	width: 100%;
+	padding: 8px 32px 8px 16px;
+	background-color: transparent;
+	border: none;
+}
+
+.root .order {
+	position: relative;
+	margin-bottom: 1px;
+	background-color: #25292d;
+	padding: 8px 16px;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.root .icon {
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	cursor: pointer;
+	transform: translateY(-50%);
+	font-size: 1.5em;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.root .descending {
+	transform: translateY(-50%) rotate(180deg);
+}
+
+.root .titles {
+	margin-bottom: 1px;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.root .titles li a {
+	display: block;
+	padding: 8px 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: 1px solid transparent;
+}
+
+.root .titles li a:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.root .titles li a.active {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.15);
+}
+
+.root .matches {
+	margin-top: auto;
+	background-color: #25292d;
+	padding: 8px 16px;
+}

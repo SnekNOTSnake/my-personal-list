@@ -1,0 +1,196 @@
+.root .container {
+	display: flex;
+	margin-bottom: 32px;
+}
+
+.root .container .poster {
+	width: 225px;
+	height: 315px;
+	border-radius: 4px;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.root .container .detail {
+	padding: 0 32px;
+}
+
+.root .container .detail .actions {
+	margin-bottom: 16px;
+}
+
+.root .container .detail .actions button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	background-color: rgba(255, 255, 255, 0.1);
+	width: 25px;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+	margin-right: 8px;
+	font-size: 1.2em;
+}
+
+.root .container .detail .actions button::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.root .container .detail .actions button:hover::before {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.root .container .detail h1 {
+	margin-bottom: 8px;
+}
+
+.root .container .detail .watchInfo {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.root .container .detail .watchInfo .watchedInfo {
+	margin-right: 24px;
+}
+
+.root .container .detail .tags {
+	margin-bottom: 24px;
+}
+
+.root .container .detail .tags li {
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+	display: inline-block;
+	padding: 2px 8px;
+	margin-right: 8px;
+	color: #333;
+	background-color: #fff;
+	border-radius: 4px;
+	text-transform: capitalize;
+}
+
+.root .container .detail .tags li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root .container .detail .tags li:hover::before {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+
+.root .container .detail .additionalInfo ul {
+	columns: 2;
+}
+
+.root .container .detail .additionalInfo li {
+	margin-bottom: 4px;
+}
+
+.root .notes {
+	padding: 8px 24px;
+	margin-bottom: 32px;
+}
+
+.root .related {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	margin-bottom: 32px;
+}
+
+.root .related .showToggler {
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+	display: flex;
+	font-size: larger;
+	padding: 8px 24px 8px 20px;
+	background-color: #2f80ed;
+	border-radius: 4px;
+}
+
+.root .related .showToggler::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root .related .showToggler:hover::before {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.root .related .showToggler svg {
+	transform: rotate(180deg);
+	font-size: 1.5em;
+	margin-right: 4px;
+}
+
+.root .related.active .showToggler svg {
+	transform: rotate(0deg);
+}
+
+.root .related .titles {
+	padding: 24px;
+	display: none;
+}
+
+.root .related .titles li {
+	margin-bottom: 8px;
+	text-transform: capitalize;
+}
+
+.root .related .titles li:last-child {
+	margin-bottom: 0;
+}
+
+.root .related .titles li a:hover {
+	text-decoration: underline;
+}
+
+.root .related.active .titles {
+	display: block;
+}
+
+.root .episodes .filenameToggler {
+	display: flex;
+	font-size: 1.2em;
+	margin-bottom: 16px;
+}
+
+.root .episodes .filenameToggler svg {
+	font-size: 1.2em;
+	margin-right: 8px;
+}
+
+.root .episodes li {
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	padding: 8px 16px;
+	margin: 0 16px 16px 0px;
+	text-align: center;
+	min-width: 75px;
+}

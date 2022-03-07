@@ -1,0 +1,47 @@
+.root {
+	position: relative;
+	width: 50px;
+	min-height: 100vh;
+}
+
+.root .menu {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	width: 50px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+}
+
+.root .menu h2 {
+	margin: 0;
+	color: #333;
+	font-weight: normal;
+}
+
+.root .menu a {
+	display: block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 100%;
+	text-decoration: none;
+	color: #333;
+}
+
+.root .menu a.active {
+	color: #fff;
+	background-color: #2f80ed;
+}
+
+.root .menu .icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.5em;
+}
+
+.root .menu .settings {
+	margin-top: auto;
+}

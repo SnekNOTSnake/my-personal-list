@@ -1,0 +1,23 @@
+.root {
+	width: 100%;
+	max-width: 768px;
+}
+
+.root .chart {
+	margin-bottom: 24px;
+}
+
+.root .totals {
+	display: flex;
+	justify-content: space-around;
+}
+
+.root .totals .number {
+	font-size: 4em;
+	text-align: center;
+}
+
+.root .totals .text {
+	font-size: 1.2em;
+	text-align: center;
+}

@@ -1,0 +1,103 @@
+.left {
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+}
+
+/* Scrollbar */
+.left ::-webkit-scrollbar {
+	width: 10px;
+}
+.left ::-webkit-scrollbar-track {
+	background: #25292d;
+}
+.left ::-webkit-scrollbar-thumb {
+	background: #454c53;
+}
+
+.left li {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 8px 16px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.left li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 4px;
+	background-color: transparent;
+}
+
+.left li::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: transparent;
+}
+
+.left li:hover::after {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.left li.active {
+	background-color: rgba(33, 150, 83, 0.15);
+}
+
+.left li.active::before {
+	background-color: rgba(33, 150, 83);
+}
+
+.left li.disabled {
+	background-color: rgba(235, 87, 87, 0.15);
+}
+
+.left li.disabled::before {
+	background-color: rgba(235, 87, 87);
+}
+
+.left li .grow {
+	flex-grow: 1;
+}
+
+.left li span {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.left .clear {
+	display: flex;
+	padding: 8px 16px;
+	height: 34px;
+}
+
+.left .clear button {
+	display: inline-flex;
+	align-items: flex-end;
+	color: #fff;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	border-radius: 4;
+}
+
+.left .genres {
+	overflow-y: auto;
+	height: calc(100% - 34px);
+}
+
+.left .icon {
+	font-size: 1.3em;
+	margin-right: 4px;
+}

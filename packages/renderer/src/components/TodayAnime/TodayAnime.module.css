@@ -1,0 +1,19 @@
+.root .posters {
+	display: flex;
+	max-width: 768px;
+	margin-bottom: 64px;
+}
+
+.root .poster {
+	width: 100%;
+	aspect-ratio: 225 / 315;
+	border-radius: 4px;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-right: 16px;
+}
+
+.root .poster:last-child {
+	margin-right: 0;
+}
