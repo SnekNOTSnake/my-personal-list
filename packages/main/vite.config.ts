@@ -8,6 +8,7 @@ export default defineConfig({
 	plugins: [esm2cjs([])],
 	build: {
 		outDir: '../../dist/main',
+		emptyOutDir: true,
 		lib: {
 			entry: 'index.ts',
 			formats: ['cjs'],

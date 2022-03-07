@@ -9,7 +9,7 @@ import { createMainWindow, win } from './windowManager'
 app.on('ready', () => {
 	createMainWindow()
 	initializeIpcEvents()
-	installExtension(REACT_DEVELOPER_TOOLS)
+	installExtension(REACT_DEVELOPER_TOOLS.id)
 
 	app.on('activate', () => {
 		// On macOS it's common to re-create a window in the app when the
