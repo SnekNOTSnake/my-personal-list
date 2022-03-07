@@ -3,17 +3,18 @@
 	"description": "My personal anime tracking list",
 	"version": "0.1.0",
 	"scripts": {
-		"start": "yarn start:renderer",
-		"start:main": "NODE_ENV=development electron -r ts-node/register/transpile-only ./packages/main/index.ts",
-		"start:renderer": "NODE_ENV=development ts-node --transpile-only scripts/watch.js",
-		"dev": "node scripts/watch.mjs",
-		"build": "yarn run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
-		"typecheck": "tsc --noEmit"
+		"start": "concurrently \"yarn start:renderer\" \"yarn start:main\" --kill-others",
+		"start:main": "tsc && electron .",
+		"start:renderer": "vite dev",
+		"build": "yarn run typecheck && yarn build:renderer && yarn build:main",
+		"build:main": "NODE_ENV=production tsc --build && NODE_ENV=production electron-builder --config .electron-builder.config.js",
+		"build:renderer": "NODE_ENV=production vite build",
+		"typecheck": "tsc --noEmit && tsc --noEmit --project packages/renderer"
 	},
 	"private": true,
 	"author": "Akhmad Najmuddin <udintobe@gmail.com>",
 	"license": "MIT",
-	"main": "dist/main/index.cjs",
+	"main": "dist/main/index.js",
 	"dependencies": {
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
@@ -22,6 +23,7 @@
 		"@types/react": "^17.0.33",
 		"@types/react-dom": "^17.0.10",
 		"@vitejs/plugin-react": "^1.0.7",
+		"concurrently": "^7.0.0",
 		"electron": "17.0.1",
 		"electron-builder": "^22.14.13",
 		"electron-devtools-installer": "^3.2.0",

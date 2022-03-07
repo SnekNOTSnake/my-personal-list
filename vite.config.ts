@@ -9,7 +9,8 @@ export default defineConfig({
 	base: './',
 	build: {
 		sourcemap: process.env.NODE_ENV !== 'production',
-		outDir: 'dist/renderer',
+		outDir: '../../dist/renderer',
+		emptyOutDir: true,
 	},
 	resolve: {
 		alias: {
