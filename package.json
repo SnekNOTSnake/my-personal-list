@@ -3,6 +3,9 @@
 	"description": "My personal anime tracking list",
 	"version": "0.1.0",
 	"scripts": {
+		"start": "yarn start:renderer",
+		"start:main": "NODE_ENV=development electron -r ts-node/register/transpile-only ./packages/main/index.ts",
+		"start:renderer": "NODE_ENV=development ts-node --transpile-only scripts/watch.js",
 		"dev": "node scripts/watch.mjs",
 		"build": "yarn run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
 		"typecheck": "tsc --noEmit"
@@ -22,6 +25,7 @@
 		"electron": "17.0.1",
 		"electron-builder": "^22.14.13",
 		"electron-devtools-installer": "^3.2.0",
+		"ts-node": "^10.7.0",
 		"typescript": "^4.5.4",
 		"vite": "^2.8.0",
 		"vite-plugin-resolve": "^1.8.0"

@@ -20,7 +20,7 @@ export const createMainWindow = () => {
 		icon: getAssetPath('icon.png'),
 		autoHideMenuBar: true,
 		webPreferences: {
-			preload: path.resolve(__dirname, '../common/preload.cjs'),
+			preload: path.resolve(__dirname, '../common/preload.js'),
 		},
 	})
 
