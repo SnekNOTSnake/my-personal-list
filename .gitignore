@@ -133,6 +133,7 @@ dist
 .DS_Store
 
 # Releases
+release
 release/app/dist
 release/build
 .erb/dll
