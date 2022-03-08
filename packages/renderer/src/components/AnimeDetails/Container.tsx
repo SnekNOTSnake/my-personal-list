@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 
@@ -10,7 +10,9 @@ import { seriesState } from '../../recoil-states/series'
 const Container: React.FC = () => {
 	const { seriesId } = useParams()
 	const series = useRecoilValue(seriesState).find((el) => el.id === seriesId)
+
 	const [isEditing, setIsEditing] = React.useState(false)
+	useEffect(() => setIsEditing(false), [seriesId])
 
 	if (!series) return <div>404 Series not found</div>
 

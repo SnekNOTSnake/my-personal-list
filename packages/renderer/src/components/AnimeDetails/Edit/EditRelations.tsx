@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { seriesState } from '../../../recoil-states/series'
@@ -12,6 +12,8 @@ type Props = {
 
 const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 	const series = useRecoilValue(seriesState)
+
+	const [focused, setFocused] = useState(false)
 
 	const [relatedInput, setRelatedInput] = useState('')
 	const onRelatedChange = (e: InputChange) => setRelatedInput(e.target.value)
@@ -51,21 +53,26 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 		<div className={[styles.labeledInput, styles.relations].join(' ')}>
 			<div className={styles.label}>Add relations</div>
 			<div className={styles.relationInput}>
-				<input value={relatedInput} onChange={onRelatedChange} type='text' />
-				<div className={styles.relationType}>
-					<select onChange={onRelTypeChange}>
-						<option value='sequel'>Sequel</option>
-						<option value='prequel'>Prequel</option>
-						<option value='side-story'>Side Story</option>
-						<option value='spin-off'>Spin Off</option>
-						<option value='parent'>Parent</option>
-						<option value='summary'>Summary</option>
-						<option value='alternative-version'>Alternative Version</option>
-					</select>
-				</div>
+				<input
+					value={relatedInput}
+					onChange={onRelatedChange}
+					type='text'
+					onFocus={() => setFocused(true)}
+					onBlur={() => setTimeout(() => setFocused(false), 50)}
+				/>
+				<select className={styles.relationType} onChange={onRelTypeChange}>
+					<option value='sequel'>Sequel</option>
+					<option value='prequel'>Prequel</option>
+					<option value='side-story'>Side Story</option>
+					<option value='spin-off'>Spin Off</option>
+					<option value='parent'>Parent</option>
+					<option value='summary'>Summary</option>
+					<option value='alternative-version'>Alternative Version</option>
+				</select>
 				<div
-					tabIndex={0 /* Allow div focus */}
-					className={styles.seriesPopover}
+					className={[styles.seriesPopover, focused ? styles.active : ''].join(
+						' ',
+					)}
 				>
 					<ul>
 						{localFilteredSeries.map((el) => (

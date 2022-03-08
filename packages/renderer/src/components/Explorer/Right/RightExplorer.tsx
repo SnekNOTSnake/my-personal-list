@@ -69,7 +69,7 @@ const RightExplorer: React.FC = () => {
 								className={({ isActive }) => (isActive ? styles.active : '')}
 								to={`/explore/${el.id}`}
 							>
-								{el.title}
+								<span>{el.title}</span>
 							</NavLink>
 						</li>
 					))}

@@ -76,6 +76,12 @@ input:focus {
 	color: #fff;
 }
 
+select {
+	cursor: pointer;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
 p {
 	margin: 0;
 }
