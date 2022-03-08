@@ -10,7 +10,7 @@ import {
 } from 'react-icons/md'
 
 import styles from './Navigation.module.css'
-import { themeState } from '@/recoil-states/theme'
+import { themeState } from '@/store/theme'
 
 const Navigation: React.FC = () => {
 	const [theme, setTheme] = useRecoilState(themeState)

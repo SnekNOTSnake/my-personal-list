@@ -12,29 +12,16 @@ import { Bar } from 'react-chartjs-2'
 
 import styles from './Stockpile.module.css'
 import { useRecoilValue } from 'recoil'
-import { themeState } from '@/recoil-states/theme'
+import { themeState } from '@/store/theme'
+import { seriesStats } from '@/store/series'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
-const labels = [
-	'Action',
-	'Adventure',
-	'Comedy',
-	'Ecchi',
-	'Gourmet',
-	'Music',
-	'Psychology',
-	'Romance',
-	'Supernatural',
-	'Music',
-	'Psychology',
-	'Romance',
-	'Supernatural',
-]
 
 const Stockpile: React.FC = () => {
 	const theme = useRecoilValue(themeState)
 	const isDark = theme === 'dark'
+
+	const stats = useRecoilValue(seriesStats)
 
 	const options = {
 		responsive: true,
@@ -55,22 +42,26 @@ const Stockpile: React.FC = () => {
 					borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : '#777',
 					tickColor: 'transparent',
 				},
-				ticks: { stepSize: 200 },
+				ticks: {
+					stepSize: Math.ceil(
+						Math.max(...stats.tags.map((tag) => tag.epsNum)) / 4,
+					),
+				},
 			},
 		},
 	}
 
 	const data = {
-		labels,
+		labels: stats.tags.map((tag) => tag.name),
 		datasets: [
 			{
 				label: 'Watched',
-				data: [210, 245, 130, 210, 250, 100, 175, 210, 75, 100, 175, 210, 75],
+				data: stats.tags.map((tag) => tag.epsWatched),
 				backgroundColor: '#2f80ed',
 			},
 			{
-				label: 'Fresh',
-				data: [410, 680, 605, 410, 670, 275, 595, 410, 220, 275, 595, 410, 220],
+				label: 'Total',
+				data: stats.tags.map((tag) => tag.epsNum),
 				backgroundColor: isDark ? '#fff' : '#ccc',
 			},
 		],
@@ -83,11 +74,11 @@ const Stockpile: React.FC = () => {
 			</div>
 			<div className={styles.totals}>
 				<div>
-					<div className={styles.number}>620</div>
+					<div className={styles.number}>{stats.epsFresh}</div>
 					<div className={styles.text}>Fresh eps</div>
 				</div>
 				<div>
-					<div className={styles.number}>43</div>
+					<div className={styles.number}>{stats.totalSeries}</div>
 					<div className={styles.text}>Fresh series</div>
 				</div>
 			</div>

@@ -21,22 +21,41 @@ export const seriesFilter = atom({
 	},
 })
 
-export const seriesTags = selector({
-	key: 'seriesTags',
+export const seriesStats = selector({
+	key: 'seriesStats',
 	get: ({ get }) => {
 		const series = get(seriesState)
 		const tagsSet = new Set<string>()
 		series.forEach((el) => el.tags.forEach((tag) => tagsSet.add(tag)))
 
-		const tags: { name: string; count: number }[] = []
-		tagsSet.forEach((tag) =>
+		const tags: {
+			name: string
+			count: number
+			epsNum: number
+			epsWatched: number
+		}[] = []
+
+		tagsSet.forEach((tag) => {
+			const filtered = series.filter((el) => el.tags.includes(tag))
 			tags.push({
 				name: tag,
-				count: series.filter((el) => el.tags.includes(tag)).length,
-			}),
-		)
+				count: filtered.length,
+				epsNum: filtered.map((el) => el.epsNum).reduce((p, c) => p + c),
+				epsWatched: filtered.map((el) => el.epsWatched).reduce((p, c) => p + c),
+			})
+		})
+		tags.sort((a, b) => a.name.localeCompare(b.name))
 
-		return tags
+		const stats = {
+			tags,
+			epsFresh: series
+				.filter((el) => el.tags.length > 0)
+				.map((tag) => tag.epsNum - tag.epsWatched)
+				.reduce((p, c) => p + c),
+			totalSeries: series.filter((el) => el.epsWatched === 0).length,
+		}
+
+		return stats
 	},
 })
 

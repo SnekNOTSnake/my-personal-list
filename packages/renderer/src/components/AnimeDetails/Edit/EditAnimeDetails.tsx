@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { seriesState } from '../../../recoil-states/series'
+import { seriesState } from '../../../store/series'
 
 import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
@@ -60,7 +60,15 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		setSeries((prevVal) => {
 			const index = prevVal.findIndex((el) => el.id === data.id)
 			const newSeriesArr = [...prevVal]
-			newSeriesArr.splice(index, 1, { ...prevVal[index], ...input })
+			newSeriesArr.splice(index, 1, {
+				...prevVal[index],
+				...input,
+				epsNum: Number(input.epsNum),
+				epsWatched: Number(input.epsWatched),
+				rewatchCount: Number(input.rewatchCount),
+				res: Number(input.res),
+				duration: Number(input.duration),
+			})
 			return newSeriesArr
 		})
 

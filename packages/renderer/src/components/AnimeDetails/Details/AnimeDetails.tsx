@@ -9,7 +9,7 @@ import {
 import { useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 
-import { seriesFilter } from '../../../recoil-states/series'
+import { seriesFilter } from '../../../store/series'
 import styles from './AnimeDetails.module.css'
 
 type Props = { edit: () => any; data: Series }
