@@ -58,7 +58,7 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 					onChange={onRelatedChange}
 					type='text'
 					onFocus={() => setFocused(true)}
-					onBlur={() => setTimeout(() => setFocused(false), 50)}
+					onBlur={() => setTimeout(() => setFocused(false), 100)}
 				/>
 				<select className={styles.relationType} onChange={onRelTypeChange}>
 					<option value='sequel'>Sequel</option>

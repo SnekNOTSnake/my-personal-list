@@ -76,7 +76,7 @@ export const filteredSeries = selector({
 			)
 			.filter((el) =>
 				filter.tags.deactive.length
-					? filter.tags.deactive.some((tag) => !el.tags.includes(tag))
+					? filter.tags.deactive.every((tag) => !el.tags.includes(tag))
 					: true,
 			)
 
