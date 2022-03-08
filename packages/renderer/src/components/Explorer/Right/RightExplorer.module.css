@@ -1,26 +1,15 @@
-/* Scrollbar */
-.root ::-webkit-scrollbar {
-	width: 10px;
-}
-.root ::-webkit-scrollbar-track {
-	background: #191c1f;
-}
-.root ::-webkit-scrollbar-thumb {
-	background: #454c53;
-}
-
 .root {
 	display: flex;
 	flex-direction: column;
-	background-color: #191c1f;
+	background-color: var(--background-secondary);
 	padding: 0 1px;
 }
 
 .root .toolBar {
 	display: flex;
 	position: relative;
-	border-bottom: 1px solid #191c1f;
-	background-color: #25292d;
+	border-bottom: 1px solid var(--background-secondary);
+	background-color: var(--background);
 	height: 35px;
 }
 
@@ -40,17 +29,11 @@
 	padding: 0 16px;
 	background-color: transparent;
 	border: none;
-	color: #fff;
-}
-
-.root .toolBar select option {
-	color: #333;
 }
 
 .root .toolBar .icon {
 	cursor: pointer;
 	font-size: 1.5em;
-	color: rgba(255, 255, 255, 0.5);
 	margin-right: 8px;
 }
 
@@ -76,12 +59,12 @@
 }
 
 .root .titles li a:hover {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: var(--background-light);
 }
 
 .root .titles li a.active {
-	background-color: rgba(255, 255, 255, 0.1);
-	border-color: rgba(255, 255, 255, 0.15);
+	background-color: var(--background-light);
+	border-color: var(--border);
 }
 
 .root .titles li a > span {
@@ -95,6 +78,6 @@
 	align-items: center;
 	padding: 0 16px;
 	margin-top: auto;
-	background-color: #25292d;
+	background-color: var(--background);
 	height: 35px;
 }

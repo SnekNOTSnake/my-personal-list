@@ -2,25 +2,6 @@
 	max-width: 768px;
 }
 
-.root input,
-table,
-textarea {
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	background-color: rgba(255, 255, 255, 0.05);
-}
-
-.root input::placeholder {
-	color: rgba(255, 255, 255, 0.5);
-}
-
-.root input {
-	display: block;
-	border-radius: 4px;
-	padding: 8px 16px;
-	color: #fff;
-	width: 100%;
-}
-
 .root input.title {
 	width: 400px;
 }
@@ -28,13 +9,13 @@ textarea {
 .root table {
 	border-collapse: collapse;
 	margin: 24px 0;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	width: 100%;
 }
 
 .root th,
 .root td {
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid var(--border);
 }
 
 .root table th {
@@ -44,21 +25,15 @@ textarea {
 }
 
 .root table input {
-	width: 100%;
-	margin: 0;
 	border-radius: 0;
 	background-color: transparent;
 	border: none;
 }
 
 .root textarea {
-	width: 100%;
 	height: 100px;
 	resize: none;
-	color: #fff;
-	padding: 16px;
 	line-height: 1.5;
-	border-radius: 4px;
 	margin-bottom: 16px;
 }
 
@@ -86,9 +61,8 @@ textarea {
 	user-select: none;
 	position: relative;
 	display: inline-block;
-	background-color: #fff;
-	color: #333;
-	border-radius: 4px;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
 	padding: 2px 16px;
 	margin-right: 8px;
 }
@@ -105,7 +79,7 @@ textarea {
 }
 
 .root .tags li:hover::before {
-	background-color: rgba(0, 0, 0, 0.15);
+	background-color: var(--background-light);
 }
 
 .root .relations .relationInput {
@@ -113,19 +87,10 @@ textarea {
 	position: relative;
 }
 
-.root .relations .relationInput .relationType {
+.root .relations .relationInput select.relationType {
 	display: flex;
-	color: #fff;
-	background-color: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.15);
 	align-items: center;
-	padding: 8px 16px;
-	border-radius: 4px;
 	margin-left: 8px;
-}
-
-.root .relations .relationInput .relationType option {
-	color: #333;
 }
 
 .root .relations .relationInput .seriesPopover {
@@ -135,10 +100,10 @@ textarea {
 	left: 0;
 	min-width: 350px;
 	min-height: 100px;
-	background-color: #303337;
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	background-color: var(--background-secondary);
+	border: 1px solid var(--border);
 	display: none;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	padding: 8px 0;
 	user-select: none;
 }
@@ -165,7 +130,7 @@ textarea {
 }
 
 .root .relations .relationInput .seriesPopover li:hover::before {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: var(--background-light);
 }
 
 .root .relations input {
@@ -180,11 +145,10 @@ textarea {
 	position: relative;
 	display: inline-flex;
 	cursor: pointer;
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 4px;
+	background-color: var(--background-light);
+	border-radius: var(--border-radius);
 	text-transform: capitalize;
 	margin-bottom: 8px;
-	color: #fff;
 }
 
 .root .relations .titles li > div::before {
@@ -199,18 +163,18 @@ textarea {
 }
 
 .root .relations .titles li > div:hover::before {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: var(--background-light);
 }
 
 .root .relations .titles li .relatedType {
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 4px;
+	background-color: var(--background-light);
+	border-radius: var(--border-radius);
 	padding: 8px 16px;
 }
 
 .root .relations .titles li .relatedType {
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 4px;
+	background-color: var(--background-light);
+	border-radius: var(--border-radius);
 	padding: 8px 16px;
 }
 
@@ -231,14 +195,14 @@ textarea {
 }
 
 .root button {
-	background-color: rgba(255, 255, 255, 0.15);
-	color: #fff;
-	border-radius: 4px;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
 	border: none;
 	padding: 8px 16px;
 	margin-right: 8px;
 }
 
 .root button.save {
-	background-color: #2f80ed;
+	background-color: var(--color-primary);
+	color: #fff;
 }

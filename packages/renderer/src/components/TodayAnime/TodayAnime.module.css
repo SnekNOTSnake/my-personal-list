@@ -7,7 +7,7 @@
 .root .poster {
 	width: 100%;
 	aspect-ratio: 225 / 315;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

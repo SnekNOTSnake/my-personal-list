@@ -5,6 +5,6 @@
 
 .main {
 	width: calc(100% - 50px);
-	background-color: #25292d;
-	color: #fff;
+	background-color: var(--background);
+	color: var(--text-primary);
 }

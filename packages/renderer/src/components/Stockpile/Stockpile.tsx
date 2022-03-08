@@ -11,32 +11,10 @@ import {
 import { Bar } from 'react-chartjs-2'
 
 import styles from './Stockpile.module.css'
+import { useRecoilValue } from 'recoil'
+import { themeState } from '@/recoil-states/theme'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
-const options = {
-	responsive: true,
-	scales: {
-		x: {
-			stacked: true,
-			grid: {
-				display: false,
-				tickColor: 'transparent',
-				borderColor: 'rgba(255, 255, 255, 0.1)',
-			},
-		},
-		y: {
-			stacked: true,
-			grid: {
-				color: 'rgba(255, 255, 255, 0.1)',
-				borderDash: [4, 4],
-				borderColor: 'rgba(255, 255, 255, 0.1)',
-				tickColor: 'transparent',
-			},
-			ticks: { stepSize: 200 },
-		},
-	},
-}
 
 const labels = [
 	'Action',
@@ -54,23 +32,50 @@ const labels = [
 	'Supernatural',
 ]
 
-export const data = {
-	labels,
-	datasets: [
-		{
-			label: 'Watched',
-			data: [210, 245, 130, 210, 250, 100, 175, 210, 75, 100, 175, 210, 75],
-			backgroundColor: '#2f80ed',
-		},
-		{
-			label: 'Fresh',
-			data: [410, 680, 605, 410, 670, 275, 595, 410, 220, 275, 595, 410, 220],
-			backgroundColor: '#fff',
-		},
-	],
-}
-
 const Stockpile: React.FC = () => {
+	const theme = useRecoilValue(themeState)
+	const isDark = theme === 'dark'
+
+	const options = {
+		responsive: true,
+		scales: {
+			x: {
+				stacked: true,
+				grid: {
+					display: false,
+					tickColor: 'transparent',
+					borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : '#777',
+				},
+			},
+			y: {
+				stacked: true,
+				grid: {
+					color: isDark ? 'rgba(255, 255, 255, 0.1)' : '#777',
+					borderDash: [4, 4],
+					borderColor: isDark ? 'rgba(255, 255, 255, 0.1)' : '#777',
+					tickColor: 'transparent',
+				},
+				ticks: { stepSize: 200 },
+			},
+		},
+	}
+
+	const data = {
+		labels,
+		datasets: [
+			{
+				label: 'Watched',
+				data: [210, 245, 130, 210, 250, 100, 175, 210, 75, 100, 175, 210, 75],
+				backgroundColor: '#2f80ed',
+			},
+			{
+				label: 'Fresh',
+				data: [410, 680, 605, 410, 670, 275, 595, 410, 220, 275, 595, 410, 220],
+				backgroundColor: isDark ? '#fff' : '#ccc',
+			},
+		],
+	}
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.chart}>

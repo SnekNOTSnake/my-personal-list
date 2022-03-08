@@ -6,7 +6,7 @@
 .root .container .poster {
 	width: 225px;
 	height: 315px;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -26,9 +26,8 @@
 	justify-content: center;
 	position: relative;
 	border: none;
-	border-radius: 4px;
+	border-radius: var(--border-radius);
 	color: #fff;
-	background-color: rgba(255, 255, 255, 0.1);
 	width: 25px;
 	height: 25px;
 	margin: 0;
@@ -45,7 +44,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0);
+	background-color: transparent;
 }
 
 .root .container .detail .actions button:hover::before {
@@ -76,9 +75,9 @@
 	display: inline-block;
 	padding: 2px 8px;
 	margin-right: 8px;
-	color: #333;
-	background-color: #fff;
-	border-radius: 4px;
+	color: var(--text-primary);
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
 	text-transform: capitalize;
 }
 
@@ -94,7 +93,7 @@
 }
 
 .root .container .detail .tags li:hover::before {
-	background-color: rgba(0, 0, 0, 0.15);
+	background-color: var(--background-light);
 }
 
 .root .container .detail .additionalInfo ul {
@@ -111,8 +110,8 @@
 }
 
 .root .related {
-	background-color: rgba(255, 255, 255, 0.1);
-	border-radius: 4px;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
 	margin-bottom: 32px;
 }
 
@@ -123,8 +122,9 @@
 	display: flex;
 	font-size: larger;
 	padding: 8px 24px 8px 20px;
-	background-color: #2f80ed;
-	border-radius: 4px;
+	background-color: var(--color-primary);
+	border-radius: var(--border-radius);
+	color: #fff;
 }
 
 .root .related .showToggler::before {
@@ -187,8 +187,8 @@
 
 .root .episodes li {
 	display: inline-block;
-	background-color: rgba(255, 255, 255, 0.1);
-	border-radius: 4px;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
 	padding: 8px 16px;
 	margin: 0 16px 16px 0px;
 	text-align: center;

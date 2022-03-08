@@ -2,6 +2,7 @@
 	position: relative;
 	width: 50px;
 	min-height: 100vh;
+	background-color: var(--foreground);
 }
 
 .root .menu {
@@ -14,24 +15,18 @@
 	bottom: 0;
 }
 
-.root .menu h2 {
-	margin: 0;
-	color: #333;
-	font-weight: normal;
-}
-
 .root .menu a {
 	display: block;
 	position: relative;
 	width: 100%;
 	padding-bottom: 100%;
 	text-decoration: none;
-	color: #333;
+	color: var(--text-contrast);
 }
 
 .root .menu a.active {
 	color: #fff;
-	background-color: #2f80ed;
+	background-color: var(--color-primary);
 }
 
 .root .menu .icon {
@@ -44,4 +39,5 @@
 
 .root .menu .settings {
 	margin-top: auto;
+	cursor: pointer;
 }
