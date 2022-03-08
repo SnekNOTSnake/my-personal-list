@@ -17,9 +17,10 @@
 
 .left li {
 	display: flex;
+	height: 35px;
+	padding: 0 16px;
 	align-items: center;
 	position: relative;
-	padding: 8px 16px;
 	cursor: pointer;
 	white-space: nowrap;
 	overflow: hidden;
@@ -78,8 +79,10 @@
 
 .left .clear {
 	display: flex;
-	padding: 8px 16px;
-	height: 34px;
+	align-items: center;
+	padding: 0 16px;
+	height: 35px;
+	border-bottom: 1px solid #191c1f;
 }
 
 .left .clear button {
@@ -94,7 +97,7 @@
 
 .left .genres {
 	overflow-y: auto;
-	height: calc(100% - 34px);
+	height: calc(100% - 35px);
 }
 
 .left .icon {

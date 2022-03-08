@@ -29,29 +29,37 @@ const RightExplorer: React.FC = () => {
 
 	return (
 		<div className={styles.root}>
-			<div className={styles.search}>
-				<input
-					type='search'
-					placeholder='Search'
-					value={filter.query}
-					onChange={onSearchChange}
-				/>
-				<MdSearch className={styles.icon} />
+			<div className={styles.toolBar}>
+				<div>
+					<input
+						type='search'
+						placeholder='Search'
+						value={filter.query}
+						onChange={onSearchChange}
+					/>
+				</div>
+				<div>
+					<MdSearch className={styles.icon} />
+				</div>
 			</div>
-			<div className={styles.order}>
-				<select value={filter.order.by} onChange={onOrderByChange}>
-					<option value='title'>Title</option>
-					<option value='duration'>Duration</option>
-					<option value='resolution'>Resolution</option>
-					<option value='epsNum'>Number of Episodes</option>
-				</select>
-				<MdOutlineExpandMore
-					onClick={onAscDescClick}
-					className={[
-						styles.icon,
-						...[filter.order.descending ? styles.descending : ''],
-					].join(' ')}
-				/>
+			<div className={styles.toolBar}>
+				<div>
+					<select value={filter.order.by} onChange={onOrderByChange}>
+						<option value='title'>Title</option>
+						<option value='duration'>Duration</option>
+						<option value='resolution'>Resolution</option>
+						<option value='epsNum'>Number of Episodes</option>
+					</select>
+				</div>
+				<div>
+					<MdOutlineExpandMore
+						onClick={onAscDescClick}
+						className={[
+							styles.icon,
+							...[filter.order.descending ? styles.descending : ''],
+						].join(' ')}
+					/>
+				</div>
 			</div>
 			<div className={styles.titles}>
 				<ul>

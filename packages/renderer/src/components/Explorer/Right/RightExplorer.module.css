@@ -13,53 +13,71 @@
 	display: flex;
 	flex-direction: column;
 	background-color: #191c1f;
-	padding: 1px;
+	padding: 0 1px;
 }
 
-.root .search {
+.root .toolBar {
+	display: flex;
 	position: relative;
-	margin-bottom: 1px;
+	border-bottom: 1px solid #191c1f;
 	background-color: #25292d;
+	height: 35px;
 }
 
-.root .search input {
+.root .toolBar > div {
+	display: flex;
+	align-items: center;
+}
+
+.root .toolBar > div:first-child {
 	width: 100%;
-	padding: 8px 32px 8px 16px;
+}
+
+.root .toolBar input,
+.root .toolBar select {
+	width: 100%;
+	height: 100%;
+	padding: 0 16px;
 	background-color: transparent;
 	border: none;
+	color: #fff;
 }
 
-.root .order {
-	position: relative;
-	margin-bottom: 1px;
-	background-color: #25292d;
-	padding: 8px 16px;
-	color: rgba(255, 255, 255, 0.5);
-}
-
-.root .icon {
-	position: absolute;
-	top: 50%;
-	right: 16px;
+.root .toolBar select {
 	cursor: pointer;
-	transform: translateY(-50%);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.root .toolBar select option {
+	color: #333;
+}
+
+.root .toolBar .icon {
+	cursor: pointer;
 	font-size: 1.5em;
 	color: rgba(255, 255, 255, 0.5);
+	margin-right: 8px;
 }
 
-.root .descending {
-	transform: translateY(-50%) rotate(180deg);
+.root .toolBar .descending {
+	transform: rotate(180deg);
 }
 
 .root .titles {
-	margin-bottom: 1px;
 	overflow-y: auto;
-	height: 100%;
+	height: calc(100% - 105px);
+}
+
+.root .titles li {
+	height: 35px;
 }
 
 .root .titles li a {
-	display: block;
-	padding: 8px 16px;
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	height: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -76,7 +94,10 @@
 }
 
 .root .matches {
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
 	margin-top: auto;
 	background-color: #25292d;
-	padding: 8px 16px;
+	height: 35px;
 }
