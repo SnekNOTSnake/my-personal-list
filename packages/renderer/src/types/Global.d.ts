@@ -25,11 +25,11 @@ interface Metadata {
 interface Series extends Metadata {
 	id: string
 	title: string
+	regular: boolean
 	tags: string[]
 	epsNum: number
 	epsWatched: number
 	rewatchCount: number
-	suspended: boolean
 	notes: string
 	related: Relation[]
 }

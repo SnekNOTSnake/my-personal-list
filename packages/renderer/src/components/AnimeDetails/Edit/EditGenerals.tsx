@@ -8,24 +8,36 @@ type Props = {
 		epsNum: number
 		epsWatched: number
 		rewatchCount: number
+		regular: boolean
 	}
 	onInputChange: (e: InputChange | TextAreaChange) => any
 }
 
 const EditGenerals: React.FC<Props> = ({
-	generalInfo: { epsNum, epsWatched, rewatchCount, title },
+	generalInfo: { epsNum, epsWatched, rewatchCount, title, regular },
 	onInputChange,
 }) => (
 	<div>
-		<div className={styles.labeledInput}>
-			<div className={styles.label}>Title</div>
-			<input
-				className={styles.title}
-				type='text'
-				name='title'
-				onChange={onInputChange}
-				value={title}
-			/>
+		<div className={styles.numberInputs}>
+			<div className={styles.labeledInput}>
+				<div className={styles.label}>Title</div>
+				<input
+					type='text'
+					name='title'
+					onChange={onInputChange}
+					value={title}
+				/>
+			</div>
+			<div className={styles.labeledInput}>
+				<div className={styles.label}>Regular Series</div>
+				<input
+					className={styles.regular}
+					type='checkbox'
+					checked={regular}
+					onChange={onInputChange}
+					name='regular'
+				/>
+			</div>
 		</div>
 		<div className={styles.numberInputs}>
 			<div className={styles.labeledInput}>

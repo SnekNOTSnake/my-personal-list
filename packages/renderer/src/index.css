@@ -109,6 +109,11 @@ input[type='search']::-webkit-search-results-decoration {
 	display: none;
 }
 
+input[type='checkbox'],
+select {
+	cursor: pointer;
+}
+
 input,
 table,
 textarea,
@@ -128,7 +133,6 @@ select {
 }
 
 select {
-	cursor: pointer;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }

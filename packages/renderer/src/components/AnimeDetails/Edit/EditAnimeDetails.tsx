@@ -28,6 +28,7 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		notes: data.notes,
 		tags: data.tags,
 		related: data.related,
+		regular: data.regular,
 	}
 
 	const setSeries = useSetRecoilState(seriesState)
@@ -47,9 +48,15 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 
 	const onInputChange = (e: InputChange | TextAreaChange) => {
 		setInput((initVal) => {
+			const type = e.target.getAttribute('type')
+
+			let value: any = e.target.value
+			if (type === 'checkbox') value = !initVal.regular
+			if (type === 'number') value = Number(e.target.value)
+
 			return {
 				...initVal,
-				[e.target.name]: e.target.value,
+				[e.target.name]: value,
 			}
 		})
 	}
@@ -63,11 +70,6 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 			newSeriesArr.splice(index, 1, {
 				...prevVal[index],
 				...input,
-				epsNum: Number(input.epsNum),
-				epsWatched: Number(input.epsWatched),
-				rewatchCount: Number(input.rewatchCount),
-				res: Number(input.res),
-				duration: Number(input.duration),
 			})
 			return newSeriesArr
 		})

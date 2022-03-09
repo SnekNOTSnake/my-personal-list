@@ -36,10 +36,14 @@ export const seriesStats = selector({
 		}[] = []
 
 		tagsSet.forEach((tag) => {
-			const filtered = series.filter((el) => el.tags.includes(tag))
+			const nonRegularFiltered = series.filter((el) => el.tags.includes(tag))
+			const filtered = series
+				.filter((el) => el.regular)
+				.filter((el) => el.tags.includes(tag))
+
 			tags.push({
 				name: tag,
-				count: filtered.length,
+				count: nonRegularFiltered.length,
 				epsNum: filtered.map((el) => el.epsNum).reduce((p, c) => p + c),
 				epsWatched: filtered.map((el) => el.epsWatched).reduce((p, c) => p + c),
 			})
@@ -49,10 +53,12 @@ export const seriesStats = selector({
 		const stats = {
 			tags,
 			epsFresh: series
-				.filter((el) => el.tags.length > 0)
+				.filter((el) => el.regular)
 				.map((tag) => tag.epsNum - tag.epsWatched)
 				.reduce((p, c) => p + c),
-			totalSeries: series.filter((el) => el.epsWatched === 0).length,
+			totalSeries: series
+				.filter((el) => el.regular)
+				.filter((el) => el.epsWatched === 0).length,
 		}
 
 		return stats

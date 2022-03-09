@@ -2,8 +2,9 @@
 	max-width: 768px;
 }
 
-.root input.title {
-	width: 400px;
+.root input.regular {
+	width: 25px;
+	height: 25px;
 }
 
 .root table {
@@ -88,6 +89,7 @@
 }
 
 .root .relations .relationInput select.relationType {
+	width: initial;
 	display: flex;
 	align-items: center;
 	margin-left: 8px;
@@ -184,9 +186,11 @@
 
 .root .numberInputs {
 	display: flex;
+	margin-bottom: 24px;
 }
 
 .root .numberInputs > div {
+	flex-grow: 1;
 	margin: 0 16px 0 0;
 }
 
