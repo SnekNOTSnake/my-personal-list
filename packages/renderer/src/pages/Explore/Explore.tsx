@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Explorer from '../../components/Explorer'
-import AnimeDetails from '../../components/AnimeDetails'
+import Explorer from '@/components/Explorer'
+import AnimeDetails from '@/components/AnimeDetails'
 import styles from './Explore.module.css'
 
 const Explore: React.FC = () => (

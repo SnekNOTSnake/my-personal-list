@@ -3,7 +3,7 @@ import { MdSearch, MdOutlineExpandMore } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { NavLink } from 'react-router-dom'
 
-import { filteredSeries, seriesFilter } from '../../../store/series'
+import { filteredSeries, seriesFilter } from '@/store/series'
 import styles from './RightExplorer.module.css'
 
 const RightExplorer: React.FC = () => {

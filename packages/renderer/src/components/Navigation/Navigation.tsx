@@ -15,9 +15,8 @@ import { settingsState } from '@/store/settings'
 const Navigation: React.FC = () => {
 	const [{ theme }, setSettings] = useRecoilState(settingsState)
 	const onChangeTheme = async () => {
-		const res = await window.myAPI.changeTheme(
-			theme === 'dark' ? 'light' : 'dark',
-		)
+		const newTheme = theme === 'dark' ? 'light' : 'dark'
+		const res = await window.myAPI.changeTheme(newTheme)
 		setSettings((prevVal) => ({ ...prevVal, theme: res }))
 	}
 

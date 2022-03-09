@@ -2,7 +2,7 @@ import React from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { seriesFilter, seriesStats } from '../../../store/series'
+import { seriesFilter, seriesStats } from '@/store/series'
 import styles from './LeftExplorer.module.css'
 
 const LeftExplorer: React.FC = () => {

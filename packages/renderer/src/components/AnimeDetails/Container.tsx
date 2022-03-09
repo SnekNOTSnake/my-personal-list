@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 import AnimeDetails from './Details'
 import EditAnimeDetails from './Edit'
 import styles from './Container.module.css'
-import { seriesState } from '../../store/series'
+import { seriesState } from '@/store/series'
 
 const Container: React.FC = () => {
 	const { seriesId } = useParams()

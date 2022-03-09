@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { seriesState } from '../../../store/series'
+import { seriesState } from '@/store/series'
 import styles from './EditAnimeDetails.module.css'
 
 type Props = {

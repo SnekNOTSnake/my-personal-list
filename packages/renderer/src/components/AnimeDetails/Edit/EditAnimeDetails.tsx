@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { seriesState } from '../../../store/series'
+import { seriesState } from '@/store/series'
 
 import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
