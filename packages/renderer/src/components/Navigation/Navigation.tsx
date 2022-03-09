@@ -10,12 +10,16 @@ import {
 } from 'react-icons/md'
 
 import styles from './Navigation.module.css'
-import { themeState } from '@/store/theme'
+import { settingsState } from '@/store/settings'
 
 const Navigation: React.FC = () => {
-	const [theme, setTheme] = useRecoilState(themeState)
-	const onChangeTheme = () =>
-		setTheme((prevVal) => (prevVal === 'dark' ? 'light' : 'dark'))
+	const [{ theme }, setSettings] = useRecoilState(settingsState)
+	const onChangeTheme = async () => {
+		const res = await window.myAPI.changeTheme(
+			theme === 'dark' ? 'light' : 'dark',
+		)
+		setSettings((prevVal) => ({ ...prevVal, theme: res }))
+	}
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', theme)

@@ -6,9 +6,11 @@ type SelectChange = React.ChangeEvent<HTMLSelectElement>
 type InputKeyPress = React.KeyboardEvent<HTMLInputElement>
 type FormSubmit = React.FormEvent<HTMLFormElement>
 
+type Theme = 'light' | 'dark'
+
 interface Settings {
-	episodeTreshold: number
-	dataDir: string | null
+	theme: Theme
+	cwd: string | null
 }
 
 interface Metadata {
@@ -48,6 +50,8 @@ interface Relation {
 
 interface Window {
 	myAPI: {
-		info: string
+		changeTheme: (theme: Theme) => Promise<Theme>
+		changeCWD: () => Promise<any>
+		getSettings: () => Promise<Settings>
 	}
 }

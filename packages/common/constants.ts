@@ -1,3 +1,5 @@
 export const IPCKey = {
-	ShowOpenDialog: 'ShowOpenDialog',
+	ChangeTheme: 'ChangeTheme',
+	ChangeCWD: 'ChangeCWD',
+	GetSettings: 'GetSettings',
 }

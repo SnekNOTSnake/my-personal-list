@@ -1,9 +1,11 @@
 import { app } from 'electron'
 import { initializeIpcEvents } from './ipcEvents'
+import { createMainMenu } from './menu'
 import { createMainWindow, win } from './windowManager'
 
 app.on('ready', async () => {
 	createMainWindow()
+	createMainMenu()
 	initializeIpcEvents()
 
 	// Install React Extension if in dev mode

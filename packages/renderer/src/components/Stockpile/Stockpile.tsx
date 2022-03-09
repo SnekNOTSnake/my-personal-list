@@ -12,13 +12,13 @@ import { Bar } from 'react-chartjs-2'
 
 import styles from './Stockpile.module.css'
 import { useRecoilValue } from 'recoil'
-import { themeState } from '@/store/theme'
+import { settingsState } from '@/store/settings'
 import { seriesStats } from '@/store/series'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const Stockpile: React.FC = () => {
-	const theme = useRecoilValue(themeState)
+	const { theme } = useRecoilValue(settingsState)
 	const isDark = theme === 'dark'
 
 	const stats = useRecoilValue(seriesStats)

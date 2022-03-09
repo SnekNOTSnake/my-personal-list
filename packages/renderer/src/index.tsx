@@ -4,11 +4,8 @@ import { RecoilRoot } from 'recoil'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './pages/App'
-import { initializeSettings } from './util/settings'
 import '@fontsource/roboto'
 import './index.css'
-
-initializeSettings()
 
 ReactDOM.render(
 	<React.StrictMode>

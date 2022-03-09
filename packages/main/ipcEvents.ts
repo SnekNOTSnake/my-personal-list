@@ -1,25 +1,36 @@
-import {
-	BrowserWindow,
-	dialog,
-	ipcMain,
-	IpcMainInvokeEvent,
-	OpenDialogOptions,
-} from 'electron'
+import Store from 'electron-store'
+import { dialog, ipcMain, IpcMainInvokeEvent } from 'electron'
 import { IPCKey } from '../common/constants'
 
 let initialized = false
+const store = new Store<Settings>({
+	defaults: { cwd: null, theme: 'light' },
+})
 
-const onShowOpenDialog = async (
-	event: IpcMainInvokeEvent,
-	options: OpenDialogOptions,
-) => {
-	const win = BrowserWindow.fromWebContents(event.sender)
-	if (!win) throw new Error('Message sender window does not exist')
-	return await dialog.showOpenDialog(win, options)
+/* Events */
+
+const onChangeTheme = (e: IpcMainInvokeEvent, theme: Theme) => {
+	store.set('theme', theme)
+	return store.get('theme')
 }
 
+const onChangeCWD = async (e: IpcMainInvokeEvent) => {
+	const res = await dialog.showOpenDialog({ properties: ['openDirectory'] })
+	if (!res.canceled) store.set('cwd', res.filePaths[0])
+
+	return res
+}
+
+const onGetSettings = (e: IpcMainInvokeEvent): Settings => {
+	return store.store
+}
+
+/* End of Events */
+
 export const initializeIpcEvents = () => {
-	ipcMain.handle(IPCKey.ShowOpenDialog, onShowOpenDialog)
+	ipcMain.handle(IPCKey.ChangeTheme, onChangeTheme)
+	ipcMain.handle(IPCKey.ChangeCWD, onChangeCWD)
+	ipcMain.handle(IPCKey.GetSettings, onGetSettings)
 
 	initialized = true
 }
@@ -27,7 +38,9 @@ export const initializeIpcEvents = () => {
 export const releaseIpcEvents = () => {
 	if (!initialized) return
 
-	ipcMain.removeAllListeners(IPCKey.ShowOpenDialog)
+	ipcMain.removeAllListeners(IPCKey.ChangeTheme)
+	ipcMain.removeAllListeners(IPCKey.ChangeCWD)
+	ipcMain.removeAllListeners(IPCKey.GetSettings)
 
 	initialized = false
 }
