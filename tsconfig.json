@@ -12,5 +12,5 @@
 		"jsx": "react-jsx",
 		"outDir": "dist"
 	},
-	"include": ["packages/common", "packages/main"]
+	"include": ["packages/common", "packages/main", "Types.d.ts"]
 }

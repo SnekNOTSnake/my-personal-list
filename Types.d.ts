@@ -45,3 +45,9 @@ interface Relation {
 		| 'summary'
 		| 'alternative-version'
 }
+
+interface Window {
+	myAPI: {
+		info: string
+	}
+}
