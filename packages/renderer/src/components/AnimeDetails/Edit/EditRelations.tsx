@@ -23,8 +23,8 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 
 	const localFilteredSeries = useMemo(() => {
 		const filtered = series.filter((el) => {
-			if (el.id === data.id) return false
-			if (relatedI.some((relatedAnime) => relatedAnime.id === el.id))
+			if (el.path === data.path) return false
+			if (relatedI.some((relatedAnime) => relatedAnime.path === el.path))
 				return false
 			return el.title.toLowerCase().startsWith(relatedInput.toLowerCase())
 		})
@@ -35,12 +35,12 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 		return filtered
 	}, [series, relatedInput, relatedI])
 
-	const onAddRelation = (id: string) => {
-		setRelatedI([...relatedI, { id, type: relatedType as any }])
+	const onAddRelation = (path: string) => {
+		setRelatedI([...relatedI, { path, type: relatedType as any }])
 	}
 
-	const onRemoveRelation = (id: string) => {
-		const index = relatedI.findIndex((el) => el.id === id)
+	const onRemoveRelation = (path: string) => {
+		const index = relatedI.findIndex((el) => el.path === path)
 		if (index < 0) return relatedI
 
 		const newRelations = [...relatedI]
@@ -76,19 +76,19 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 				>
 					<ul>
 						{localFilteredSeries.map((el) => (
-							<li onClick={() => onAddRelation(el.id)} key={el.id}>
-								{el.title}
+							<li onClick={() => onAddRelation(el.path)} key={el.path}>
+								{el.title || el.path}
 							</li>
 						))}
 					</ul>
 				</div>
 			</div>
 			<ul className={styles.titles}>
-				{relatedI.map((series) => (
-					<li key={series.id}>
-						<div onClick={() => onRemoveRelation(series.id)}>
+				{relatedI.map((series, i) => (
+					<li key={series.path || i}>
+						<div onClick={() => onRemoveRelation(series.path)}>
 							<div className={styles.relatedType}>{series.type}</div>
-							<div className={styles.relatedName}>{series.id}</div>
+							<div className={styles.relatedName}>{series.path}</div>
 						</div>
 					</li>
 				))}

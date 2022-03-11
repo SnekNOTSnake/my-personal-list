@@ -25,7 +25,9 @@ interface Metadata {
 }
 
 interface Series extends Metadata {
-	id: string
+	path: string
+	fullPath: string
+
 	title: string
 	regular: boolean
 	tags: string[]
@@ -37,7 +39,7 @@ interface Series extends Metadata {
 }
 
 interface Relation {
-	id: string
+	path: string
 	type:
 		| 'sequel'
 		| 'prequel'
@@ -51,7 +53,9 @@ interface Relation {
 interface Window {
 	myAPI: {
 		changeTheme: (theme: Theme) => Promise<Theme>
-		changeCWD: () => Promise<any>
 		getSettings: () => Promise<Settings>
+		getSeries: () => Promise<Series[]>
+
+		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}
 }

@@ -5,8 +5,10 @@ import styles from './Layout.module.css'
 
 const Layout: React.FC = ({ children }) => (
 	<div className={styles.root}>
-		<Navigation />
-		<main className={styles.main}>{children}</main>
+		<React.Suspense fallback={<div>Loading...</div>}>
+			<Navigation />
+			<main className={styles.main}>{children}</main>
+		</React.Suspense>
 	</div>
 )
 

@@ -1,5 +1,7 @@
 export const IPCKey = {
 	ChangeTheme: 'ChangeTheme',
-	ChangeCWD: 'ChangeCWD',
 	GetSettings: 'GetSettings',
+	GetSeries: 'GetSeries',
+
+	UpdateSettings: 'UpdateSettings',
 }

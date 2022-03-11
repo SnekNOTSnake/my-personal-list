@@ -1,12 +1,33 @@
-import { Menu, MenuItemConstructorOptions } from 'electron'
+import { dialog, Menu, MenuItemConstructorOptions, shell } from 'electron'
+import { IPCKey } from '../common/constants'
+import { store } from './ipcEvents'
 
 const createTemplate = (): MenuItemConstructorOptions[] => [
 	{
 		label: 'MyPersonalList',
 		submenu: [
 			{ label: 'About MyPersonalList' },
-			{ label: 'Open Data Directory' },
-			{ label: 'Change Data Directory' },
+			{
+				label: 'Open Data Directory',
+				click: () => {
+					const cwd = store.get('cwd')
+					if (!cwd) return new Notification('Data directory is not set')
+					shell.openPath(cwd)
+				},
+			},
+			{
+				label: 'Change Data Directory',
+				click: async (menuItem, browser) => {
+					if (!browser) return
+					const res = await dialog.showOpenDialog({
+						properties: ['openDirectory'],
+					})
+
+					if (!res.canceled) store.set('cwd', res.filePaths[0])
+
+					browser.webContents.send(IPCKey.UpdateSettings, store.store)
+				},
+			},
 			{ type: 'separator' },
 			{ role: 'quit' },
 		],

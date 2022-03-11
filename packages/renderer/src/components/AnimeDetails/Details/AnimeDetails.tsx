@@ -64,7 +64,7 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 						</button>
 					</div>
 
-					<h1>{data.title}</h1>
+					<h1>{data.title || data.path}</h1>
 					<div className={styles.watchInfo}>
 						<div className={styles.watchedInfo}>
 							{data.epsWatched} of {data.epsNum} episodes
@@ -112,10 +112,10 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 				</div>
 				<div className={styles.titles}>
 					<ul>
-						{data.related.map((series) => (
-							<li key={series.id}>
-								<Link to={`/explore/${series.id}`}>
-									{series.type}: {series.id.replace(/-/gi, ' ')}
+						{data.related.map((series, i) => (
+							<li key={series.path || i}>
+								<Link to={`/explore/${decodeURIComponent(series.path)}`}>
+									{series.type}: {series.path.replace(/-/gi, ' ')}
 								</Link>
 							</li>
 						))}

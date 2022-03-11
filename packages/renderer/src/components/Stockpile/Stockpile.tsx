@@ -22,12 +22,18 @@ const Stockpile: React.FC = () => {
 	const isDark = theme === 'dark'
 
 	const stats = useRecoilValue(seriesStats)
+	const tags = [...stats.tags]
+	tags.splice(-1, 1)
+
+	if (!tags.length) {
+		tags.push({ name: 'Empty Data', count: 0, epsNum: 0, epsWatched: 0 })
+	}
 
 	const options = {
 		responsive: true,
 		scales: {
 			x: {
-				stacked: true,
+				stacked: false,
 				grid: {
 					display: false,
 					tickColor: 'transparent',
@@ -35,7 +41,7 @@ const Stockpile: React.FC = () => {
 				},
 			},
 			y: {
-				stacked: true,
+				stacked: false,
 				grid: {
 					color: isDark ? 'rgba(255, 255, 255, 0.1)' : '#777',
 					borderDash: [4, 4],
@@ -43,25 +49,23 @@ const Stockpile: React.FC = () => {
 					tickColor: 'transparent',
 				},
 				ticks: {
-					stepSize: Math.ceil(
-						Math.max(...stats.tags.map((tag) => tag.epsNum)) / 4,
-					),
+					stepSize: Math.ceil(Math.max(...tags.map((tag) => tag.epsNum)) / 5),
 				},
 			},
 		},
 	}
 
 	const data = {
-		labels: stats.tags.map((tag) => tag.name),
+		labels: tags.map((tag) => tag.name),
 		datasets: [
 			{
 				label: 'Watched',
-				data: stats.tags.map((tag) => tag.epsWatched),
+				data: tags.map((tag) => tag.epsWatched),
 				backgroundColor: '#2f80ed',
 			},
 			{
 				label: 'Total',
-				data: stats.tags.map((tag) => tag.epsNum),
+				data: tags.map((tag) => tag.epsNum),
 				backgroundColor: isDark ? '#fff' : '#ccc',
 			},
 		],

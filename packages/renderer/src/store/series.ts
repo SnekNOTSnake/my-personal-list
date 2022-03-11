@@ -1,9 +1,8 @@
 import { atom, selector } from 'recoil'
-import data from '../../../../assets/data.json'
 
 export const seriesState = atom({
 	key: 'series',
-	default: data.series as Series[],
+	default: window.myAPI.getSeries(),
 })
 
 export const seriesFilter = atom({
@@ -44,18 +43,31 @@ export const seriesStats = selector({
 			tags.push({
 				name: tag,
 				count: nonRegularFiltered.length,
-				epsNum: filtered.map((el) => el.epsNum).reduce((p, c) => p + c),
-				epsWatched: filtered.map((el) => el.epsWatched).reduce((p, c) => p + c),
+				epsNum: filtered.map((el) => el.epsNum).reduce((p, c) => p + c, 0),
+				epsWatched: filtered
+					.map((el) => el.epsWatched)
+					.reduce((p, c) => p + c, 0),
 			})
 		})
 		tags.sort((a, b) => a.name.localeCompare(b.name))
+
+		// Untagged series
+		const untaggeds = series.filter((el) => !el.tags.length)
+		tags.push({
+			name: 'untagged',
+			count: untaggeds.length,
+			epsNum: untaggeds.map((el) => el.epsNum).reduce((p, c) => p + c, 0),
+			epsWatched: untaggeds
+				.map((el) => el.epsWatched)
+				.reduce((p, c) => p + c, 0),
+		})
 
 		const stats = {
 			tags,
 			epsFresh: series
 				.filter((el) => el.regular)
 				.map((tag) => tag.epsNum - tag.epsWatched)
-				.reduce((p, c) => p + c),
+				.reduce((p, c) => p + c, 0),
 			totalSeries: series
 				.filter((el) => el.regular)
 				.filter((el) => el.epsWatched === 0).length,
@@ -71,20 +83,27 @@ export const filteredSeries = selector({
 		const series = get(seriesState)
 		const filter = get(seriesFilter)
 
-		const filtered = series
-			.filter((el) =>
-				el.title.toLowerCase().startsWith(filter.query.toLocaleLowerCase()),
-			)
-			.filter((el) =>
-				filter.tags.active.length
-					? filter.tags.active.every((tag) => el.tags.includes(tag))
-					: true,
-			)
-			.filter((el) =>
-				filter.tags.deactive.length
-					? filter.tags.deactive.every((tag) => !el.tags.includes(tag))
-					: true,
-			)
+		let filtered
+		if (filter.tags.active.includes('untagged')) {
+			filtered = series.filter((el) => el.tags.length === 0)
+		} else if (filter.tags.deactive.includes('untagged')) {
+			filtered = series.filter((el) => el.tags.length > 0)
+		} else {
+			filtered = series
+				.filter((el) =>
+					el.title.toLowerCase().startsWith(filter.query.toLocaleLowerCase()),
+				)
+				.filter((el) =>
+					filter.tags.active.length
+						? filter.tags.active.every((tag) => el.tags.includes(tag))
+						: true,
+				)
+				.filter((el) =>
+					filter.tags.deactive.length
+						? filter.tags.deactive.every((tag) => !el.tags.includes(tag))
+						: true,
+				)
+		}
 
 		let ordered = filtered
 		switch (filter.order.by) {

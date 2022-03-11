@@ -2,29 +2,30 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 
-import AnimeDetails from './Details'
-import EditAnimeDetails from './Edit'
+import Details from './Details'
+import Edit from './Edit'
 import styles from './Container.module.css'
 import { seriesState } from '@/store/series'
 
 const Container: React.FC = () => {
-	const { seriesId } = useParams()
-	const series = useRecoilValue(seriesState).find((el) => el.id === seriesId)
+	const params = useParams()
+	const path = decodeURIComponent(params.path || '')
+	const ani = useRecoilValue(seriesState).find((el) => el.path === path)
 
 	const [isEditing, setIsEditing] = React.useState(false)
-	useEffect(() => setIsEditing(false), [seriesId])
+	useEffect(() => setIsEditing(false), [path])
 
-	if (!series) return <div>404 Series not found</div>
+	if (!ani) return <div />
 
 	const edit = () => setIsEditing(true)
-	const closeEdit = () => setIsEditing(false)
+	const close = () => setIsEditing(false)
 
 	return (
 		<div className={styles.root}>
 			{isEditing ? (
-				<EditAnimeDetails closeEdit={closeEdit} data={series} />
+				<Edit closeEdit={close} data={ani} />
 			) : (
-				<AnimeDetails edit={edit} data={series} />
+				<Details edit={edit} data={ani} />
 			)}
 		</div>
 	)

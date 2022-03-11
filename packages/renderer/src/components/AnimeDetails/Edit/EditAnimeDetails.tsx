@@ -65,7 +65,7 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		e.preventDefault()
 
 		setSeries((prevVal) => {
-			const index = prevVal.findIndex((el) => el.id === data.id)
+			const index = prevVal.findIndex((el) => el.path === data.path)
 			const newSeriesArr = [...prevVal]
 			newSeriesArr.splice(index, 1, {
 				...prevVal[index],

@@ -64,12 +64,12 @@ const RightExplorer: React.FC = () => {
 			<div className={styles.titles}>
 				<ul>
 					{series.map((el) => (
-						<li key={el.id}>
+						<li key={el.path}>
 							<NavLink
 								className={({ isActive }) => (isActive ? styles.active : '')}
-								to={`/explore/${el.id}`}
+								to={`/explore/${encodeURIComponent(el.path)}`}
 							>
-								<span>{el.title}</span>
+								<span>{el.title || el.path}</span>
 							</NavLink>
 						</li>
 					))}

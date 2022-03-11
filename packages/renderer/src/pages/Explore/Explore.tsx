@@ -10,7 +10,7 @@ const Explore: React.FC = () => (
 		<Explorer />
 
 		<Routes>
-			<Route path=':seriesId' element={<AnimeDetails />} />
+			<Route path=':path' element={<AnimeDetails />} />
 		</Routes>
 	</div>
 )
