@@ -3,8 +3,8 @@ import fs from 'fs/promises'
 import Store from 'electron-store'
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
 
-import { IPCKey } from '../common/constants'
-import { ensureSeries, exists, read } from './util'
+import { IPCKey, DATA_FILE_NAME } from '../common/constants'
+import { ensureSeries, exists, read, sanitizeSeries, write } from './util'
 
 let initialized = false
 export const store = new Store<Settings>({
@@ -32,7 +32,7 @@ const onGetSeries = async (e: IpcMainInvokeEvent): Promise<Series[]> => {
 
 	await Promise.all(
 		dirs.map(async (dir) => {
-			const mplPath = path.join(cwd, dir.name, 'mpl.json')
+			const mplPath = path.join(cwd, dir.name, DATA_FILE_NAME)
 			const paths = {
 				path: dir.name,
 				fullPath: path.join(cwd, dir.name),
@@ -44,9 +44,21 @@ const onGetSeries = async (e: IpcMainInvokeEvent): Promise<Series[]> => {
 			const data = await read(mplPath)
 			if (!data) return series.push(ensureSeries({ ...paths }))
 
-			const animeObj: Series = JSON.parse(data.toString())
+			const animeObj: Series = sanitizeSeries(JSON.parse(data.toString()))
 			series.push(ensureSeries({ ...paths, ...animeObj }))
 		}),
+	)
+
+	return series
+}
+
+const onEditSeries = async (
+	e: IpcMainInvokeEvent,
+	series: Series,
+): Promise<Series> => {
+	await write(
+		path.join(series.fullPath, DATA_FILE_NAME),
+		JSON.stringify(sanitizeSeries(series)),
 	)
 
 	return series
@@ -58,6 +70,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.ChangeTheme, onChangeTheme)
 	ipcMain.handle(IPCKey.GetSettings, onGetSettings)
 	ipcMain.handle(IPCKey.GetSeries, onGetSeries)
+	ipcMain.handle(IPCKey.EditSeries, onEditSeries)
 
 	initialized = true
 }
@@ -68,6 +81,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.ChangeTheme)
 	ipcMain.removeAllListeners(IPCKey.GetSettings)
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
+	ipcMain.removeAllListeners(IPCKey.EditSeries)
 
 	initialized = false
 }

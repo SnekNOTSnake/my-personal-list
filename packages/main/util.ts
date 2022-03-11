@@ -59,8 +59,29 @@ export const read = async (filePath: string) => {
 	}
 }
 
+export const write = async (filePath: string, content: string) => {
+	try {
+		await fs.writeFile(filePath, content)
+		return true
+	} catch (err) {
+		return false
+	}
+}
+
 export const ensureSeries = (series?: Partial<Series>) => {
 	const anime = { ...defSeries, ...series }
 	anime.related = anime.related.map((el) => ({ ...defRelated, ...el }))
 	return anime
+}
+
+export const sanitizeSeries = (series: Series): Series => {
+	const newSeries: any = {}
+	const blackListProperties = ['path', 'fullPath']
+
+	Object.keys(defSeries).forEach((key) => {
+		if (key in series && !blackListProperties.includes(key))
+			newSeries[key] = series[key as keyof Series]
+	})
+
+	return newSeries
 }

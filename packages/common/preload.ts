@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 	changeTheme: (theme: Theme) => ipc.invoke(IPCKey.ChangeTheme, theme),
 	getSettings: () => ipc.invoke(IPCKey.GetSettings),
 	getSeries: () => ipc.invoke(IPCKey.GetSeries),
+	editSeries: (series: Series) => ipc.invoke(IPCKey.EditSeries, series),
 
 	onUpdateSettings: (listener: (newSettings: Settings) => void) =>
 		ipc.on(IPCKey.UpdateSettings, (e, settings) => listener(settings)),

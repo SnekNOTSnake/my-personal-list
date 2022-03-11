@@ -55,6 +55,7 @@ interface Window {
 		changeTheme: (theme: Theme) => Promise<Theme>
 		getSettings: () => Promise<Settings>
 		getSeries: () => Promise<Series[]>
+		editSeries: (series: Series) => Promise<Series>
 
 		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}

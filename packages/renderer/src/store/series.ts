@@ -1,5 +1,7 @@
 import { atom, selector } from 'recoil'
 
+window.myAPI.getSeries().then((val) => console.log(val))
+
 export const seriesState = atom({
 	key: 'series',
 	default: window.myAPI.getSeries(),

@@ -61,8 +61,10 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		})
 	}
 
-	const onSubmit = (e: FormSubmit) => {
+	const onSubmit = async (e: FormSubmit) => {
 		e.preventDefault()
+
+		await window.myAPI.editSeries({ ...data, ...input })
 
 		setSeries((prevVal) => {
 			const index = prevVal.findIndex((el) => el.path === data.path)
