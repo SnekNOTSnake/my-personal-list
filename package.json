@@ -9,7 +9,8 @@
 		"build": "yarn run typecheck && yarn build:renderer && yarn build:main",
 		"build:main": "NODE_ENV=production tsc --build && NODE_ENV=production electron-builder --config .electron-builder.config.js",
 		"build:renderer": "NODE_ENV=production vite build",
-		"typecheck": "tsc --noEmit && tsc --noEmit --project packages/renderer"
+		"typecheck": "tsc --noEmit && tsc --noEmit --project packages/renderer",
+		"test": "mocha ./test/**/*\\.test\\.js --require ts-node/register/transpile-only"
 	},
 	"private": true,
 	"author": "Akhmad Najmuddin <udintobe@gmail.com>",
@@ -27,6 +28,7 @@
 		"recoil": "^0.6.1"
 	},
 	"devDependencies": {
+		"@types/mocha": "^9.1.0",
 		"@types/react": "^17.0.33",
 		"@types/react-dom": "^17.0.10",
 		"@vitejs/plugin-react": "^1.0.7",
@@ -34,7 +36,10 @@
 		"electron": "17.0.1",
 		"electron-builder": "^22.14.13",
 		"electron-devtools-installer": "^3.2.0",
+		"expect": "^27.5.1",
+		"mocha": "^9.2.1",
 		"prettier": "^2.5.1",
+		"ts-node": "^10.7.0",
 		"typescript": "^4.5.4",
 		"vite": "^2.8.0",
 		"vite-plugin-resolve": "^1.8.0"

@@ -1,5 +1,9 @@
 declare module '*.module.css'
 
+interface ObjectConstructor {
+	typedKeys<T>(obj: T): Array<keyof T>
+}
+
 type InputChange = React.ChangeEvent<HTMLInputElement>
 type TextAreaChange = React.ChangeEvent<HTMLTextAreaElement>
 type SelectChange = React.ChangeEvent<HTMLSelectElement>

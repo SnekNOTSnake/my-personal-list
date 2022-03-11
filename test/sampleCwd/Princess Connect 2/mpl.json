@@ -1,0 +1,21 @@
+{
+	"title": "Princess Connect 2",
+	"regular": true,
+	"tags": ["Action", "Adventure", "Gourmet"],
+
+	"epsNum": 12,
+	"epsWatched": 0,
+	"rewatchCount": 0,
+
+	"audio": "AAC Dual 128kbps",
+	"video": "HEVC 10-bit",
+	"quality": "web",
+	"duration": 24,
+	"encoder": "dedsec",
+	"source": "AnimeKaizoku",
+	"res": 720,
+	"subtitle": "Subsplease ",
+
+	"notes": "Lorem ipsum dolor sit, something cool.",
+	"related": [{ "type": "prequel", "path": "Princess Connect" }]
+}

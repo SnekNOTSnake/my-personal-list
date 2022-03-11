@@ -3,10 +3,12 @@ import fs from 'fs/promises'
 import { constants } from 'fs'
 import { app } from 'electron'
 
+Object.typedKeys = Object.keys as any
+
 const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 3000
 
-const defSeries: Series = {
+export const defSeries: Series = {
 	path: '',
 	fullPath: '',
 	title: '',
@@ -84,4 +86,15 @@ export const sanitizeSeries = (series: Series): Series => {
 	})
 
 	return newSeries
+}
+
+export const trimSeries = (series: Series) => {
+	const trimmed = {} as any
+
+	Object.typedKeys(series).forEach((key) => {
+		if (typeof series[key] === 'string')
+			trimmed[key] = (series[key] as string).replace(/\s+/g, ' ').trim()
+	})
+
+	return { ...series, ...trimmed }
 }

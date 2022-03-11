@@ -1,0 +1,13 @@
+{
+	"title": "Mushishi",
+	"regular": true,
+
+	"epsNum": 13,
+
+	"encoder": "dedsec",
+	"source": "AnimeKaizoku",
+	"res": 720,
+	"subtitle": "Subsplease ",
+
+	"related": [{ "type": "sequel", "path": "Mushishi 2" }]
+}

@@ -1,0 +1,23 @@
+{
+	"title": "Princess Connect",
+	"regular": true,
+	"tags": ["Action", "Adventure"],
+
+	"epsNum": 13,
+	"epsWatched": 4,
+	"rewatchCount": 0,
+
+	"audio": "AAC Dual 128kbps",
+	"video": "HEVC 10-bit",
+	"quality": "bd",
+	"duration": 24,
+	"encoder": "dedsec",
+	"source": "AnimeKaizoku",
+	"res": 720,
+	"subtitle": "Subsplease",
+
+	"notes": "Lorem ipsum dolor sit, something cool.",
+	"related": [{ "type": "sequel", "path": "Princess Connect 2" }],
+
+	"unrelatedField": "Something cool"
+}
