@@ -82,18 +82,20 @@ describe('Utils', () => {
 	})
 
 	describe('sanitizeSeries', () => {
-		it('Should eliminate unnecessary properties, including path and fullPath', () => {
+		it('Should eliminate unnecessary properties, including path, fullPath, and files', () => {
 			const mushishi = ensureSeries({
 				title: 'Mushishi Zoku Shou 2',
 				unnecessaryField: true,
 				path: 'somewhere',
 				fullPath: '/media/Alpha/somewhere',
+				files: ['something.cool', 'nothing-in.here'],
 			})
 			const sanitized = sanitizeSeries(mushishi)
 
 			expect(sanitized.unnecessaryField).toBeUndefined()
-			expect(sanitized.path).toBeUndefined
-			expect(sanitized.fullPath).toBeUndefined
+			expect(sanitized.path).toBeUndefined()
+			expect(sanitized.fullPath).toBeUndefined()
+			expect(sanitized.files).toBeUndefined()
 		})
 	})
 })

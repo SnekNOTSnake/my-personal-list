@@ -83,7 +83,7 @@ export const ensureSeries = (series?: Partial<Series>) => {
 
 export const sanitizeSeries = (series: Series): Series => {
 	const newSeries: any = {}
-	const blackListProperties = ['path', 'fullPath']
+	const blackListProperties = ['path', 'fullPath', 'files']
 
 	Object.typedKeys(defSeries).forEach((key) => {
 		if (key in series && !blackListProperties.includes(key))

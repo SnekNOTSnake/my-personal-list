@@ -51,14 +51,14 @@ export class Events {
 					fullPath: path.join(ANIME, dir.name),
 				}
 
-				const isExists = await exists(mplPath)
-				if (!isExists) return series.push(ensureSeries({ ...paths }))
-
-				const data = await read(mplPath)
-				if (!data) return series.push(ensureSeries({ ...paths }))
-
 				const items = await fs.readdir(paths.fullPath, { withFileTypes: true })
 				const files = items.filter((el) => el.isFile()).map((el) => el.name)
+
+				const isExists = await exists(mplPath)
+				if (!isExists) return series.push(ensureSeries({ ...paths, files }))
+
+				const data = await read(mplPath)
+				if (!data) return series.push(ensureSeries({ ...paths, files }))
 
 				const animeObj: Series = sanitizeSeries(JSON.parse(data.toString()))
 				series.push(ensureSeries({ ...paths, ...animeObj, files }))

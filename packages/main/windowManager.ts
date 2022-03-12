@@ -27,6 +27,14 @@ export const createMainWindow = () => {
 
 	win.loadURL(resolveHtmlPath('index.html', app))
 
+	// Fix 404 on refresh (production).
+	// https://github.com/electron/electron/issues/14978#issuecomment-535191746
+	win.webContents.on('did-fail-load', () => {
+		if (!win) return
+
+		win.loadURL(resolveHtmlPath('index.html', app))
+	})
+
 	win.on('ready-to-show', () => {
 		if (!win) throw new Error('"mainWindow" is not defined')
 

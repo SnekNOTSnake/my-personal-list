@@ -72,12 +72,17 @@ describe('ipcEvents', () => {
 
 		it('Should contain all filenames inside each series', async () => {
 			const series = await events.onGetSeries('')
+
 			const priconne = series.find((el) => el.path === 'Princess Connect')
 			const exp = priconne.files.every(
 				(file) => file === 'some_random.file' || file === 'mpl.json',
 			)
 
+			const yashahime = series.find((el) => el.path === 'Yashahime')
+			const exp2 = yashahime.files.some((file) => file === 'sample.file')
+
 			expect(exp).toBe(true)
+			expect(exp2).toBe(true)
 		})
 	})
 
