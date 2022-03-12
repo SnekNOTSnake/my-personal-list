@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
@@ -22,15 +21,9 @@ class Store {
 const store = new Store()
 const events = new Events(store)
 
-const INITIAL_SAMPLE_CWD = path.join(__dirname, 'sampleCwd')
 const SAMPLE_CWD = path.join('sampleCwd_copy')
 
 describe('ipcEvents', () => {
-	// Copy sampleCwd to avoid altering it
-	before(() => {
-		fs.cpSync(INITIAL_SAMPLE_CWD, SAMPLE_CWD, { recursive: true }, () => {})
-	})
-
 	describe('onGetSettings', () => {
 		it('Should return default settings if not yet set', () => {
 			const settings = events.onGetSettings('')
@@ -141,10 +134,5 @@ describe('ipcEvents', () => {
 
 			expect(mushishi.title).toBe('Mushishi Extra Spaces')
 		})
-	})
-
-	// Dispose of sampleCwd copy
-	after(() => {
-		fs.rmSync(SAMPLE_CWD, { recursive: true })
 	})
 })

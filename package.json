@@ -10,7 +10,7 @@
 		"build:main": "NODE_ENV=production tsc --build && NODE_ENV=production electron-builder --config .electron-builder.config.js",
 		"build:renderer": "NODE_ENV=production vite build",
 		"typecheck": "tsc --noEmit && tsc --noEmit --project packages/renderer",
-		"test": "mocha ./test/**/*\\.test\\.js --require ts-node/register/transpile-only"
+		"test": "mocha"
 	},
 	"private": true,
 	"author": "Akhmad Najmuddin <udintobe@gmail.com>",

@@ -1,0 +1,5 @@
+{
+	"spec": ["./test/**/*\\.test\\.js"],
+	"recursive": true,
+	"require": ["ts-node/register/transpile-only", "./test/mocha-hooks.test.js"]
+}

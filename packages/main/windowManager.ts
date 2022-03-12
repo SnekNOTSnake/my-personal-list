@@ -24,7 +24,7 @@ export const createMainWindow = () => {
 		},
 	})
 
-	win.loadURL(resolveHtmlPath('index.html'))
+	win.loadURL(resolveHtmlPath('index.html', app))
 
 	win.on('ready-to-show', () => {
 		if (!win) throw new Error('"mainWindow" is not defined')

@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { constants } from 'fs'
-import { app } from 'electron'
 
 Object.typedKeys = Object.keys as any
 
@@ -37,7 +36,10 @@ const defRelated: Relation = {
 	type: 'sequel',
 }
 
-export const resolveHtmlPath = (htmlFileName: string): string => {
+export const resolveHtmlPath = (
+	htmlFileName: string,
+	app: Electron.App,
+): string => {
 	if (isProd || app.isPackaged)
 		return `file://${path.resolve(__dirname, '../renderer/', htmlFileName)}`
 	else return new URL(`http://localhost:${PORT}`).href
