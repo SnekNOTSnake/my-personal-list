@@ -21,6 +21,7 @@ export const createMainWindow = () => {
 		autoHideMenuBar: true,
 		webPreferences: {
 			preload: path.resolve(__dirname, '../common/preload.js'),
+			webSecurity: app.isPackaged,
 		},
 	})
 

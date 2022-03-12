@@ -1,8 +1,9 @@
+import fs from 'fs'
 import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
-import { defSeries } from '../packages/main/util'
-import { ANIME_DIR } from '../packages/common/constants'
+import { defSeries, exists } from '../packages/main/util'
+import { ANIME_DIR, POSTER_DIR } from '../packages/common/constants'
 
 const defaultStore = { cwd: null, theme: 'light' }
 
@@ -20,10 +21,11 @@ class Store {
 }
 
 const store = new Store()
-const events = new Events(store)
+const events = new Events(store, {})
 
-const SAMPLE_CWD = path.join('sampleCwd_copy')
+const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
 const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
+const POSTER = path.join(SAMPLE_CWD, POSTER_DIR)
 
 describe('ipcEvents', () => {
 	describe('onGetSettings', () => {
@@ -135,6 +137,46 @@ describe('ipcEvents', () => {
 			})
 
 			expect(mushishi.title).toBe('Mushishi Extra Spaces')
+		})
+	})
+
+	describe('onChangePoster', () => {
+		it('Should generate `attachments` dir if not exists', async () => {
+			fs.rmSync(POSTER, { recursive: true })
+
+			const poster = path.join(__dirname, 'assets/urasekai.jpg')
+			const events = new Events(store, {
+				showOpenDialog: async () => ({ filePaths: [poster], canceled: false }),
+			})
+
+			const series = await events.onGetSeries('')
+			const mushishi = series.find((el) => el.path === 'Mushishi')
+			await events.onChangePoster('', mushishi)
+
+			const posterDirExists = await exists(POSTER)
+			expect(posterDirExists).toBe(true)
+
+			fs.rmSync(POSTER, { recursive: true })
+		})
+
+		it('Should be able to copy selected poster to `attachments` and then update the series', async () => {
+			const poster = path.join(__dirname, 'assets/urasekai.jpg')
+			const events = new Events(store, {
+				showOpenDialog: async () => ({ filePaths: [poster], canceled: false }),
+			})
+
+			const series = await events.onGetSeries('')
+			const mushishi = series.find((el) => el.path === 'Mushishi')
+			const result = await events.onChangePoster('', mushishi)
+
+			const updatedSeries = await events.onGetSeries('')
+			const updatedMushishi = updatedSeries.find((el) => el.path === 'Mushishi')
+			const isPosterExists = await exists(
+				path.join(POSTER, updatedMushishi.poster),
+			)
+
+			expect(updatedMushishi.poster).toBe(result.poster)
+			expect(isPosterExists).toBe(true)
 		})
 	})
 })

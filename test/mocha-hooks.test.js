@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const INITIAL_SAMPLE_CWD = path.join(__dirname, 'sampleCwd')
-const SAMPLE_CWD = path.join('sampleCwd_copy')
+const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
 
 exports.mochaHooks = {
 	beforeAll: () => {
@@ -11,6 +11,7 @@ exports.mochaHooks = {
 	},
 
 	afterAll: () => {
+		// Dispose sampleCwd copy
 		fs.rmSync(SAMPLE_CWD, { recursive: true })
 	},
 }

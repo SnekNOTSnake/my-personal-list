@@ -3,6 +3,7 @@ export const IPCKey = {
 	GetSettings: 'GetSettings',
 	GetSeries: 'GetSeries',
 	EditSeries: 'EditSeries',
+	ChangePoster: 'ChangePoster',
 
 	UpdateSettings: 'UpdateSettings',
 }

@@ -11,6 +11,7 @@ export const defSeries: Series = {
 	path: '',
 	fullPath: '',
 	title: '',
+	poster: '',
 	regular: false,
 	tags: [],
 
@@ -82,7 +83,7 @@ export const sanitizeSeries = (series: Series): Series => {
 	const newSeries: any = {}
 	const blackListProperties = ['path', 'fullPath']
 
-	Object.keys(defSeries).forEach((key) => {
+	Object.typedKeys(defSeries).forEach((key) => {
 		if (key in series && !blackListProperties.includes(key))
 			newSeries[key] = series[key as keyof Series]
 	})

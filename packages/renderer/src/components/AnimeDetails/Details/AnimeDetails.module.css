@@ -4,12 +4,52 @@
 }
 
 .root .container .poster {
+	cursor: pointer;
 	width: 225px;
 	height: 315px;
 	border-radius: var(--border-radius);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	position: relative;
+	background-color: var(--background-secondary);
+}
+
+.root .container .poster button {
+	position: absolute;
+	z-index: 10;
+	bottom: 8px;
+	right: 8px;
+	display: none;
+	width: 32px;
+	height: 32px;
+	background-color: var(--color-primary);
+	color: #fff;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius);
+	border: none;
+	font-size: 1.4em;
+	box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+}
+
+.root .container .poster:hover button {
+	display: flex;
+}
+
+.root .container .poster button::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root .container .poster button:hover::before {
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .root .container .detail {

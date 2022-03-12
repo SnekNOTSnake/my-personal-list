@@ -5,17 +5,22 @@ import {
 	MdOutlineMoreHoriz,
 	MdOutlineEdit,
 	MdOutlineExpandMore,
+	MdOutlineImage,
 } from 'react-icons/md'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 
-import { seriesFilter } from '@/store/series'
+import { seriesFilter, seriesState } from '@/store/series'
+import { settingsState } from '@/store/settings'
 import styles from './AnimeDetails.module.css'
 
 type Props = { edit: () => any; data: Series }
 
 const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 	const setFilter = useSetRecoilState(seriesFilter)
+	const setSeries = useSetRecoilState(seriesState)
+	const { cwd } = useRecoilValue(settingsState)
+
 	const [showRelated, setShowRelated] = useState(true)
 
 	const onShowRelatedToggle = () => setShowRelated((prevVal) => !prevVal)
@@ -40,13 +45,28 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 			}
 		})
 
+	const onChangePoster = async () => {
+		const result = await window.myAPI.changePoster(data)
+		setSeries((prevVal) => {
+			const newSeries = [...prevVal]
+			const index = newSeries.findIndex((el) => el.path === data.path)
+			newSeries.splice(index, 1, result)
+			return newSeries
+		})
+	}
+
+	const posterPath = data.poster
+		? `url(file://${[cwd, 'attachments', data.poster].join('/')})`
+		: ''
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.container}>
-				<div
-					className={styles.poster}
-					style={{ backgroundImage: 'url(https://picsum.photos/450/630)' }}
-				/>
+				<div className={styles.poster} style={{ backgroundImage: posterPath }}>
+					<button type='button' onClick={onChangePoster}>
+						<MdOutlineImage />
+					</button>
+				</div>
 				<div className={styles.detail}>
 					<div className={styles.actions}>
 						<button style={{ backgroundColor: '#2f80ed' }} type='button'>

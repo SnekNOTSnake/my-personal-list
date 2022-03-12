@@ -33,11 +33,14 @@ interface Series extends Metadata {
 	fullPath: string
 
 	title: string
+	poster: string
 	regular: boolean
 	tags: string[]
+
 	epsNum: number
 	epsWatched: number
 	rewatchCount: number
+
 	notes: string
 	related: Relation[]
 }
@@ -60,6 +63,7 @@ interface Window {
 		getSettings: () => Promise<Settings>
 		getSeries: () => Promise<Series[]>
 		editSeries: (series: Series) => Promise<Series>
+		changePoster: (series: Series) => Promise<Series>
 
 		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}

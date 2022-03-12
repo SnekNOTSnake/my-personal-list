@@ -1,9 +1,9 @@
 import path from 'path'
 import fs from 'fs/promises'
 import Store from 'electron-store'
-import { ipcMain, IpcMainInvokeEvent } from 'electron'
+import { Dialog, dialog, ipcMain, IpcMainInvokeEvent } from 'electron'
 
-import { IPCKey, DATA_FILE, ANIME_DIR } from '../common/constants'
+import { IPCKey, DATA_FILE, ANIME_DIR, POSTER_DIR } from '../common/constants'
 import {
 	ensureSeries,
 	exists,
@@ -12,14 +12,17 @@ import {
 	trimSeries,
 	write,
 } from './util'
+import { nanoid } from 'nanoid'
 
 /* Events */
 
 export class Events {
 	store: Store<Settings>
+	dialog: Dialog
 
-	constructor(store: Store<Settings>) {
+	constructor(store: Store<Settings>, dialog: Dialog) {
 		this.store = store
+		this.dialog = dialog
 	}
 
 	onChangeTheme = (e: IpcMainInvokeEvent, theme: Theme) => {
@@ -73,6 +76,36 @@ export class Events {
 
 		return trimmed
 	}
+
+	onChangePoster = async (
+		e: IpcMainInvokeEvent,
+		series: Series,
+	): Promise<Series> => {
+		const cwd = this.store.get('cwd')
+		if (!cwd) return series
+		const POSTER = path.join(cwd, POSTER_DIR)
+		const posterDirExists = await exists(POSTER)
+		if (!posterDirExists) fs.mkdir(POSTER)
+
+		const isExists = await exists(series.fullPath)
+		if (!isExists) return series
+
+		const result = await this.dialog.showOpenDialog({
+			properties: ['openFile'],
+			filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }],
+		})
+		if (result.canceled) return series
+
+		const filenameParts = result.filePaths[0].split('.')
+		const ext = filenameParts[filenameParts.length - 1]
+		const filename = `${nanoid()}.${ext}`
+		fs.copyFile(result.filePaths[0], path.join(POSTER, filename))
+
+		const newSeries = { ...series, poster: filename }
+		await this.onEditSeries(e, newSeries)
+
+		return newSeries
+	}
 }
 
 /* End of Events */
@@ -83,12 +116,13 @@ export const store = new Store<Settings>({
 })
 
 export const initializeIpcEvents = () => {
-	const events = new Events(store)
+	const events = new Events(store, dialog)
 
 	ipcMain.handle(IPCKey.ChangeTheme, events.onChangeTheme)
 	ipcMain.handle(IPCKey.GetSettings, events.onGetSettings)
 	ipcMain.handle(IPCKey.GetSeries, events.onGetSeries)
 	ipcMain.handle(IPCKey.EditSeries, events.onEditSeries)
+	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
 
 	initialized = true
 }
@@ -100,6 +134,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.GetSettings)
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
+	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 
 	initialized = false
 }

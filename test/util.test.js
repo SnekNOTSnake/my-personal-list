@@ -11,7 +11,7 @@ import {
 } from '../packages/main/util'
 import { ANIME_DIR, DATA_FILE } from '../packages/common/constants'
 
-const SAMPLE_CWD = path.join('sampleCwd_copy')
+const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
 const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
 
 describe('Utils', () => {
