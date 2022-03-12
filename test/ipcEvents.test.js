@@ -2,6 +2,7 @@ import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
 import { defSeries } from '../packages/main/util'
+import { ANIME_DIR } from '../packages/common/constants'
 
 const defaultStore = { cwd: null, theme: 'light' }
 
@@ -22,6 +23,7 @@ const store = new Store()
 const events = new Events(store)
 
 const SAMPLE_CWD = path.join('sampleCwd_copy')
+const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
 
 describe('ipcEvents', () => {
 	describe('onGetSettings', () => {
@@ -94,7 +96,7 @@ describe('ipcEvents', () => {
 			await events.onEditSeries('', {
 				...editedSeries,
 				path: 'Mushishi',
-				fullPath: path.join(SAMPLE_CWD, 'Mushishi'),
+				fullPath: path.join(ANIME, 'Mushishi'),
 			})
 
 			const series = await events.onGetSeries('')
@@ -118,7 +120,7 @@ describe('ipcEvents', () => {
 				...editedSeries,
 				unnecessaryField: 'Something cool',
 				path: 'Mushishi',
-				fullPath: path.join(SAMPLE_CWD, 'Mushishi'),
+				fullPath: path.join(ANIME, 'Mushishi'),
 			})
 
 			expect(mushishi.unnecessaryField).toBeUndefined()
@@ -129,7 +131,7 @@ describe('ipcEvents', () => {
 				...editedSeries,
 				title: ' Mushishi       Extra     Spaces ',
 				path: 'Mushishi',
-				fullPath: path.join(SAMPLE_CWD, 'Mushishi'),
+				fullPath: path.join(ANIME, 'Mushishi'),
 			})
 
 			expect(mushishi.title).toBe('Mushishi Extra Spaces')

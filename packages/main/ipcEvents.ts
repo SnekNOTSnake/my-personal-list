@@ -3,7 +3,7 @@ import fs from 'fs/promises'
 import Store from 'electron-store'
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
 
-import { IPCKey, DATA_FILE_NAME } from '../common/constants'
+import { IPCKey, DATA_FILE, ANIME_DIR } from '../common/constants'
 import {
 	ensureSeries,
 	exists,
@@ -34,17 +34,18 @@ export class Events {
 	onGetSeries = async (e: IpcMainInvokeEvent): Promise<Series[]> => {
 		const cwd = this.store.get('cwd')
 		if (!cwd) return []
+		const ANIME = path.join(cwd, ANIME_DIR)
 
-		const items = await fs.readdir(cwd, { withFileTypes: true })
+		const items = await fs.readdir(ANIME, { withFileTypes: true })
 		const dirs = items.filter((item) => item.isDirectory())
 		const series: Series[] = []
 
 		await Promise.all(
 			dirs.map(async (dir) => {
-				const mplPath = path.join(cwd, dir.name, DATA_FILE_NAME)
+				const mplPath = path.join(ANIME, dir.name, DATA_FILE)
 				const paths = {
 					path: dir.name,
-					fullPath: path.join(cwd, dir.name),
+					fullPath: path.join(ANIME, dir.name),
 				}
 
 				const isExists = await exists(mplPath)
@@ -68,10 +69,7 @@ export class Events {
 		const sanitized = sanitizeSeries(series)
 		const trimmed = trimSeries(sanitized)
 
-		await write(
-			path.join(series.fullPath, DATA_FILE_NAME),
-			JSON.stringify(trimmed),
-		)
+		await write(path.join(series.fullPath, DATA_FILE), JSON.stringify(trimmed))
 
 		return trimmed
 	}

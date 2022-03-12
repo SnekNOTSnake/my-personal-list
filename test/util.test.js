@@ -9,9 +9,10 @@ import {
 	ensureSeries,
 	sanitizeSeries,
 } from '../packages/main/util'
-import { DATA_FILE_NAME } from '../packages/common/constants'
+import { ANIME_DIR, DATA_FILE } from '../packages/common/constants'
 
 const SAMPLE_CWD = path.join('sampleCwd_copy')
+const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
 
 describe('Utils', () => {
 	describe('resolveHtmlPath', () => {
@@ -29,7 +30,10 @@ describe('Utils', () => {
 	describe('exists', () => {
 		it('Should return true if exists', async () => {
 			const isExists = await exists(SAMPLE_CWD)
+			const isExists2 = await exists(path.join(ANIME, 'Mushishi', DATA_FILE))
+
 			expect(isExists).toBeTruthy()
+			expect(isExists2).toBeTruthy()
 		})
 
 		it('Should return false if not exists', async () => {
@@ -40,9 +44,7 @@ describe('Utils', () => {
 
 	describe('read', () => {
 		it("Should be able to read file's content", async () => {
-			const buffer = await read(
-				path.join(SAMPLE_CWD, 'Princess Connect', DATA_FILE_NAME),
-			)
+			const buffer = await read(path.join(ANIME, 'Princess Connect', DATA_FILE))
 			const priconne = JSON.parse(buffer.toString())
 
 			expect(priconne.title).toBe('Princess Connect')

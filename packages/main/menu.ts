@@ -1,12 +1,42 @@
+import path from 'path'
 import { dialog, Menu, MenuItemConstructorOptions, shell } from 'electron'
 import { IPCKey } from '../common/constants'
 import { store } from './ipcEvents'
+import { exists } from './util'
 
 const createTemplate = (): MenuItemConstructorOptions[] => [
 	{
 		label: 'MyPersonalList',
 		submenu: [
 			{ label: 'About MyPersonalList' },
+			{ type: 'separator' },
+			{
+				label: 'Theme',
+				submenu: [
+					{
+						label: 'Light',
+						type: 'radio',
+						checked: store.get('theme') === 'light',
+						click: (menuItem, browser) => {
+							if (!browser) return
+
+							store.set('theme', 'light')
+							browser.webContents.send(IPCKey.UpdateSettings, store.store)
+						},
+					},
+					{
+						label: 'Dark',
+						type: 'radio',
+						checked: store.get('theme') === 'dark',
+						click: (menuItem, browser) => {
+							if (!browser) return
+
+							store.set('theme', 'dark')
+							browser.webContents.send(IPCKey.UpdateSettings, store.store)
+						},
+					},
+				],
+			},
 			{
 				label: 'Open Data Directory',
 				click: () => {
@@ -23,7 +53,12 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 						properties: ['openDirectory'],
 					})
 
-					if (!res.canceled) store.set('cwd', res.filePaths[0])
+					if (!res.canceled) return
+					// Make sure the selected has `anime` directory in it
+					if (!exists(path.join(res.filePaths[0], 'anime')))
+						return new Notification("Data directory must contain 'anime' dir")
+
+					store.set('cwd', res.filePaths[0])
 
 					browser.webContents.send(IPCKey.UpdateSettings, store.store)
 				},

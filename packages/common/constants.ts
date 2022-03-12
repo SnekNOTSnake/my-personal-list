@@ -7,4 +7,6 @@ export const IPCKey = {
 	UpdateSettings: 'UpdateSettings',
 }
 
-export const DATA_FILE_NAME = 'mpl.json'
+export const DATA_FILE = 'mpl.json'
+export const ANIME_DIR = 'anime'
+export const POSTER_DIR = 'attachments'
