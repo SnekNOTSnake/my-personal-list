@@ -1,5 +1,11 @@
 import path from 'path'
-import { dialog, Menu, MenuItemConstructorOptions, shell } from 'electron'
+import {
+	dialog,
+	shell,
+	Menu,
+	MenuItemConstructorOptions,
+	Notification,
+} from 'electron'
 import { IPCKey } from '../common/constants'
 import { store } from './ipcEvents'
 import { exists } from './util'
@@ -41,7 +47,12 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 				label: 'Open Data Directory',
 				click: () => {
 					const cwd = store.get('cwd')
-					if (!cwd) return new Notification('Data directory is not set')
+					if (!cwd)
+						return new Notification({
+							title: 'Error Opening Data Directory',
+							body: 'Data directory is not set',
+						})
+
 					shell.openPath(cwd)
 				},
 			},
@@ -53,10 +64,15 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 						properties: ['openDirectory'],
 					})
 
-					if (!res.canceled) return
+					if (res.canceled) return
 					// Make sure the selected has `anime` directory in it
-					if (!exists(path.join(res.filePaths[0], 'anime')))
-						return new Notification("Data directory must contain 'anime' dir")
+					const dirExists = await exists(path.join(res.filePaths[0], 'anime'))
+					if (!dirExists)
+						return new Notification({
+							title: 'Error Changing Data Directory',
+							body: "Data directory must contain 'anime' dir",
+							urgency: 'critical',
+						}).show()
 
 					store.set('cwd', res.filePaths[0])
 
