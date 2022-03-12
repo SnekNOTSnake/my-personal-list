@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 	getSeries: () => ipc.invoke(IPCKey.GetSeries),
 	editSeries: (series: Series) => ipc.invoke(IPCKey.EditSeries, series),
 	changePoster: (series: Series) => ipc.invoke(IPCKey.ChangePoster, series),
+	openInExplorer: (fPath: string) => ipc.invoke(IPCKey.OpenInExplorer, fPath),
 
 	onUpdateSettings: (listener: (newSettings: Settings) => void) =>
 		ipc.on(IPCKey.UpdateSettings, (e, settings) => listener(settings)),

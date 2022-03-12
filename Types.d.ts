@@ -64,6 +64,7 @@ interface Window {
 		getSeries: () => Promise<Series[]>
 		editSeries: (series: Series) => Promise<Series>
 		changePoster: (series: Series) => Promise<Series>
+		openInExplorer: (fullPath: string) => Promise<void>
 
 		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}

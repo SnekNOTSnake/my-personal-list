@@ -1,11 +1,12 @@
-export const IPCKey = {
-	ChangeTheme: 'ChangeTheme',
-	GetSettings: 'GetSettings',
-	GetSeries: 'GetSeries',
-	EditSeries: 'EditSeries',
-	ChangePoster: 'ChangePoster',
+export enum IPCKey {
+	ChangeTheme = 'ChangeTheme',
+	GetSettings = 'GetSettings',
+	GetSeries = 'GetSeries',
+	EditSeries = 'EditSeries',
+	ChangePoster = 'ChangePoster',
+	OpenInExplorer = 'OpenInExplorer',
 
-	UpdateSettings: 'UpdateSettings',
+	UpdateSettings = 'UpdateSettings',
 }
 
 export const DATA_FILE = 'mpl.json'

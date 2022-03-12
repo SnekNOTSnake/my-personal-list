@@ -69,7 +69,11 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 				</div>
 				<div className={styles.detail}>
 					<div className={styles.actions}>
-						<button style={{ backgroundColor: '#2f80ed' }} type='button'>
+						<button
+							onClick={() => window.myAPI.openInExplorer(data.fullPath)}
+							style={{ backgroundColor: '#2f80ed' }}
+							type='button'
+						>
 							<MdOutlineFolder />
 						</button>
 						<button

@@ -15,8 +15,8 @@ export const createMainWindow = () => {
 
 	win = new BrowserWindow({
 		show: false,
-		width: 1280,
-		height: 720,
+		width: 1600,
+		height: 900,
 		icon: getAssetPath('icon.png'),
 		autoHideMenuBar: true,
 		webPreferences: {

@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import Store from 'electron-store'
-import { Dialog, dialog, ipcMain, IpcMainInvokeEvent } from 'electron'
+import { Dialog, dialog, ipcMain, IpcMainInvokeEvent, shell } from 'electron'
 
 import { IPCKey, DATA_FILE, ANIME_DIR, POSTER_DIR } from '../common/constants'
 import {
@@ -106,6 +106,13 @@ export class Events {
 
 		return newSeries
 	}
+
+	onOpenInExplorer = async (
+		e: IpcMainInvokeEvent,
+		fullPath: string,
+	): Promise<void> => {
+		shell.openPath(fullPath)
+	}
 }
 
 /* End of Events */
@@ -123,6 +130,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.GetSeries, events.onGetSeries)
 	ipcMain.handle(IPCKey.EditSeries, events.onEditSeries)
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
+	ipcMain.handle(IPCKey.OpenInExplorer, events.onOpenInExplorer)
 
 	initialized = true
 }
@@ -135,6 +143,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
+	ipcMain.removeAllListeners(IPCKey.OpenInExplorer)
 
 	initialized = false
 }
