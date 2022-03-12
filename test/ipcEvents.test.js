@@ -69,6 +69,16 @@ describe('ipcEvents', () => {
 				series.every((el) => Object.keys(defSeries).every((key) => key in el)),
 			).toBeTruthy()
 		})
+
+		it('Should contain all filenames inside each series', async () => {
+			const series = await events.onGetSeries('')
+			const priconne = series.find((el) => el.path === 'Princess Connect')
+			const exp = priconne.files.every(
+				(file) => file === 'some_random.file' || file === 'mpl.json',
+			)
+
+			expect(exp).toBe(true)
+		})
 	})
 
 	describe('onEditSeries', () => {

@@ -1,6 +1,6 @@
 .root .container {
 	display: flex;
-	margin-bottom: 32px;
+	margin-bottom: 40px;
 }
 
 .root .container .poster {
@@ -214,23 +214,51 @@
 	display: block;
 }
 
-.root .episodes .filenameToggler {
+.root .episodes .showAllToggler {
 	display: flex;
-	font-size: 1.2em;
-	margin-bottom: 16px;
+	align-items: center;
+	font-size: 1.1em;
+	margin-bottom: 24px;
+	background-color: var(--background-secondary);
+	position: relative;
+	padding: 8px 16px;
+	border: none;
+	border-radius: var(--border-radius);
 }
 
-.root .episodes .filenameToggler svg {
+.root .episodes .showAllToggler::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: var(--border-radius);
+	background-color: transparent;
+}
+
+.root .episodes .showAllToggler:hover::before {
+	background-color: var(--background-light);
+}
+
+.root .episodes .showAllToggler svg {
 	font-size: 1.2em;
 	margin-right: 8px;
 }
 
-.root .episodes li {
-	display: inline-block;
-	background-color: var(--background-secondary);
-	border-radius: var(--border-radius);
-	padding: 8px 16px;
-	margin: 0 16px 16px 0px;
-	text-align: center;
-	min-width: 75px;
+.root .episodes ul {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.root .episodes li div {
+	display: inline-flex;
+	cursor: pointer;
+	text-align: left;
+	margin-bottom: 16px;
+}
+
+.root .episodes li div:hover {
+	text-decoration: underline;
 }

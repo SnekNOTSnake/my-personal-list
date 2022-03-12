@@ -4,7 +4,7 @@ export enum IPCKey {
 	GetSeries = 'GetSeries',
 	EditSeries = 'EditSeries',
 	ChangePoster = 'ChangePoster',
-	OpenInExplorer = 'OpenInExplorer',
+	OpenItem = 'OpenItem',
 
 	UpdateSettings = 'UpdateSettings',
 }

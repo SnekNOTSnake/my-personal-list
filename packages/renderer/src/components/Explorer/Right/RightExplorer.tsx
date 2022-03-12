@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MdSearch, MdOutlineExpandMore } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { filteredSeries, seriesFilter } from '@/store/series'
 import styles from './RightExplorer.module.css'
 
 const RightExplorer: React.FC = () => {
+	const navigate = useNavigate()
+
 	const series = useRecoilValue(filteredSeries)
 	const [filter, setFilter] = useRecoilState(seriesFilter)
+
+	useEffect(() => {
+		if (series.length) navigate(`/explore/${series[0].path}`)
+	}, [])
 
 	const onSearchChange = (e: InputChange) => {
 		setFilter((prevVal) => ({ ...prevVal, query: e.target.value }))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useState } from 'react'
 import {
 	MdOutlineFolder,
@@ -22,8 +22,26 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 	const { cwd } = useRecoilValue(settingsState)
 
 	const [showRelated, setShowRelated] = useState(true)
-
 	const onShowRelatedToggle = () => setShowRelated((prevVal) => !prevVal)
+
+	const [showAll, setShowAll] = useState(false)
+	const onShowAllToggle = () => setShowAll((prevVal) => !prevVal)
+
+	const files = useMemo(() => {
+		const items = data.files.map((file) => {
+			const nameParts = file.split('.')
+			if (nameParts.length < 2) return { ext: '', name: file }
+			const ext = nameParts.pop() as string
+
+			return { ext, name: nameParts.join('.') }
+		})
+
+		if (showAll) return items
+
+		return items.filter((file) =>
+			['mkv', 'mp4', 'avi', '3gp'].includes(file.ext),
+		)
+	}, [data.files, showAll])
 
 	const onActivateTag = (tag: string) =>
 		setFilter((prevVal) => {
@@ -70,7 +88,7 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 				<div className={styles.detail}>
 					<div className={styles.actions}>
 						<button
-							onClick={() => window.myAPI.openInExplorer(data.fullPath)}
+							onClick={() => window.myAPI.openItem(data.fullPath)}
 							style={{ backgroundColor: '#2f80ed' }}
 							type='button'
 						>
@@ -148,14 +166,25 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 			</div>
 
 			<div className={styles.episodes}>
-				<div className={styles.filenameToggler}>
-					<MdOutlineFolder /> Show filenames
-				</div>
+				<button onClick={onShowAllToggle} className={styles.showAllToggler}>
+					<MdOutlineFolder /> {showAll ? 'Show Videos Only' : 'Show All Files'}
+				</button>
 
 				<ul>
-					{Array.from(new Array(data.epsNum).keys()).map((el) => (
-						<li key={el}>{el + 1}</li>
-					))}
+					{files.map((file) => {
+						const fullPath = [
+							data.fullPath,
+							[file.name, file.ext].join('.'),
+						].join('/')
+
+						return (
+							<li key={[file.name, file.ext].join('.')}>
+								<div onClick={() => window.myAPI.openItem(fullPath)}>
+									{file.name}
+								</div>
+							</li>
+						)
+					})}
 				</ul>
 			</div>
 		</div>

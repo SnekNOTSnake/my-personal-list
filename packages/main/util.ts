@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000
 export const defSeries: Series = {
 	path: '',
 	fullPath: '',
+	files: [],
+
 	title: '',
 	poster: '',
 	regular: false,

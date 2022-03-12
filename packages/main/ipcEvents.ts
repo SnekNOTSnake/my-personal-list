@@ -57,8 +57,11 @@ export class Events {
 				const data = await read(mplPath)
 				if (!data) return series.push(ensureSeries({ ...paths }))
 
+				const items = await fs.readdir(paths.fullPath, { withFileTypes: true })
+				const files = items.filter((el) => el.isFile()).map((el) => el.name)
+
 				const animeObj: Series = sanitizeSeries(JSON.parse(data.toString()))
-				series.push(ensureSeries({ ...paths, ...animeObj }))
+				series.push(ensureSeries({ ...paths, ...animeObj, files }))
 			}),
 		)
 
@@ -107,7 +110,7 @@ export class Events {
 		return newSeries
 	}
 
-	onOpenInExplorer = async (
+	onOpenItem = async (
 		e: IpcMainInvokeEvent,
 		fullPath: string,
 	): Promise<void> => {
@@ -130,7 +133,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.GetSeries, events.onGetSeries)
 	ipcMain.handle(IPCKey.EditSeries, events.onEditSeries)
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
-	ipcMain.handle(IPCKey.OpenInExplorer, events.onOpenInExplorer)
+	ipcMain.handle(IPCKey.OpenItem, events.onOpenItem)
 
 	initialized = true
 }
@@ -143,7 +146,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
-	ipcMain.removeAllListeners(IPCKey.OpenInExplorer)
+	ipcMain.removeAllListeners(IPCKey.OpenItem)
 
 	initialized = false
 }
