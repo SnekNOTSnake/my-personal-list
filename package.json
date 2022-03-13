@@ -21,6 +21,7 @@
 		"chart.js": "^3.7.1",
 		"electron-store": "^8.0.1",
 		"nanoid": "^3.3.1",
+		"prettier": "^2.5.1",
 		"react": "^17.0.2",
 		"react-chartjs-2": "^4.0.1",
 		"react-dom": "^17.0.2",
@@ -30,6 +31,7 @@
 	},
 	"devDependencies": {
 		"@types/mocha": "^9.1.0",
+		"@types/prettier": "^2.4.4",
 		"@types/react": "^17.0.33",
 		"@types/react-dom": "^17.0.10",
 		"@vitejs/plugin-react": "^1.0.7",
@@ -39,7 +41,6 @@
 		"electron-devtools-installer": "^3.2.0",
 		"expect": "^27.5.1",
 		"mocha": "^9.2.1",
-		"prettier": "^2.5.1",
 		"ts-node": "^10.7.0",
 		"typescript": "^4.5.4",
 		"vite": "^2.8.0",

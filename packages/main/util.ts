@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { constants } from 'fs'
+import prettier from 'prettier'
 
 Object.typedKeys = Object.keys as any
 
@@ -68,7 +69,14 @@ export const read = async (filePath: string) => {
 
 export const write = async (filePath: string, content: string) => {
 	try {
-		await fs.writeFile(filePath, content)
+		const formated = await prettier
+			.resolveConfig(path.resolve(__dirname, '../../.prettierrc.json'))
+			.then((options) => {
+				return prettier.format(content, { ...options, parser: 'json' })
+			})
+
+		await fs.writeFile(filePath, formated)
+
 		return true
 	} catch (err) {
 		return false
