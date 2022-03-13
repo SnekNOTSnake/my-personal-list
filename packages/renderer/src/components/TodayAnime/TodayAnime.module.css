@@ -1,11 +1,10 @@
 .root .posters {
 	display: flex;
-	max-width: 768px;
 	margin-bottom: 64px;
 }
 
 .root .poster {
-	width: 100%;
+	width: 175px;
 	aspect-ratio: 225 / 315;
 	border-radius: var(--border-radius);
 	background-position: center;

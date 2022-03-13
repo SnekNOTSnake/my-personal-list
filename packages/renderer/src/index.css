@@ -16,7 +16,7 @@
 
 	--foreground: #1b262c;
 	--text-primary: #1b262c;
-	--text-secondary: rgba(0, 0, 0, 0.5);
+	--text-secondary: rgba(0, 0, 0, 0.65);
 	--text-contrast: #fff;
 
 	--color-primary: #2f80ed;
@@ -36,7 +36,7 @@
 
 	--foreground: #fff;
 	--text-primary: #fff;
-	--text-secondary: rgba(255, 255, 255, 0.5);
+	--text-secondary: rgba(255, 255, 255, 0.65);
 	--text-contrast: #1b262c;
 }
 

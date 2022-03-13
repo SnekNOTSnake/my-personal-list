@@ -1,0 +1,24 @@
+.root {
+	position: relative;
+}
+
+.root .label {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+.root .label .percentage {
+	font-size: 2.5em;
+}
+
+.root .label .episodes {
+	color: var(--text-secondary);
+	font-size: 1.2em;
+}

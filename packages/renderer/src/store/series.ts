@@ -66,13 +66,14 @@ export const seriesStats = selector({
 
 		const stats = {
 			tags,
-			epsFresh: series
+			watchedEpisodes: series
 				.filter((el) => el.regular)
-				.map((tag) => tag.epsNum - tag.epsWatched)
+				.map((el) => el.epsWatched)
 				.reduce((p, c) => p + c, 0),
-			totalSeries: series
+			totalEpisodes: series
 				.filter((el) => el.regular)
-				.filter((el) => el.epsWatched === 0).length,
+				.map((el) => el.epsNum)
+				.reduce((p, c) => p + c, 0),
 		}
 
 		return stats
