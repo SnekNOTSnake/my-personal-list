@@ -112,8 +112,12 @@ export const filteredSeries = selector({
 			case 'title':
 				ordered.sort((a, b) =>
 					filter.order.descending
-						? b.title.localeCompare(a.title)
-						: a.title.localeCompare(b.title),
+						? b.title
+							? b.title.localeCompare(a.title)
+							: b.path.localeCompare(a.path)
+						: a.title
+						? a.title.localeCompare(b.title)
+						: a.path.localeCompare(b.path),
 				)
 				break
 

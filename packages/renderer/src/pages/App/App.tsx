@@ -19,6 +19,11 @@ const App: React.FC = () => {
 			const newSeries = await window.myAPI.getSeries()
 			setSeries(newSeries)
 		})
+
+		window.addEventListener('focus', async () => {
+			const newSeries = await window.myAPI.getSeries()
+			setSeries(newSeries)
+		})
 	}, [])
 
 	return (

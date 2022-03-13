@@ -54,6 +54,7 @@
 
 .root .container .detail {
 	padding: 0 32px;
+	width: calc(100% - 225px);
 }
 
 .root .container .detail .actions {
@@ -97,7 +98,21 @@
 
 .root .container .detail .watchInfo {
 	display: flex;
-	margin-bottom: 8px;
+	margin-bottom: 16px;
+}
+
+.root .container .detail .watchInfo button {
+	background-color: var(--color-green);
+	color: #fff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border: none;
+	padding: 0;
+	border-radius: var(--border-radius);
+	margin-right: 8px;
 }
 
 .root .container .detail .watchInfo .watchedInfo {
