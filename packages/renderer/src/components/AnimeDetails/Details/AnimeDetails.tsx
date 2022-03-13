@@ -6,6 +6,7 @@ import {
 	MdOutlineEdit,
 	MdOutlineExpandMore,
 	MdOutlineImage,
+	MdOutlineAdd,
 } from 'react-icons/md'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
@@ -73,6 +74,22 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 		})
 	}
 
+	const onIncreaseEpsWatched = async () => {
+		const newData = {
+			...data,
+			epsWatched: data.epsWatched + 1,
+		}
+
+		await window.myAPI.editSeries(newData)
+
+		setSeries((prevVal) => {
+			const newSeries = [...prevVal]
+			const index = newSeries.findIndex((el) => el.path === data.path)
+			newSeries.splice(index, 1, newData)
+			return newSeries
+		})
+	}
+
 	const posterPath = data.poster
 		? `url(file://${[cwd, 'attachments', data.poster].join('/')})`
 		: ''
@@ -108,6 +125,9 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 
 					<h1>{data.title || data.path}</h1>
 					<div className={styles.watchInfo}>
+						<button onClick={onIncreaseEpsWatched} type='button'>
+							<MdOutlineAdd />
+						</button>
 						<div className={styles.watchedInfo}>
 							{data.epsWatched} of {data.epsNum} episodes
 						</div>
