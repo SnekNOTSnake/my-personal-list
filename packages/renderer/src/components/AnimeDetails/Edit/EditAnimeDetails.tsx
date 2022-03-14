@@ -65,13 +65,8 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		e.preventDefault()
 
 		await window.myAPI.editSeries({ ...data, ...input })
-
-		setSeries((prevVal) => {
-			const index = prevVal.findIndex((el) => el.path === data.path)
-			const newSeries = [...prevVal]
-			newSeries.splice(index, 1, { ...prevVal[index], ...input })
-			return newSeries
-		})
+		const newSeries = await window.myAPI.getSeries()
+		setSeries(newSeries)
 
 		closeEdit()
 	}

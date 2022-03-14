@@ -22,7 +22,7 @@
 	width: 100%;
 }
 
-.root .toolBar input,
+.root .toolBar input.search,
 .root .toolBar select {
 	width: 100%;
 	height: 100%;

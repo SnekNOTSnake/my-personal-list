@@ -9,7 +9,7 @@ import { seriesState } from '@/store/series'
 
 const Container: React.FC = () => {
 	const params = useParams()
-	const path = decodeURIComponent(params.path || '')
+	const path = decodeURI(params.path || '')
 	const ani = useRecoilValue(seriesState).find((el) => el.path === path)
 
 	const [isEditing, setIsEditing] = React.useState(false)

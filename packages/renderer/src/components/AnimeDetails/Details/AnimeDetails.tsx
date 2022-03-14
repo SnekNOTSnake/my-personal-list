@@ -150,10 +150,13 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 							<li>Source: {data.source}</li>
 							<li>Quality: {data.quality}</li>
 							<li>Resolution: {data.res}p</li>
-							<li>Duration: {data.duration} mins</li>
 							<li>Video: {data.video}</li>
 							<li>Audio: {data.audio}</li>
+							<li>Duration: {data.duration} mins</li>
 							<li>Subtitle: {data.subtitle}</li>
+							{data.regular || (
+								<li className={styles.irregular}>Type: Irregular</li>
+							)}
 						</ul>
 					</div>
 				</div>
@@ -176,7 +179,7 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 					<ul>
 						{data.related.map((series, i) => (
 							<li key={series.path || i}>
-								<Link to={`/explore/${decodeURIComponent(series.path)}`}>
+								<Link to={`/explore/${decodeURI(series.path)}`}>
 									{series.type}: {series.path.replace(/-/gi, ' ')}
 								</Link>
 							</li>
@@ -200,7 +203,7 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 						return (
 							<li key={[file.name, file.ext].join('.')}>
 								<div onClick={() => window.myAPI.openItem(fullPath)}>
-									{file.name}
+									{[file.name, file.ext].join('.')}
 								</div>
 							</li>
 						)

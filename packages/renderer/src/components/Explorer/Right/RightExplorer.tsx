@@ -30,7 +30,8 @@ const RightExplorer: React.FC = () => {
 		const listener = (e: KeyboardEvent) => {
 			const iFocused = document.querySelector(`.${styles.search}:focus`)
 			const focused = document.querySelector(`.${styles.root}:focus-within`)
-			if (!titlesRef.current || !inputRef.current || !focused) return
+			if (!titlesRef.current || !inputRef.current) return
+			if (!focused && !['f', 'Escape'].includes(e.key)) return
 
 			const scrollAccordingly = () => {
 				if (!titlesRef.current) return
@@ -91,7 +92,6 @@ const RightExplorer: React.FC = () => {
 					break
 
 				default:
-					console.log(e.key)
 					break
 			}
 		}
@@ -118,7 +118,7 @@ const RightExplorer: React.FC = () => {
 		}))
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} tabIndex={0}>
 			<div className={styles.toolBar}>
 				<div>
 					<input

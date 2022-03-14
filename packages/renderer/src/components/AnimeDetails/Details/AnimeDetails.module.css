@@ -93,6 +93,7 @@
 }
 
 .root .container .detail h1 {
+	line-height: 1.2;
 	margin-bottom: 8px;
 }
 
@@ -120,7 +121,7 @@
 }
 
 .root .container .detail .tags {
-	margin-bottom: 24px;
+	margin-bottom: 8px;
 }
 
 .root .container .detail .tags li {
@@ -129,7 +130,7 @@
 	position: relative;
 	display: inline-block;
 	padding: 2px 8px;
-	margin-right: 8px;
+	margin: 0 8px 8px 0;
 	color: var(--text-primary);
 	background-color: var(--background-secondary);
 	border-radius: var(--border-radius);
@@ -152,11 +153,13 @@
 }
 
 .root .container .detail .additionalInfo ul {
-	columns: 2;
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 4px 24px;
 }
 
-.root .container .detail .additionalInfo li {
-	margin-bottom: 4px;
+.root .container .detail .additionalInfo ul li.irregular {
+	color: var(--color-primary);
 }
 
 .root .notes {
@@ -265,13 +268,13 @@
 .root .episodes ul {
 	display: grid;
 	grid-template-columns: auto auto auto;
+	gap: 20px 30px;
 }
 
 .root .episodes li div {
 	display: inline-flex;
 	cursor: pointer;
 	text-align: left;
-	margin-bottom: 16px;
 }
 
 .root .episodes li div:hover {
