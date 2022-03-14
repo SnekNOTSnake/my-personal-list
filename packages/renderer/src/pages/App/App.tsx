@@ -20,7 +20,6 @@ const App: React.FC = () => {
 
 		window.myAPI.onUpdateSettings(async (newSettings) => {
 			setSettings(newSettings)
-
 			const newSeries = await window.myAPI.getSeries()
 			setSeries(newSeries)
 		})

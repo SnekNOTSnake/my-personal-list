@@ -9,11 +9,20 @@ contextBridge.exposeInMainWorld('myAPI', {
 	changePoster: (series: Series) => ipc.invoke(IPCKey.ChangePoster, series),
 	openItem: (fPath: string) => ipc.invoke(IPCKey.OpenItem, fPath),
 
+	// Settings subscription
 	onUpdateSettings: (listener: (newSettings: Settings) => void) => {
-		// ipc.invoke(IPCKey.ChangeTheme, theme)
-		ipc.on(IPCKey.UpdateSettings, (e, settings) => listener(settings))
+		ipc.on(IPCKey.ChangeTheme, async (e, theme) => {
+			const settings = await ipc.invoke(IPCKey.ChangeTheme, theme)
+			listener(settings)
+		})
+
+		ipc.on(IPCKey.ChangeDataDir, async (e) => {
+			const settings = await ipc.invoke(IPCKey.ChangeDataDir)
+			listener(settings)
+		})
 	},
 })
 
-// Unexposed Menu-Main communications
+// Menu-Main communications
 ipc.on(IPCKey.RemoveUnusedPosters, () => ipc.invoke(IPCKey.RemoveUnusedPosters))
+ipc.on(IPCKey.OpenDataDir, () => ipc.invoke(IPCKey.OpenDataDir))

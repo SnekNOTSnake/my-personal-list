@@ -8,6 +8,8 @@ export enum IPCKey {
 
 	UpdateSettings = 'UpdateSettings',
 	RemoveUnusedPosters = 'RemoveUnusedPosters',
+	OpenDataDir = 'OpenDataDir',
+	ChangeDataDir = 'ChangeDataDir',
 }
 
 export const DATA_FILE = 'mpl.json'

@@ -60,7 +60,7 @@ interface Relation {
 
 interface Window {
 	myAPI: {
-		changeTheme: (theme: Theme) => Promise<Theme>
+		changeTheme: (theme: Theme) => Promise<Settings>
 		getSettings: () => Promise<Settings>
 		getSeries: () => Promise<Series[]>
 		editSeries: (series: Series) => Promise<Series>

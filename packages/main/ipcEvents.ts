@@ -1,7 +1,14 @@
 import path from 'path'
 import fs from 'fs/promises'
 import Store from 'electron-store'
-import { Dialog, dialog, ipcMain, IpcMainInvokeEvent, shell } from 'electron'
+import {
+	Dialog,
+	dialog,
+	ipcMain,
+	IpcMainInvokeEvent,
+	shell,
+	Notification,
+} from 'electron'
 
 import { IPCKey, DATA_FILE, ANIME_DIR, POSTER_DIR } from '../common/constants'
 import {
@@ -27,7 +34,7 @@ export class Events {
 
 	onChangeTheme = (e: IpcMainInvokeEvent, theme: Theme) => {
 		this.store.set('theme', theme)
-		return this.store.get('theme')
+		return this.store.store
 	}
 
 	onGetSettings = (e: IpcMainInvokeEvent): Settings => {
@@ -137,6 +144,38 @@ export class Events {
 			}),
 		)
 	}
+
+	onOpenDataDir = () => {
+		const cwd = store.get('cwd')
+		if (!cwd)
+			return new Notification({
+				title: 'Error Opening Data Directory',
+				body: 'Data directory is not set',
+			})
+
+		shell.openPath(cwd)
+	}
+
+	onChangeDataDir = async (): Promise<Settings> => {
+		const res = await dialog.showOpenDialog({
+			properties: ['openDirectory'],
+		})
+
+		if (res.canceled) return store.store
+		// Make sure the selected has `anime` directory in it
+		const dirExists = await exists(path.join(res.filePaths[0], 'anime'))
+		if (!dirExists) {
+			new Notification({
+				title: 'Error Changing Data Directory',
+				body: "Data directory must contain 'anime' dir",
+				urgency: 'critical',
+			}).show()
+			return store.store
+		}
+
+		store.set('cwd', res.filePaths[0])
+		return store.store
+	}
 }
 
 /* End of Events */
@@ -156,6 +195,8 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
 	ipcMain.handle(IPCKey.OpenItem, events.onOpenItem)
 	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
+	ipcMain.handle(IPCKey.OpenDataDir, events.onOpenDataDir)
+	ipcMain.handle(IPCKey.ChangeDataDir, events.onChangeDataDir)
 
 	initialized = true
 }
@@ -169,7 +210,8 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
-	ipcMain.removeAllListeners(IPCKey.RemoveUnusedPosters)
+	ipcMain.removeAllListeners(IPCKey.OpenDataDir)
+	ipcMain.removeAllListeners(IPCKey.ChangeDataDir)
 
 	initialized = false
 }

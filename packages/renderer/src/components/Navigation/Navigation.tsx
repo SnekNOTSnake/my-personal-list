@@ -16,8 +16,8 @@ const Navigation: React.FC = () => {
 	const [{ theme }, setSettings] = useRecoilState(settingsState)
 	const onChangeTheme = async () => {
 		const newTheme = theme === 'dark' ? 'light' : 'dark'
-		const res = await window.myAPI.changeTheme(newTheme)
-		setSettings((prevVal) => ({ ...prevVal, theme: res }))
+		const newSettings = await window.myAPI.changeTheme(newTheme)
+		setSettings(newSettings)
 	}
 
 	useEffect(() => {
