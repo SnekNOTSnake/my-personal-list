@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { seriesState } from '@/store/series'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { seriesState, seriesFilter, seriesStats } from '@/store/series'
 
 import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
@@ -31,6 +31,8 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		regular: data.regular,
 	}
 
+	const stats = useRecoilValue(seriesStats)
+	const setFilters = useSetRecoilState(seriesFilter)
 	const setSeries = useSetRecoilState(seriesState)
 	const [input, setInput] = useState(defaultInputs)
 
@@ -67,6 +69,27 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 		await window.myAPI.editSeries({ ...data, ...input })
 		const newSeries = await window.myAPI.getSeries()
 		setSeries(newSeries)
+
+		// Remove active single tags about to delete
+		setFilters((prevVal) => {
+			const tagsToDelete = data.tags.filter((tag) => !input.tags.includes(tag))
+			const lonelyTagsToDelete = stats.tags.filter(
+				(tag) => tag.count === 1 && tagsToDelete.includes(tag.name),
+			)
+
+			const active = [...prevVal.tags.active]
+			const deactive = [...prevVal.tags.deactive]
+
+			lonelyTagsToDelete.forEach((tag) => {
+				const aIndex = active.findIndex((el) => el === tag.name)
+				const dIndex = deactive.findIndex((el) => el === tag.name)
+
+				if (aIndex >= 0) active.splice(aIndex, 1)
+				if (dIndex >= 0) deactive.splice(dIndex, 1)
+			})
+
+			return { ...prevVal, tags: { active, deactive } }
+		})
 
 		closeEdit()
 	}

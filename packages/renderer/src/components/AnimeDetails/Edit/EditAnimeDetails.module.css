@@ -65,7 +65,7 @@
 	background-color: var(--background-secondary);
 	border-radius: var(--border-radius);
 	padding: 2px 16px;
-	margin-right: 8px;
+	margin: 0 8px 8px 0;
 }
 
 .root .tags li::before {

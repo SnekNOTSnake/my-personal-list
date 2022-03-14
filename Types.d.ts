@@ -20,7 +20,7 @@ interface Settings {
 interface Metadata {
 	encoder: string
 	source: string
-	quality: 'bd' | 'dvd' | 'web'
+	quality: 'unknown' | 'bd' | 'dvd' | 'web'
 	res: number
 	duration: number
 	video: string

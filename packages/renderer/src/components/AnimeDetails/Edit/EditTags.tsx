@@ -12,6 +12,7 @@ const EditTags: React.FC<Props> = ({ setTags, tagsI }) => {
 			e.preventDefault()
 
 			const newTag = e.currentTarget.value
+			if (['untagged'].includes(newTag)) return
 			if (tagsI.includes(newTag)) return
 
 			setTags([...tagsI, newTag])

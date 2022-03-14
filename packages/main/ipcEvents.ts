@@ -114,7 +114,7 @@ export class Events {
 		e: IpcMainInvokeEvent,
 		fullPath: string,
 	): Promise<void> => {
-		shell.openPath(fullPath)
+		shell.openExternal(`file://${fullPath}`)
 	}
 }
 

@@ -24,7 +24,7 @@ export const defSeries: Series = {
 
 	audio: '',
 	video: '',
-	quality: 'bd',
+	quality: 'unknown',
 	duration: 0,
 	encoder: '',
 	res: 0,
