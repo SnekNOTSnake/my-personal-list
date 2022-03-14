@@ -13,14 +13,14 @@ const App: React.FC = () => {
 	const setSeries = useSetRecoilState(seriesState)
 
 	useEffect(() => {
-		window.myAPI.onUpdateSettings(async (newSettings) => {
-			setSettings(newSettings)
-
+		window.addEventListener('focus', async () => {
 			const newSeries = await window.myAPI.getSeries()
 			setSeries(newSeries)
 		})
 
-		window.addEventListener('focus', async () => {
+		window.myAPI.onUpdateSettings(async (newSettings) => {
+			setSettings(newSettings)
+
 			const newSeries = await window.myAPI.getSeries()
 			setSeries(newSeries)
 		})

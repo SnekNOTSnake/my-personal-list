@@ -116,6 +116,27 @@ export class Events {
 	): Promise<void> => {
 		shell.openExternal(`file://${fullPath}`)
 	}
+
+	onRemoveUnusedPosters = async (e: IpcMainInvokeEvent): Promise<void> => {
+		const cwd = this.store.get('cwd')
+		if (!cwd) return
+
+		const series = await this.onGetSeries(e)
+		const POSTER = path.join(cwd, POSTER_DIR)
+
+		const files = await fs.readdir(POSTER, { withFileTypes: true })
+		const filesToDelete = files.filter((file) => {
+			if (!file.isFile()) return false
+			return series.every((el) => el.poster !== file.name)
+		})
+
+		await Promise.all(
+			filesToDelete.map(async (file) => {
+				const fullPath = path.join(POSTER, file.name)
+				await fs.rm(fullPath)
+			}),
+		)
+	}
 }
 
 /* End of Events */
@@ -134,6 +155,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.EditSeries, events.onEditSeries)
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
 	ipcMain.handle(IPCKey.OpenItem, events.onOpenItem)
+	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
 
 	initialized = true
 }
@@ -147,6 +169,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
+	ipcMain.removeAllListeners(IPCKey.RemoveUnusedPosters)
 
 	initialized = false
 }

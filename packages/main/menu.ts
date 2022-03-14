@@ -79,6 +79,13 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 					browser.webContents.send(IPCKey.UpdateSettings, store.store)
 				},
 			},
+			{
+				label: 'Remove Unused Posters',
+				click: (menuItem, browser) => {
+					if (!browser) return
+					browser.webContents.send(IPCKey.RemoveUnusedPosters)
+				},
+			},
 			{ type: 'separator' },
 			{ role: 'quit' },
 		],

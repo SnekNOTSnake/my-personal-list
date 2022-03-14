@@ -155,6 +155,20 @@ describe('ipcEvents', () => {
 		})
 	})
 
+	describe('onRemoveUnusedPosters', () => {
+		it('Should remove unused posters', async () => {
+			await events.onRemoveUnusedPosters('')
+
+			fs.readdir(POSTER, (err, items) => {
+				expect(err).toBeFalsy()
+				expect(items.length).toBe(2)
+				expect(items.includes('fate-zero.jpg')).toBe(false)
+				expect(items.includes('read-or-die.jpg')).toBe(true)
+				expect(items.includes('isekai-shokudou.jpg')).toBe(true)
+			})
+		})
+	})
+
 	describe('onChangePoster', () => {
 		it('Should generate `attachments` dir if not exists', async () => {
 			fs.rmSync(POSTER, { recursive: true })
