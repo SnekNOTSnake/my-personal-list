@@ -1,6 +1,8 @@
 import { atom, selector } from 'recoil'
+import fuzzysort from 'fuzzysort'
 
 window.myAPI.getSeries().then((val) => console.log(val))
+type OrderBy = 'relevance' | 'title' | 'duration' | 'resolution' | 'epsNum'
 
 export const seriesState = atom({
 	key: 'series',
@@ -13,7 +15,7 @@ export const seriesFilter = atom({
 		query: '',
 		order: {
 			descending: false,
-			by: 'title' as 'title' | 'duration' | 'resolution' | 'epsNum',
+			by: 'title' as OrderBy,
 		},
 		tags: {
 			active: [] as string[],
@@ -94,9 +96,6 @@ export const filteredSeries = selector({
 		} else {
 			filtered = series
 				.filter((el) =>
-					el.title.toLowerCase().startsWith(filter.query.toLocaleLowerCase()),
-				)
-				.filter((el) =>
 					filter.tags.active.length
 						? filter.tags.active.every((tag) => el.tags.includes(tag))
 						: true,
@@ -108,8 +107,25 @@ export const filteredSeries = selector({
 				)
 		}
 
-		let ordered = filtered
-		switch (filter.order.by) {
+		let orderBy = filter.order.by as OrderBy
+		let searched: Series[] = filtered
+		if (filter.query) {
+			const results = fuzzysort.go(filter.query, filtered, { keys: ['title'] })
+			const sorted = [...results]
+			sorted.sort((a, b) => {
+				if (a.score !== b.score) return b.score - a.score
+				return b.obj.title.localeCompare(a.obj.title)
+			})
+
+			orderBy = 'relevance'
+			searched = sorted.map((el) => el.obj)
+		}
+
+		let ordered = searched
+		switch (orderBy) {
+			case 'relevance':
+				break
+
 			case 'title':
 				ordered.sort((a, b) =>
 					filter.order.descending

@@ -137,6 +137,7 @@ const RightExplorer: React.FC = () => {
 			<div className={styles.toolBar}>
 				<div>
 					<select value={filter.order.by} onChange={onOrderByChange}>
+						<option value='relevance'>Relevance</option>
 						<option value='title'>Title</option>
 						<option value='duration'>Duration</option>
 						<option value='resolution'>Resolution</option>
