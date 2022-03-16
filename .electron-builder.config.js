@@ -5,13 +5,13 @@ const pkg = require('./package.json')
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
-	appId: 'My-Very-Own-Personal-List-Id',
+	appId: 'com.sneknotsnake.my-personal-list',
 	productName: pkg.name,
 	copyright: 'Copyright © 2022 ${author}',
 	asar: true,
 	directories: {
 		output: 'release/${version}',
-		buildResources: 'build',
+		buildResources: 'assets',
 	},
 	files: ['dist'],
 	win: {
@@ -21,14 +21,16 @@ module.exports = {
 				arch: ['x64'],
 			},
 		],
-		artifactName: '${name}-${version}.exe',
+		artifactName: '${name}-${version}.${ext}',
 	},
 	mac: {
 		target: ['dmg'],
-		artifactName: '${name}-${version}.dmg',
+		artifactName: '${name}-${version}.${ext}',
 	},
 	linux: {
-		target: ['AppImage'],
-		artifactName: '${name}-${version}.AppImage',
+		target: ['AppImage', 'deb'],
+		artifactName: '${name}-${version}.${ext}',
+		category: 'Utility',
 	},
+	extraResources: ['./assets/**'],
 }
