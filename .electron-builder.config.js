@@ -5,12 +5,12 @@ const pkg = require('./package.json')
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
-	appId: 'YourAppId',
+	appId: 'My-Very-Own-Personal-List-Id',
 	productName: pkg.name,
-	copyright: `Copyright © 2022 ${pkg.author}`,
+	copyright: 'Copyright © 2022 ${author}',
 	asar: true,
 	directories: {
-		output: `release/${pkg.version}`,
+		output: 'release/${version}',
 		buildResources: 'build',
 	},
 	files: ['dist'],
@@ -21,14 +21,14 @@ module.exports = {
 				arch: ['x64'],
 			},
 		],
-		artifactName: `${pkg.name}-${pkg.version}.exe`,
+		artifactName: '${name}-${version}.exe',
 	},
 	mac: {
 		target: ['dmg'],
-		artifactName: `${pkg.name}-${pkg.version}.dmg`,
+		artifactName: '${name}-${version}.dmg',
 	},
 	linux: {
 		target: ['AppImage'],
-		artifactName: `${pkg.name}-${pkg.version}.AppImage`,
+		artifactName: '${name}-${version}.AppImage',
 	},
 }
