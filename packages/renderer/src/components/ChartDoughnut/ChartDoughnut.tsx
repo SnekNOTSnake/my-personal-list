@@ -6,7 +6,7 @@ import styles from './ChartDoughnut.module.css'
 import { settingsState } from '@/store/settings'
 
 /**
- * @description See https://github.com/chartjs/Chart.js/issues/6195
+ * @see https://github.com/chartjs/Chart.js/issues/6195
  */
 
 const thicknessPlugin = {

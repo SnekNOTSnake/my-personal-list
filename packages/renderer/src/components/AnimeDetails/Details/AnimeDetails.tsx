@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useState } from 'react'
 import {
 	MdOutlineFolder,
@@ -22,19 +22,28 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 	const setSeries = useSetRecoilState(seriesState)
 	const { cwd } = useRecoilValue(settingsState)
 
-	const [showRelated, setShowRelated] = useState(true)
+	const [showRelated, setShowRelated] = useState(Boolean(data.related.length))
 	const onShowRelatedToggle = () => setShowRelated((prevVal) => !prevVal)
 
 	const [showAll, setShowAll] = useState(false)
 	const onShowAllToggle = () => setShowAll((prevVal) => !prevVal)
 
+	useEffect(() => {
+		setShowRelated(Boolean(data.related.length))
+	}, [data.related])
+
 	const files = useMemo(() => {
 		const items = data.files.map((file) => {
 			const nameParts = file.split('.')
-			if (nameParts.length < 2) return { ext: '', name: file }
-			const ext = nameParts.pop() as string
+			if (nameParts.length < 2) return { episode: null, ext: '', full: file }
 
-			return { ext, name: nameParts.join('.') }
+			let episode = null
+			const ext = nameParts[nameParts.length - 1] as string
+			if (!isNaN(Number(nameParts[0]))) episode = Number(nameParts[0])
+			if (nameParts.length < 3) return { episode, ext, full: file }
+
+			episode = Number(nameParts[0]?.replace(/[^0-9]/g, ''))
+			return { episode, ext, full: file }
 		})
 
 		if (showAll) return items
@@ -195,15 +204,13 @@ const AnimeDetails: React.FC<Props> = ({ edit, data }) => {
 
 				<ul>
 					{files.map((file) => {
-						const fullPath = [
-							data.fullPath,
-							[file.name, file.ext].join('.'),
-						].join('/')
+						const fullPath = [data.fullPath, file.full].join('/')
+						const isCurrentEps = file.episode === data.epsWatched + 1
 
 						return (
-							<li key={[file.name, file.ext].join('.')}>
+							<li className={isCurrentEps ? styles.active : ''} key={file.full}>
 								<div onClick={() => window.myAPI.openItem(fullPath)}>
-									{[file.name, file.ext].join('.')}
+									{file.full}
 								</div>
 							</li>
 						)

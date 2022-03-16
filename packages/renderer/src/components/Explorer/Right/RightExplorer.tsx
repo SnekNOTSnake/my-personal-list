@@ -83,7 +83,9 @@ const RightExplorer: React.FC = () => {
 					break
 
 				case 'f':
-					if (e.ctrlKey) inputRef.current.focus()
+					if (!e.ctrlKey) return
+					inputRef.current.focus()
+					inputRef.current.select()
 					break
 
 				case 'Escape':
