@@ -7,6 +7,7 @@ import { settingsState } from '@/store/settings'
 import { seriesState } from '@/store/series'
 import Home from '../Home'
 import Explore from '../Explore'
+import Schedule from '../Schedule'
 
 const App: React.FC = () => {
 	const setSettings = useSetRecoilState(settingsState)
@@ -30,6 +31,7 @@ const App: React.FC = () => {
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/explore/*' element={<Explore />} />
+				<Route path='/schedule' element={<Schedule />} />
 			</Routes>
 		</Layout>
 	)
