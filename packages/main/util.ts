@@ -40,7 +40,7 @@ const defRelated: Relation = {
 	type: 'sequel',
 }
 
-const defSchedule: Schedule = {
+export const defSchedule: Schedule = {
 	sun: [],
 	mon: [],
 	tue: [],

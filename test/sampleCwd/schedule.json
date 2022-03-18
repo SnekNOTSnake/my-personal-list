@@ -1,0 +1,9 @@
+{
+	"sun": ["sun-anime", "sunday"],
+	"mon": ["mon-anime", "monday"],
+	"tue": ["tue-anime", "tuesday"],
+	"wed": ["wed-anime"],
+	"thu": ["thu-anime"],
+	"fri": ["fri-anime", "friday"],
+	"sat": ["sat-anime", "something-different"]
+}

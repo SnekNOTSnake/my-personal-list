@@ -2,8 +2,17 @@ import fs from 'fs'
 import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
-import { defSeries, exists } from '../packages/main/util'
-import { ANIME_DIR, POSTER_DIR } from '../packages/common/constants'
+import {
+	defSeries,
+	defSchedule,
+	exists,
+	ensureSchedule,
+} from '../packages/main/util'
+import {
+	ANIME_DIR,
+	POSTER_DIR,
+	SCHEDULE_FILE,
+} from '../packages/common/constants'
 
 const defaultStore = { cwd: null, theme: 'light' }
 
@@ -26,6 +35,7 @@ const events = new Events(store, {})
 const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
 const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
 const POSTER = path.join(SAMPLE_CWD, POSTER_DIR)
+const SCHEDULE = path.join(SAMPLE_CWD, SCHEDULE_FILE)
 
 describe('ipcEvents', () => {
 	describe('onGetSettings', () => {
@@ -206,6 +216,66 @@ describe('ipcEvents', () => {
 
 			expect(updatedMushishi.poster).toBe(result.poster)
 			expect(isPosterExists).toBe(true)
+		})
+	})
+
+	describe('onGetSchedule', () => {
+		it('Should return stored schedule', async () => {
+			const schedule = await events.onGetSchedule('')
+
+			expect(schedule.sun).toHaveLength(2)
+			expect(schedule.wed).toHaveLength(1)
+			expect(schedule.sat).toHaveLength(2)
+			expect(schedule.sat[1]).toBe('something-different')
+		})
+
+		it("Should return default schedule when the file isn't presents", async () => {
+			fs.rmSync(SCHEDULE)
+			const schedule = await events.onGetSchedule('')
+
+			expect(schedule).toHaveProperty('sun')
+			expect(schedule).toHaveProperty('mon')
+			expect(schedule).toHaveProperty('tue')
+			expect(schedule).toHaveProperty('wed')
+			expect(schedule).toHaveProperty('thu')
+			expect(schedule).toHaveProperty('fri')
+			expect(schedule).toHaveProperty('sat')
+		})
+
+		it('Should populate incomplete schedule', async () => {
+			fs.writeFileSync(SCHEDULE, JSON.stringify({ mon: ['some-anime'] }))
+			const schedule = await events.onGetSchedule('')
+
+			expect(schedule.sun).toHaveLength(0)
+			expect(schedule.mon).toHaveLength(1)
+			expect(schedule.tue).toHaveLength(0)
+		})
+	})
+
+	describe('onChangeSchedule', () => {
+		it('Should write schedule file when none is present', async () => {
+			fs.rmSync(SCHEDULE)
+			let isExists = await exists(SCHEDULE)
+			expect(isExists).toBe(false)
+
+			await events.onChangeSchedule('', ensureSchedule())
+			isExists = await exists(SCHEDULE)
+			expect(isExists).toBe(true)
+		})
+
+		it('Should be able to store schedules', async () => {
+			await events.onChangeSchedule(
+				'',
+				ensureSchedule({
+					sun: ['something-cool'],
+					tue: ['something-cool', 'something-different'],
+				}),
+			)
+
+			const schedule = await events.onGetSchedule('')
+
+			expect(schedule.sun[0]).toBe('something-cool')
+			expect(schedule.tue[1]).toBe('something-different')
 		})
 	})
 })

@@ -8,6 +8,8 @@ import {
 	write,
 	ensureSeries,
 	sanitizeSeries,
+	ensureSchedule,
+	sanitizeSchedule,
 } from '../packages/main/util'
 import { ANIME_DIR, DATA_FILE } from '../packages/common/constants'
 
@@ -96,6 +98,32 @@ describe('Utils', () => {
 			expect(sanitized.path).toBeUndefined()
 			expect(sanitized.fullPath).toBeUndefined()
 			expect(sanitized.files).toBeUndefined()
+		})
+	})
+
+	describe('ensureSchedule', () => {
+		it('Should fill in missing days', () => {
+			const schedule = ensureSchedule({ mon: ['tahu'] })
+
+			expect(schedule).toHaveProperty('sun')
+			expect(schedule).toHaveProperty('mon')
+			expect(schedule).toHaveProperty('tue')
+			expect(schedule).toHaveProperty('wed')
+		})
+	})
+
+	describe('sanitizeSchedul', () => {
+		it('Should eliminate unnecessary properties', () => {
+			const mySchedule = ensureSchedule({
+				tahu: ['kotak'],
+				mon: ['semprong'],
+				tue: ['tempe'],
+			})
+			const sanitized = sanitizeSchedule(mySchedule)
+
+			expect(sanitized.tahu).toBeUndefined()
+			expect(sanitized.mon[0]).toBe('semprong')
+			expect(sanitized.tue[0]).toBe('tempe')
 		})
 	})
 })
