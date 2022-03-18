@@ -1,12 +1,19 @@
 import { atom, selector } from 'recoil'
 import fuzzysort from 'fuzzysort'
 
+Object.typedKeys = Object.keys as any
+
 window.myAPI.getSeries().then((val) => console.log(val))
 type OrderBy = 'relevance' | 'title' | 'duration' | 'resolution' | 'epsNum'
 
 export const seriesState = atom({
 	key: 'series',
 	default: window.myAPI.getSeries(),
+})
+
+export const scheduleState = atom({
+	key: 'schedule',
+	default: window.myAPI.getSchedule(),
 })
 
 export const seriesFilter = atom({
@@ -163,5 +170,31 @@ export const filteredSeries = selector({
 		}
 
 		return ordered
+	},
+})
+
+export const populatedSchedule = selector({
+	key: 'populatedSchedule',
+	get: ({ get }) => {
+		const schedule = get(scheduleState)
+		const series = get(seriesState)
+
+		const populated: any = {}
+
+		Object.typedKeys(schedule).forEach((day) => {
+			populated[day] = schedule[day].map((path) =>
+				series.find((el) => el.path === path),
+			)
+		})
+
+		return populated as {
+			sun: Series[]
+			mon: Series[]
+			tue: Series[]
+			wed: Series[]
+			thu: Series[]
+			fri: Series[]
+			sat: Series[]
+		}
 	},
 })

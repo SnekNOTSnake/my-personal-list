@@ -5,6 +5,7 @@ export enum IPCKey {
 	EditSeries = 'EditSeries',
 	ChangePoster = 'ChangePoster',
 	OpenItem = 'OpenItem',
+	GetSchedule = 'GetSchedule',
 	ChangeSchedule = 'ChangeSchedule',
 
 	UpdateSettings = 'UpdateSettings',
@@ -14,5 +15,6 @@ export enum IPCKey {
 }
 
 export const DATA_FILE = 'mpl.json'
+export const SCHEDULE_FILE = 'schedule.json'
 export const ANIME_DIR = 'anime'
 export const POSTER_DIR = 'attachments'

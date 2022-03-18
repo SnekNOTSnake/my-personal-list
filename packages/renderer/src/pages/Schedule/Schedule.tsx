@@ -1,5 +1,3 @@
-import { seriesState } from '@/store/series'
-import { settingsState } from '@/store/settings'
 import React, { useEffect, useRef, useState } from 'react'
 import {
 	MdOutlineSettings,
@@ -7,12 +5,13 @@ import {
 	MdOutlineAdd,
 } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+
+import { seriesState, scheduleState, populatedSchedule } from '@/store/series'
 import styles from './Schedule.module.css'
 
 const Schedule: React.FC = () => {
-	const series = useRecoilValue(seriesState)
-	const { schedule } = useRecoilValue(settingsState)
+	const schedule = useRecoilValue(populatedSchedule)
 
 	const [addSeriesDay, setAddSeriesDay] = useState<keyof Schedule | null>(null)
 	const onAddSeriesClick = (day: keyof Schedule) => setAddSeriesDay(day)
@@ -42,18 +41,13 @@ const Schedule: React.FC = () => {
 								</button>
 							</div>
 
-							{schedule[day as keyof Schedule].map((animePath) => {
-								const anime = series.find((el) => el.path === animePath)
-								if (!anime) return <React.Fragment />
-
-								return (
-									<ScheduleItem
-										key={animePath}
-										anime={anime}
-										day={day as keyof Schedule}
-									/>
-								)
-							})}
+							{schedule[day as keyof Schedule].map((anime) => (
+								<ScheduleItem
+									key={anime.path}
+									anime={anime}
+									day={day as keyof Schedule}
+								/>
+							))}
 						</div>
 					</div>
 				))}
@@ -65,7 +59,7 @@ const Schedule: React.FC = () => {
 type AddSeriesProps = { day: keyof Schedule | null; onClose: Function }
 const ScheduleAddSeries: React.FC<AddSeriesProps> = ({ day, onClose }) => {
 	const series = useRecoilValue(seriesState)
-	const [{ schedule }, setSettings] = useRecoilState(settingsState)
+	const [schedule, setSettings] = useRecoilState(scheduleState)
 
 	const rootRef = useRef(null)
 	const [input, setInput] = useState('')
@@ -84,11 +78,10 @@ const ScheduleAddSeries: React.FC<AddSeriesProps> = ({ day, onClose }) => {
 
 	const addSeries = async (seriesPath: string) => {
 		const newDaySeries = [...schedule[day], seriesPath]
-		const newSettings = await window.myAPI.changeSchedule({
-			[day]: newDaySeries,
-		})
+		const newSchedule = { ...schedule, [day]: newDaySeries }
 
-		setSettings(newSettings)
+		const brandNewSchedule = await window.myAPI.changeSchedule(newSchedule)
+		setSettings(brandNewSchedule)
 	}
 
 	const localFiltered = series
@@ -122,17 +115,18 @@ const ScheduleAddSeries: React.FC<AddSeriesProps> = ({ day, onClose }) => {
 
 type Props = { anime: Series; day: keyof Schedule }
 const ScheduleItem: React.FC<Props> = ({ anime, day }) => {
-	const [{ schedule }, setSettings] = useRecoilState(settingsState)
+	const [schedule, setSchedule] = useRecoilState(scheduleState)
 
 	const deleteSeriesFromSchedule = async () => {
 		const index = schedule[day].findIndex((el) => el === anime.path)
 		const newSeries = [...schedule[day]]
 		if (index < 0) return
-
 		newSeries.splice(index, 1)
-		const newSettings = await window.myAPI.changeSchedule({ [day]: newSeries })
 
-		setSettings(newSettings)
+		const newSchedule = { ...schedule, [day]: newSeries }
+		const brandNewSchedule = await window.myAPI.changeSchedule(newSchedule)
+
+		setSchedule(brandNewSchedule)
 	}
 
 	return (

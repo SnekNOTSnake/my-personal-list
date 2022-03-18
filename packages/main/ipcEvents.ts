@@ -10,11 +10,19 @@ import {
 	Notification,
 } from 'electron'
 
-import { IPCKey, DATA_FILE, ANIME_DIR, POSTER_DIR } from '../common/constants'
 import {
+	IPCKey,
+	DATA_FILE,
+	ANIME_DIR,
+	POSTER_DIR,
+	SCHEDULE_FILE,
+} from '../common/constants'
+import {
+	ensureSchedule,
 	ensureSeries,
 	exists,
 	read,
+	sanitizeSchedule,
 	sanitizeSeries,
 	trimSeries,
 	write,
@@ -34,12 +42,6 @@ export class Events {
 
 	onChangeTheme = (e: IpcMainInvokeEvent, theme: Theme) => {
 		this.store.set('theme', theme)
-		return this.store.store
-	}
-
-	onChangeSchedule = (e: IpcMainInvokeEvent, schedule: Partial<Schedule>) => {
-		const newSchedule = { ...this.store.get('schedule'), ...schedule }
-		this.store.set('schedule', newSchedule)
 		return this.store.store
 	}
 
@@ -182,6 +184,34 @@ export class Events {
 		store.set('cwd', res.filePaths[0])
 		return store.store
 	}
+
+	onGetSchedule = async (e: IpcMainInvokeEvent): Promise<Schedule> => {
+		const defaultSchedule = ensureSchedule()
+		const cwd = this.store.get('cwd')
+		if (!cwd) return defaultSchedule
+		const SCHEDULE = path.join(cwd, SCHEDULE_FILE)
+
+		const result = await read(SCHEDULE)
+		if (!result) return defaultSchedule
+		const data = ensureSchedule(JSON.parse(result.toString()))
+
+		return sanitizeSchedule(data)
+	}
+
+	onChangeSchedule = async (
+		e: IpcMainInvokeEvent,
+		schedule: Schedule,
+	): Promise<Schedule> => {
+		const cwd = this.store.get('cwd')
+		if (!cwd) return ensureSchedule()
+
+		const SCHEDULE = path.join(cwd, SCHEDULE_FILE)
+		const sanitized = sanitizeSchedule(schedule)
+
+		await write(SCHEDULE, JSON.stringify(sanitized))
+
+		return sanitized
+	}
 }
 
 /* End of Events */
@@ -191,15 +221,6 @@ export const store = new Store<Settings>({
 	defaults: {
 		cwd: null,
 		theme: 'light',
-		schedule: {
-			sun: [],
-			mon: [],
-			tue: [],
-			wed: [],
-			thu: [],
-			fri: [],
-			sat: [],
-		},
 	},
 })
 
@@ -215,6 +236,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
 	ipcMain.handle(IPCKey.OpenDataDir, events.onOpenDataDir)
 	ipcMain.handle(IPCKey.ChangeDataDir, events.onChangeDataDir)
+	ipcMain.handle(IPCKey.GetSchedule, events.onGetSchedule)
 	ipcMain.handle(IPCKey.ChangeSchedule, events.onChangeSchedule)
 
 	initialized = true
@@ -231,6 +253,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
 	ipcMain.removeAllListeners(IPCKey.OpenDataDir)
 	ipcMain.removeAllListeners(IPCKey.ChangeDataDir)
+	ipcMain.removeAllListeners(IPCKey.GetSchedule)
 	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
 
 	initialized = false

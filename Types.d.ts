@@ -25,7 +25,6 @@ interface Schedule {
 interface Settings {
 	theme: Theme
 	cwd: string | null
-	schedule: Schedule
 }
 
 interface Metadata {
@@ -77,7 +76,8 @@ interface Window {
 		editSeries: (series: Series) => Promise<Series>
 		changePoster: (series: Series) => Promise<Series>
 		openItem: (fullPath: string) => Promise<void>
-		changeSchedule: (schedule: Partial<Schedule>) => Promise<Settings>
+		getSchedule: () => Schedule
+		changeSchedule: (schedule: Schedule) => Promise<Schedule>
 
 		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}

@@ -40,6 +40,16 @@ const defRelated: Relation = {
 	type: 'sequel',
 }
 
+const defSchedule: Schedule = {
+	sun: [],
+	mon: [],
+	tue: [],
+	wed: [],
+	thu: [],
+	fri: [],
+	sat: [],
+}
+
 export const resolveHtmlPath = (
 	htmlFileName: string,
 	app: Electron.App,
@@ -110,4 +120,19 @@ export const trimSeries = (series: Series) => {
 	})
 
 	return { ...series, ...trimmed }
+}
+
+export const ensureSchedule = (schedule?: Partial<Schedule>) => {
+	const newSchedule = { ...defSchedule, ...schedule }
+	return newSchedule
+}
+
+export const sanitizeSchedule = (schedule: Schedule): Schedule => {
+	const newSchedule: any = {}
+
+	Object.typedKeys(defSchedule).forEach((key) => {
+		if (key in schedule) newSchedule[key] = schedule[key]
+	})
+
+	return newSchedule
 }

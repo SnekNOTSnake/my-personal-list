@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 	editSeries: (series: Series) => ipc.invoke(IPCKey.EditSeries, series),
 	changePoster: (series: Series) => ipc.invoke(IPCKey.ChangePoster, series),
 	openItem: (fPath: string) => ipc.invoke(IPCKey.OpenItem, fPath),
+	getSchedule: () => ipc.invoke(IPCKey.GetSchedule),
 	changeSchedule: (schedule: Partial<Schedule>) =>
 		ipc.invoke(IPCKey.ChangeSchedule, schedule),
 
