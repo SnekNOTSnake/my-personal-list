@@ -1,0 +1,49 @@
+.root {
+	display: flex;
+	flex-grow: 1;
+	margin-top: 32px;
+}
+
+.root .poster {
+	width: 50px;
+	height: 75px;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
+	margin-right: 8px;
+}
+
+.root .details {
+	display: flex;
+	flex-direction: column;
+	width: calc(100% - 50px);
+}
+
+.root .details h3 {
+	line-height: 1.2;
+	max-width: 150px;
+	margin-bottom: 0;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.root .details .episode {
+	color: var(--text-secondary);
+}
+
+.root .details .actions {
+	margin-top: auto;
+	visibility: hidden;
+	font-size: 1.2em;
+	color: var(--text-secondary);
+}
+
+[data-editing='on'] .root:hover .details .actions {
+	visibility: visible;
+}
+
+.root .details .actions svg {
+	cursor: pointer;
+	margin-right: 4px;
+}

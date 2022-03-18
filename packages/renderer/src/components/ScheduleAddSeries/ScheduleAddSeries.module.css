@@ -1,0 +1,54 @@
+.root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	display: none;
+}
+
+.root .content {
+	position: absolute;
+	top: calc(50% - 200px);
+	left: 50%;
+	transform: translateX(-50%);
+	width: 300px;
+	background-color: var(--background-secondary);
+	padding: 16px;
+	border: 1px solid var(--border);
+	border-radius: var(--border-radius);
+}
+
+.root.active {
+	display: flex;
+}
+
+.root input {
+	margin-bottom: 8px;
+}
+
+.root ul li {
+	position: relative;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.root ul li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root ul li:hover::before {
+	background-color: var(--background-light);
+}
+
+.root ul li:last-child {
+	margin: 0;
+}

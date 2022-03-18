@@ -2,60 +2,6 @@
 	padding: 24px 8px;
 }
 
-.root .addSeries {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: none;
-}
-
-.root .addSeries .content {
-	position: absolute;
-	top: calc(50% - 200px);
-	left: 50%;
-	transform: translateX(-50%);
-	width: 300px;
-	background-color: var(--background-secondary);
-	padding: 16px;
-	border: 1px solid var(--border);
-	border-radius: var(--border-radius);
-}
-
-.root .addSeries.asActive {
-	display: flex;
-}
-
-.root .addSeries input {
-	margin-bottom: 8px;
-}
-
-.root .addSeries ul li {
-	position: relative;
-	padding: 8px 16px;
-	cursor: pointer;
-}
-
-.root .addSeries ul li::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: transparent;
-}
-
-.root .addSeries ul li:hover::before {
-	background-color: var(--background-light);
-}
-
-.root .addSeries ul li:last-child {
-	margin: 0;
-}
-
 .root .days {
 	display: flex;
 	align-items: flex-start;
@@ -79,19 +25,19 @@
 	background-color: rgba(47, 128, 237, 0.15);
 }
 
-.root .days .day .header {
+.root .days .day .container .header {
 	display: flex;
 	align-items: center;
 	text-transform: capitalize;
 }
 
-.root .days .day h1 {
+.root .days .day .container .header h1 {
 	color: var(--text-secondary);
 	white-space: nowrap;
 	margin: 0;
 }
 
-.root .days .day .container.active h1 {
+.root .days .day .container.active .header h1 {
 	color: var(--text-primary);
 }
 
@@ -110,58 +56,21 @@
 	visibility: hidden;
 }
 
-.root .days .day:hover button {
+.root[data-editing='on'] .days .day:hover button {
 	visibility: visible;
 }
 
-.root .days .day .series {
-	display: flex;
-	flex-grow: 1;
-	margin-top: 32px;
+.root .edit {
+	position: fixed;
+	left: 74px;
+	bottom: 24px;
 }
 
-.root .days .day .series .poster {
-	width: 50px;
-	height: 75px;
-	background-color: var(--background-secondary);
+.root .edit button {
+	background-color: var(--background-light);
+	border: 1px solid var(--border);
+	padding: 8px 16px;
 	border-radius: var(--border-radius);
-	margin-right: 8px;
-}
-
-.root .days .day .series .details {
-	display: flex;
-	flex-direction: column;
-	width: calc(100% - 50px);
-}
-
-.root .days .day .series .details h3 {
-	line-height: 1.2;
-	max-width: 150px;
-	margin-bottom: 0;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-	overflow: hidden;
-}
-
-.root .days .day .series .details .episode {
-	color: var(--text-secondary);
-}
-
-.root .days .day .series .details .actions {
-	margin-top: auto;
-	visibility: hidden;
-	font-size: 1.2em;
-	color: var(--text-secondary);
-}
-
-.root .days .day .series:hover .details .actions {
-	visibility: visible;
-}
-
-.root .days .day .series .details .actions svg {
-	cursor: pointer;
-	margin-right: 4px;
 }
 
 @media screen and (max-width: 1024px) {

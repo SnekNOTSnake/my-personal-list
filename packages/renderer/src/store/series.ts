@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil'
 import fuzzysort from 'fuzzysort'
+import { ensureSeries } from '@/utils/helpers'
 
 Object.typedKeys = Object.keys as any
 
@@ -182,9 +183,10 @@ export const populatedSchedule = selector({
 		const populated: any = {}
 
 		Object.typedKeys(schedule).forEach((day) => {
-			populated[day] = schedule[day].map((path) =>
-				series.find((el) => el.path === path),
-			)
+			populated[day] = schedule[day].map((path) => {
+				const anime = series.find((el) => el.path === path)
+				return ensureSeries({ ...anime, path })
+			})
 		})
 
 		return populated as {
