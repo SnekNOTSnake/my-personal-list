@@ -4,8 +4,18 @@
 
 .root .addSeries {
 	position: fixed;
-	bottom: 24px;
-	left: 74px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+}
+
+.root .addSeries .content {
+	position: absolute;
+	top: calc(50% - 200px);
+	left: 50%;
+	transform: translateX(-50%);
 	width: 300px;
 	background-color: var(--background-secondary);
 	padding: 16px;
@@ -13,12 +23,33 @@
 	border-radius: var(--border-radius);
 }
 
+.root .addSeries.asActive {
+	display: flex;
+}
+
 .root .addSeries input {
 	margin-bottom: 8px;
 }
 
 .root .addSeries ul li {
-	margin-bottom: 4px;
+	position: relative;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.root .addSeries ul li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root .addSeries ul li:hover::before {
+	background-color: var(--background-light);
 }
 
 .root .addSeries ul li:last-child {
@@ -27,12 +58,14 @@
 
 .root .days {
 	display: flex;
-	/* flex-wrap: wrap; */
+	align-items: flex-start;
 }
 
 .root .days .day {
 	display: flex;
 	flex-grow: 1;
+	flex-basis: 0;
+	margin-bottom: 24px;
 }
 
 .root .days .day .container {
@@ -48,8 +81,8 @@
 
 .root .days .day .header {
 	display: flex;
-	margin-bottom: 32px;
 	align-items: center;
+	text-transform: capitalize;
 }
 
 .root .days .day h1 {
@@ -84,11 +117,7 @@
 .root .days .day .series {
 	display: flex;
 	flex-grow: 1;
-	margin-bottom: 32px;
-}
-
-.root .days .day .series:last-child {
-	margin-bottom: 0;
+	margin-top: 32px;
 }
 
 .root .days .day .series .poster {
@@ -131,12 +160,17 @@
 }
 
 .root .days .day .series .details .actions svg {
+	cursor: pointer;
 	margin-right: 4px;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1024px) {
 	.root .days {
 		flex-wrap: wrap;
+	}
+
+	.root .days .day {
+		flex-basis: initial;
 	}
 }
 

@@ -37,6 +37,12 @@ export class Events {
 		return this.store.store
 	}
 
+	onChangeSchedule = (e: IpcMainInvokeEvent, schedule: Partial<Schedule>) => {
+		const newSchedule = { ...this.store.get('schedule'), ...schedule }
+		this.store.set('schedule', newSchedule)
+		return this.store.store
+	}
+
 	onGetSettings = (e: IpcMainInvokeEvent): Settings => {
 		return this.store.store
 	}
@@ -182,7 +188,19 @@ export class Events {
 
 let initialized = false
 export const store = new Store<Settings>({
-	defaults: { cwd: null, theme: 'light' },
+	defaults: {
+		cwd: null,
+		theme: 'light',
+		schedule: {
+			sun: [],
+			mon: [],
+			tue: [],
+			wed: [],
+			thu: [],
+			fri: [],
+			sat: [],
+		},
+	},
 })
 
 export const initializeIpcEvents = () => {
@@ -197,6 +215,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
 	ipcMain.handle(IPCKey.OpenDataDir, events.onOpenDataDir)
 	ipcMain.handle(IPCKey.ChangeDataDir, events.onChangeDataDir)
+	ipcMain.handle(IPCKey.ChangeSchedule, events.onChangeSchedule)
 
 	initialized = true
 }
@@ -212,6 +231,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
 	ipcMain.removeAllListeners(IPCKey.OpenDataDir)
 	ipcMain.removeAllListeners(IPCKey.ChangeDataDir)
+	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
 
 	initialized = false
 }

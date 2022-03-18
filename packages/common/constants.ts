@@ -5,6 +5,7 @@ export enum IPCKey {
 	EditSeries = 'EditSeries',
 	ChangePoster = 'ChangePoster',
 	OpenItem = 'OpenItem',
+	ChangeSchedule = 'ChangeSchedule',
 
 	UpdateSettings = 'UpdateSettings',
 	RemoveUnusedPosters = 'RemoveUnusedPosters',

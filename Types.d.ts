@@ -12,9 +12,20 @@ type FormSubmit = React.FormEvent<HTMLFormElement>
 
 type Theme = 'light' | 'dark'
 
+interface Schedule {
+	sun: string[]
+	mon: string[]
+	tue: string[]
+	wed: string[]
+	thu: string[]
+	fri: string[]
+	sat: string[]
+}
+
 interface Settings {
 	theme: Theme
 	cwd: string | null
+	schedule: Schedule
 }
 
 interface Metadata {
@@ -66,6 +77,7 @@ interface Window {
 		editSeries: (series: Series) => Promise<Series>
 		changePoster: (series: Series) => Promise<Series>
 		openItem: (fullPath: string) => Promise<void>
+		changeSchedule: (schedule: Partial<Schedule>) => Promise<Settings>
 
 		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
 	}
