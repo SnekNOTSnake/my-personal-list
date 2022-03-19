@@ -1,26 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { scheduleState, seriesState } from '@/store/series'
 import styles from './ScheduleAddSeries.module.css'
+import Modal from '../Modal'
 
 type Props = { day: keyof Schedule | null; onClose: Function }
 const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 	const series = useRecoilValue(seriesState)
 	const [schedule, setSettings] = useRecoilState(scheduleState)
 
-	const rootRef = useRef(null)
 	const [input, setInput] = useState('')
 	const onInputChange = (e: InputChange) => setInput(e.target.value)
-
-	useEffect(() => {
-		const listener = (e: MouseEvent) => {
-			if (e.target === rootRef.current) onClose()
-		}
-
-		window.addEventListener('click', listener)
-		return () => window.removeEventListener('click', listener)
-	}, [])
 
 	if (!day) return <React.Fragment />
 
@@ -44,9 +35,9 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 		.slice(0, 5)
 
 	return (
-		<div ref={rootRef} className={[styles.root, styles.active].join(' ')}>
-			<div className={styles.content}>
-				<input type='text' value={input} onChange={onInputChange} />
+		<Modal open={Boolean(day)} onClose={onClose}>
+			<div className={styles.root}>
+				<input autoFocus type='text' value={input} onChange={onInputChange} />
 				<div className={styles.suggestions}>
 					<ul>
 						{localFiltered.map((el) => (
@@ -57,7 +48,7 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 					</ul>
 				</div>
 			</div>
-		</div>
+		</Modal>
 	)
 }
 

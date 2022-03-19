@@ -15,7 +15,6 @@ const Schedule: React.FC = () => {
 
 	const [addSeriesDay, setAddSeriesDay] = useState<keyof Schedule | null>(null)
 	const onAddSeriesClick = (day: keyof Schedule) => setAddSeriesDay(day)
-
 	const addSeriesClose = () => setAddSeriesDay(null)
 
 	return (

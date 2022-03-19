@@ -11,7 +11,7 @@
 :root {
 	--background: #fff;
 	--background-secondary: #ddd;
-	--background-light: rgba(0, 0, 0, 0.05);
+	--background-light: rgba(0, 0, 0, 0.075);
 	--border: rgba(0, 0, 0, 0.15);
 
 	--foreground: #1b262c;

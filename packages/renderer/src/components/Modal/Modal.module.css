@@ -1,0 +1,26 @@
+.root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.65);
+	display: none;
+}
+
+.root.active {
+	display: flex;
+}
+
+.root .content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	background-color: var(--background-secondary);
+	padding: 16px;
+	border: 1px solid var(--border);
+	border-radius: var(--border-radius);
+}
