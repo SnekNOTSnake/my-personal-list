@@ -36,6 +36,8 @@ export const seriesStats = selector({
 	key: 'seriesStats',
 	get: ({ get }) => {
 		const series = get(seriesState)
+		const schedule = get(scheduleState)
+
 		const tagsSet = new Set<string>()
 		series.forEach((el) => el.tags.forEach((tag) => tagsSet.add(tag)))
 
@@ -74,19 +76,45 @@ export const seriesStats = selector({
 				.reduce((p, c) => p + c, 0),
 		})
 
-		const stats = {
-			tags,
-			watchedEpisodes: series
-				.filter((el) => el.regular)
-				.map((el) => el.epsWatched)
-				.reduce((p, c) => p + c, 0),
-			totalEpisodes: series
-				.filter((el) => el.regular)
-				.map((el) => el.epsNum)
-				.reduce((p, c) => p + c, 0),
-		}
+		const watchedEpisodes = series
+			.filter((el) => el.regular)
+			.map((el) => el.epsWatched)
+			.reduce((p, c) => p + c, 0)
 
-		return stats
+		const totalEpisodes = series
+			.filter((el) => el.regular)
+			.map((el) => el.epsNum)
+			.reduce((p, c) => p + c, 0)
+
+		const avgEpsPerDay =
+			Math.ceil(
+				(Object.values(schedule).reduce((p, c) => p + c.length, 0) / 7) * 100,
+			) / 100
+
+		let stockpileLasts, suffix
+		const daysRunsOut = (totalEpisodes - watchedEpisodes) / avgEpsPerDay
+		if (daysRunsOut === Infinity) {
+			stockpileLasts = daysRunsOut
+			suffix = ''
+		} else if (daysRunsOut > 365) {
+			stockpileLasts = daysRunsOut / 365
+			suffix = 'Y'
+		} else if (daysRunsOut > 30) {
+			stockpileLasts = daysRunsOut / 30
+			suffix = 'M'
+		} else {
+			stockpileLasts = daysRunsOut
+			suffix = 'D'
+		}
+		stockpileLasts = Math.floor(stockpileLasts * 100) / 100
+
+		return {
+			tags,
+			watchedEpisodes,
+			totalEpisodes,
+			avgEpsPerDay,
+			stockpileLasts: [stockpileLasts, suffix],
+		}
 	},
 })
 
@@ -189,14 +217,26 @@ export const populatedSchedule = selector({
 			})
 		})
 
-		return populated as {
-			sun: Series[]
-			mon: Series[]
-			tue: Series[]
-			wed: Series[]
-			thu: Series[]
-			fri: Series[]
-			sat: Series[]
-		}
+		return populated as PopulatedSchedule
+	},
+})
+
+export const todaySchedule = selector({
+	key: 'todaySchedule',
+	get: ({ get }) => {
+		const schedule = get(scheduleState)
+		const series = get(seriesState)
+
+		const today = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][
+			new Date().getDay()
+		] as keyof Schedule
+		const todaySchedule = schedule[today]
+
+		const populated = todaySchedule.map((path) => {
+			const anime = series.find((el) => el.path === path)
+			return ensureSeries({ ...anime, path })
+		})
+
+		return populated
 	},
 })

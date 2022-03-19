@@ -16,6 +16,7 @@
 
 .root .days .day .container {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	padding: 16px 20px;
 	border-radius: var(--border-radius);

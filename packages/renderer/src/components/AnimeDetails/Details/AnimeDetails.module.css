@@ -5,8 +5,8 @@
 
 .root .container .poster {
 	cursor: pointer;
-	width: 225px;
-	height: 315px;
+	flex: 0 0 225px;
+	aspect-ratio: var(--poster-aspect-ratio);
 	border-radius: var(--border-radius);
 	background-position: center;
 	background-size: cover;
@@ -54,7 +54,7 @@
 
 .root .container .detail {
 	padding: 0 32px;
-	width: calc(100% - 225px);
+	flex: 1;
 }
 
 .root .container .detail .actions {

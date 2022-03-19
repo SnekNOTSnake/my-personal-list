@@ -1,18 +1,17 @@
-.root .posters {
+.root .items {
 	display: flex;
 	margin-bottom: 64px;
 }
 
-.root .poster {
+.root .items a {
+	margin-right: 16px;
+}
+
+.root .items .poster {
 	width: 175px;
-	aspect-ratio: 225 / 315;
+	aspect-ratio: var(--poster-aspect-ratio);
 	border-radius: var(--border-radius);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	margin-right: 16px;
-}
-
-.root .poster:last-child {
-	margin-right: 0;
 }

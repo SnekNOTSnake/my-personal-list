@@ -5,23 +5,26 @@
 }
 
 .root .poster {
-	width: 50px;
-	height: 75px;
-	background-color: var(--background-secondary);
+	flex: 0 0 50px;
+	aspect-ratio: var(--poster-aspect-ratio);
 	border-radius: var(--border-radius);
 	margin-right: 8px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: var(--background-secondary);
+	background-position: center;
 }
 
 .root .details {
 	display: flex;
 	flex-direction: column;
-	width: calc(100% - 50px);
+	flex: 1;
 }
 
 .root .details h3 {
 	line-height: 1.2;
 	max-width: 150px;
-	margin-bottom: 0;
+	margin-bottom: 4px;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
@@ -30,6 +33,7 @@
 
 .root .details .episode {
 	color: var(--text-secondary);
+	margin-bottom: 4px;
 }
 
 .root .details .actions {

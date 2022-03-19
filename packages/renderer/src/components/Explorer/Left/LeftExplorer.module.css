@@ -6,7 +6,7 @@
 
 .left li {
 	display: flex;
-	height: 35px;
+	height: var(--explorer-item-height);
 	padding: 0 16px;
 	align-items: center;
 	position: relative;
@@ -70,7 +70,7 @@
 	display: flex;
 	align-items: center;
 	padding: 0 16px;
-	height: 35px;
+	flex: 0 0 var(--explorer-item-height);
 	border-bottom: 1px solid var(--background-secondary);
 }
 
@@ -85,7 +85,7 @@
 
 .left .genres {
 	overflow-y: auto;
-	height: calc(100% - 35px);
+	flex-grow: 1;
 }
 
 .left .icon {

@@ -10,7 +10,7 @@
 	position: relative;
 	border-bottom: 1px solid var(--background-secondary);
 	background-color: var(--background);
-	height: 35px;
+	flex: 0 0 var(--explorer-item-height);
 }
 
 .root .toolBar > div {
@@ -43,11 +43,11 @@
 
 .root .titles {
 	overflow-y: auto;
-	height: calc(100% - 105px);
+	flex: 1;
 }
 
 .root .titles li {
-	height: 35px;
+	height: var(--explorer-item-height);
 }
 
 .root .titles li a {
@@ -79,5 +79,5 @@
 	padding: 0 16px;
 	margin-top: auto;
 	background-color: var(--background);
-	height: 35px;
+	flex: 0 0 var(--explorer-item-height);
 }

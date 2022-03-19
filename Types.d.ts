@@ -22,6 +22,16 @@ interface Schedule {
 	sat: string[]
 }
 
+interface PopulatedSchedule {
+	sun: Series[]
+	mon: Series[]
+	tue: Series[]
+	wed: Series[]
+	thu: Series[]
+	fri: Series[]
+	sat: Series[]
+}
+
 interface Settings {
 	theme: Theme
 	cwd: string | null

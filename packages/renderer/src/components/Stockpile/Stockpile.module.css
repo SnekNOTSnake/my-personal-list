@@ -10,13 +10,13 @@
 }
 
 .root .chart .doughnut {
-	width: 250px;
+	flex: 0 0 250px;
 	margin-left: 32px;
 	text-align: center;
 }
 
 .root .chart .bar {
-	width: calc(100% - 250px);
+	flex: 1;
 }
 
 .root .totals {

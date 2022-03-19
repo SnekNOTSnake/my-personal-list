@@ -1,6 +1,12 @@
 .root {
 	position: relative;
-	width: 50px;
+	/*
+		The below rule is as same as these 3 following rules:
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: 50px;
+	*/
+	flex: 0 0 50px;
 	min-height: 100vh;
 	background-color: var(--foreground);
 }

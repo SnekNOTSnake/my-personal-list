@@ -25,6 +25,8 @@
 	--color-red: rgba(235, 87, 87);
 	--color-light-red: rgba(235, 87, 87, 0.15);
 
+	--poster-aspect-ratio: 225 / 315;
+	--explorer-item-height: 35px;
 	--border-radius: 2px;
 }
 

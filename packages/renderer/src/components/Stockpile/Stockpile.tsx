@@ -9,10 +9,12 @@ import {
 	Legend,
 	ArcElement,
 } from 'chart.js'
+import { useRecoilValue } from 'recoil'
 
 import ChartDoughnut from '../ChartDoughnut/ChartDoughnut'
 import ChartBar from '../ChartBar'
 import styles from './Stockpile.module.css'
+import { seriesStats } from '@/store/series'
 
 ChartJS.register(
 	ArcElement,
@@ -25,6 +27,8 @@ ChartJS.register(
 )
 
 const Stockpile: React.FC = () => {
+	const stats = useRecoilValue(seriesStats)
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.chart}>
@@ -38,11 +42,13 @@ const Stockpile: React.FC = () => {
 			</div>
 			<div className={styles.totals}>
 				<div>
-					<div className={styles.number}>2.75</div>
+					<div className={styles.number}>{stats.avgEpsPerDay}</div>
 					<div className={styles.text}>Avg Eps / Day</div>
 				</div>
 				<div>
-					<div className={styles.number}>7.5 M</div>
+					<div className={styles.number}>
+						{stats.stockpileLasts[0]} {stats.stockpileLasts[1]}
+					</div>
 					<div className={styles.text}>Stockpile Lasts</div>
 				</div>
 			</div>
