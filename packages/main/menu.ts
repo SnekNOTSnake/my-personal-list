@@ -6,7 +6,7 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 	{
 		label: 'MyPersonalList',
 		submenu: [
-			{ label: 'About MyPersonalList' },
+			{ label: 'About My Personal List' },
 			{ type: 'separator' },
 			{
 				label: 'Theme',

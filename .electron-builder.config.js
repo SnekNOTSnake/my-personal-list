@@ -1,12 +1,10 @@
-const pkg = require('./package.json')
-
 /**
  * @type {import('electron-builder').Configuration}
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
 	appId: 'com.sneknotsnake.my-personal-list',
-	productName: pkg.name,
+	productName: 'My Personal List',
 	copyright: 'Copyright © 2022 ${author}',
 	asar: true,
 	directories: {
