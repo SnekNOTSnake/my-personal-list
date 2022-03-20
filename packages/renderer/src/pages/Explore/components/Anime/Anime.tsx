@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 
-import Details from './Details'
-import Edit from './Edit'
-import styles from './Container.module.css'
 import { seriesState } from '@/store/series'
+import Details from '../AnimeDetails'
+import Edit from '../AnimeEdit'
+import styles from './Anime.module.css'
 
-const Container: React.FC = () => {
+const Anime: React.FC = () => {
 	const params = useParams()
 	const path = decodeURI(params.path || '')
 	const ani = useRecoilValue(seriesState).find((el) => el.path === path)
@@ -31,4 +31,4 @@ const Container: React.FC = () => {
 	)
 }
 
-export default Container
+export default Anime

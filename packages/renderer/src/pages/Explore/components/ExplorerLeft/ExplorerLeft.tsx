@@ -3,9 +3,9 @@ import { MdDeleteOutline } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { seriesFilter, seriesStats } from '@/store/series'
-import styles from './LeftExplorer.module.css'
+import styles from './ExplorerLeft.module.css'
 
-const LeftExplorer: React.FC = () => {
+const ExplorerLeft: React.FC = () => {
 	const { tags } = useRecoilValue(seriesStats)
 	const [filter, setFilter] = useRecoilState(seriesFilter)
 
@@ -64,4 +64,4 @@ const LeftExplorer: React.FC = () => {
 	)
 }
 
-export default LeftExplorer
+export default ExplorerLeft

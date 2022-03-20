@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { seriesState } from '@/store/series'
-import styles from './EditAnimeDetails.module.css'
+import styles from './AnimeEdit.module.css'
 
 type Props = {
 	relatedI: Relation[]

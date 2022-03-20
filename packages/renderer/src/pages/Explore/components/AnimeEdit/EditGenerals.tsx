@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './EditAnimeDetails.module.css'
+import styles from './AnimeEdit.module.css'
 
 type Props = {
 	generalInfo: {

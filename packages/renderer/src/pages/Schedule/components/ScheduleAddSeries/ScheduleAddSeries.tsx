@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
+import Modal from '@/components/Modal'
 import { scheduleState, seriesState } from '@/store/series'
 import styles from './ScheduleAddSeries.module.css'
-import Modal from '../Modal'
 
 type Props = { day: keyof Schedule | null; onClose: Function }
 const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {

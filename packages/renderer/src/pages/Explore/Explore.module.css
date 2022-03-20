@@ -1,3 +1,20 @@
 .root {
 	display: flex;
 }
+
+.root .explorer {
+	position: fixed;
+	top: 0;
+	left: 50px;
+	bottom: 0;
+	display: flex;
+	width: 40%;
+}
+
+.root .explorer > div:first-child {
+	width: 40%;
+}
+
+.root .explorer > div:last-child {
+	width: 60%;
+}

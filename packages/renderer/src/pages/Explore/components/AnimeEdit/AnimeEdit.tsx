@@ -6,7 +6,7 @@ import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
 import EditRelations from './EditRelations'
 import EditTags from './EditTags'
-import styles from './EditAnimeDetails.module.css'
+import styles from './AnimeEdit.module.css'
 import EditGenerals from './EditGenerals'
 
 type Props = { closeEdit: () => any; data: Series }

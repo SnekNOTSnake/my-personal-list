@@ -5,9 +5,9 @@ import { useSetRecoilState } from 'recoil'
 import Layout from '@/components/Layout'
 import { settingsState } from '@/store/settings'
 import { seriesState } from '@/store/series'
-import Home from '../Home'
-import Explore from '../Explore'
-import Schedule from '../Schedule'
+import Home from './pages/Home'
+import Explore from './pages/Explore'
+import Schedule from './pages/Schedule'
 
 const App: React.FC = () => {
 	const setSettings = useSetRecoilState(settingsState)

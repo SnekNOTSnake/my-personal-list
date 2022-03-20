@@ -4,11 +4,11 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 import { filteredSeries, seriesFilter } from '@/store/series'
-import styles from './RightExplorer.module.css'
+import styles from './ExplorerRight.module.css'
 
 const getPath = (path: string) => `/explore/${path}`
 
-const RightExplorer: React.FC = () => {
+const ExplorerRight: React.FC = () => {
 	const navigate = useNavigate()
 	const { '*': path } = useParams()
 	const inputRef = React.useRef<HTMLInputElement | null>(null)
@@ -175,4 +175,4 @@ const RightExplorer: React.FC = () => {
 	)
 }
 
-export default RightExplorer
+export default ExplorerRight

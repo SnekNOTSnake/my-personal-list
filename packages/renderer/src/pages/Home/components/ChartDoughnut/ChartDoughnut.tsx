@@ -2,8 +2,8 @@ import { Doughnut } from 'react-chartjs-2'
 import { useRecoilValue } from 'recoil'
 
 import { seriesStats } from '@/store/series'
-import styles from './ChartDoughnut.module.css'
 import { settingsState } from '@/store/settings'
+import styles from './ChartDoughnut.module.css'
 
 /**
  * @see https://github.com/chartjs/Chart.js/issues/6195

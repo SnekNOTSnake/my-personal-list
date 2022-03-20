@@ -3,8 +3,8 @@ import { MdOutlineAdd } from 'react-icons/md'
 import { useRecoilValue } from 'recoil'
 
 import { populatedSchedule } from '@/store/series'
-import ScheduleAddSeries from '@/components/ScheduleAddSeries/ScheduleAddSeries'
-import ScheduleSeries from '@/components/ScheduleSeries'
+import ScheduleAddSeries from './components/ScheduleAddSeries'
+import ScheduleSeries from './components/ScheduleSeries'
 import styles from './Schedule.module.css'
 
 const Schedule: React.FC = () => {
