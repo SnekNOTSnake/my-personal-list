@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	MdOutlineFolder,
 	MdOutlineMoreHoriz,
@@ -9,14 +9,19 @@ import {
 import { useSetRecoilState } from 'recoil'
 
 import { seriesFilter, seriesState } from '@/store/series'
-import styles from './AnimeDetails.module.css'
 import Poster from '@/components/Poster'
+import Modal from '@/components/Modal'
+import styles from './AnimeDetails.module.css'
 
 type Props = { edit: () => any; data: Series }
 
 const Generals: React.FC<Props> = ({ data, edit }) => {
 	const setFilter = useSetRecoilState(seriesFilter)
 	const setSeries = useSetRecoilState(seriesState)
+	const [open, setOpen] = useState(false)
+
+	const onCloseModal = () => setOpen(false)
+	const onOpenModal = () => setOpen(true)
 
 	const onActivateTag = (tag: string) =>
 		setFilter((prevVal) => {
@@ -66,7 +71,11 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 
 	return (
 		<div className={styles.container}>
-			<Poster anime={data} className={styles.poster}>
+			<Modal open={open} onClose={onCloseModal}>
+				<Poster anime={data} className={styles.modalPoster} />
+			</Modal>
+
+			<Poster onClick={onOpenModal} anime={data} className={styles.poster}>
 				<button type='button' onClick={onChangePoster}>
 					<MdOutlineImage />
 				</button>

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import styles from './Modal.module.css'
+import s from './Modal.module.css'
 
-type Props = { open: boolean; onClose: Function }
-const Modal: React.FC<Props> = ({ open, onClose, children }) => {
+type Props = { open: boolean; onClose: Function } & JSX.IntrinsicElements['div']
+
+const Modal: React.FC<Props> = ({ open, onClose, children, ...rest }) => {
 	const rootRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -26,9 +27,10 @@ const Modal: React.FC<Props> = ({ open, onClose, children }) => {
 	return (
 		<div
 			ref={rootRef}
-			className={[styles.root, open ? styles.active : ''].join(' ')}
+			className={[s.root, open ? s.active : '', rest.className].join(' ')}
+			{...rest}
 		>
-			<div className={styles.content}>{children}</div>
+			<div className={s.content}>{children}</div>
 		</div>
 	)
 }

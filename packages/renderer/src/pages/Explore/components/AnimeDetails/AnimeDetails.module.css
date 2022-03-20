@@ -1,3 +1,7 @@
+.root .modalPoster {
+	width: 400px;
+}
+
 .root .container {
 	display: flex;
 	margin-bottom: 40px;
