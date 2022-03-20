@@ -4,6 +4,7 @@ import { MdOutlineDelete } from 'react-icons/md'
 
 import { scheduleState } from '@/store/series'
 import styles from './ScheduleSeries.module.css'
+import Poster from '@/components/Poster'
 
 type Props = { anime: Series; day: keyof Schedule }
 const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
@@ -23,12 +24,8 @@ const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
 
 	return (
 		<div className={styles.root}>
-			<div
-				className={styles.poster}
-				style={{
-					backgroundImage: `url(https://picsum.photos/50/75?key=${day})`,
-				}}
-			></div>
+			<Poster anime={anime} className={styles.poster} />
+
 			<div className={styles.details}>
 				<Link to={`/explore/${anime.path}`}>
 					<h3>{anime.title}</h3>

@@ -6,18 +6,17 @@ import {
 	MdOutlineImage,
 	MdOutlineAdd,
 } from 'react-icons/md'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import { seriesFilter, seriesState } from '@/store/series'
-import { settingsState } from '@/store/settings'
 import styles from './AnimeDetails.module.css'
+import Poster from '@/components/Poster'
 
 type Props = { edit: () => any; data: Series }
 
 const Generals: React.FC<Props> = ({ data, edit }) => {
 	const setFilter = useSetRecoilState(seriesFilter)
 	const setSeries = useSetRecoilState(seriesState)
-	const { cwd } = useRecoilValue(settingsState)
 
 	const onActivateTag = (tag: string) =>
 		setFilter((prevVal) => {
@@ -65,17 +64,13 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 		})
 	}
 
-	const posterPath = data.poster
-		? `url(file://${[cwd, 'attachments', data.poster].join('/')})`
-		: ''
-
 	return (
 		<div className={styles.container}>
-			<div className={styles.poster} style={{ backgroundImage: posterPath }}>
+			<Poster anime={data} className={styles.poster}>
 				<button type='button' onClick={onChangePoster}>
 					<MdOutlineImage />
 				</button>
-			</div>
+			</Poster>
 
 			<div className={styles.detail}>
 				<div className={styles.actions}>

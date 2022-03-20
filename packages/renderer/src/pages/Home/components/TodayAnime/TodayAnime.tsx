@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import { todaySchedule } from '@/store/series'
 import styles from './TodayAnime.module.css'
+import Poster from '@/components/Poster'
 
 const TodayAnime: React.FC = () => {
 	const series = useRecoilValue(todaySchedule)
@@ -13,14 +14,9 @@ const TodayAnime: React.FC = () => {
 			<h2>TodayAnime</h2>
 			<div className={styles.items}>
 				{series.length === 0 ? <h1>No anime for today.</h1> : ''}
-				{series.map((anime, i) => (
+				{series.map((anime) => (
 					<Link key={anime.path} to={`explore/${anime.path}`}>
-						<div
-							className={styles.poster}
-							style={{
-								backgroundImage: `url(https://picsum.photos/450/630?key=${i})`,
-							}}
-						/>
+						<Poster anime={anime} className={styles.poster} />
 					</Link>
 				))}
 			</div>

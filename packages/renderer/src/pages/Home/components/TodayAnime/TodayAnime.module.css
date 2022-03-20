@@ -9,9 +9,4 @@
 
 .root .items .poster {
 	width: 175px;
-	aspect-ratio: var(--poster-aspect-ratio);
-	border-radius: var(--border-radius);
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
 }
