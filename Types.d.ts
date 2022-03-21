@@ -35,6 +35,7 @@ interface PopulatedSchedule {
 interface Settings {
 	theme: Theme
 	cwd: string | null
+	lastPosterPath: string
 }
 
 interface Metadata {

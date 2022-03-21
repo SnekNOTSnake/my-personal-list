@@ -8,6 +8,7 @@ import {
 	IpcMainInvokeEvent,
 	shell,
 	Notification,
+	app,
 } from 'electron'
 
 import {
@@ -111,17 +112,21 @@ export class Events {
 		const result = await this.dialog.showOpenDialog({
 			properties: ['openFile'],
 			filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }],
+			defaultPath: this.store.get('lastPosterPath'),
 		})
 		if (result.canceled) return series
 
-		const filenameParts = result.filePaths[0].split('.')
+		const filePath = result.filePaths[0]
+		const filenameParts = filePath.split('.')
 		const ext = filenameParts[filenameParts.length - 1]
 		const filename = `${nanoid()}.${ext}`
-		fs.copyFile(result.filePaths[0], path.join(POSTER, filename))
+
+		fs.copyFile(filePath, path.join(POSTER, filename))
 
 		const newSeries = { ...series, poster: filename }
 		await this.onEditSeries(e, newSeries)
 
+		this.store.set('lastPosterPath', filePath)
 		return newSeries
 	}
 
@@ -221,6 +226,7 @@ export const store = new Store<Settings>({
 	defaults: {
 		cwd: null,
 		theme: 'light',
+		lastPosterPath: app.getPath('home'),
 	},
 })
 
