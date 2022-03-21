@@ -10,6 +10,7 @@ import {
 	Notification,
 	app,
 } from 'electron'
+import { nanoid } from 'nanoid'
 
 import {
 	IPCKey,
@@ -28,7 +29,6 @@ import {
 	trimSeries,
 	write,
 } from './util'
-import { nanoid } from 'nanoid'
 
 /* Events */
 
@@ -226,7 +226,7 @@ export const store = new Store<Settings>({
 	defaults: {
 		cwd: null,
 		theme: 'light',
-		lastPosterPath: app.getPath('home'),
+		lastPosterPath: app ? app.getPath('home') : '/',
 	},
 })
 

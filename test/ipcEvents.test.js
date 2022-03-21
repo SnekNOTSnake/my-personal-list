@@ -2,19 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
-import {
-	defSeries,
-	defSchedule,
-	exists,
-	ensureSchedule,
-} from '../packages/main/util'
+import { defSeries, exists, ensureSchedule } from '../packages/main/util'
 import {
 	ANIME_DIR,
 	POSTER_DIR,
 	SCHEDULE_FILE,
 } from '../packages/common/constants'
 
-const defaultStore = { cwd: null, theme: 'light' }
+const defaultStore = { cwd: null, theme: 'light', lastPosterPath: '/' }
 
 class Store {
 	store = defaultStore
