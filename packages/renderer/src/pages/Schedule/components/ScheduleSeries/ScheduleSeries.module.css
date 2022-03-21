@@ -6,13 +6,7 @@
 
 .root .poster {
 	flex: 0 0 50px;
-	aspect-ratio: var(--poster-aspect-ratio);
-	border-radius: var(--border-radius);
 	margin-right: 8px;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-color: var(--background-secondary);
-	background-position: center;
 }
 
 .root .details {

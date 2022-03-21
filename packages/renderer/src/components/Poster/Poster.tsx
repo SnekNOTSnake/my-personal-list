@@ -10,15 +10,17 @@ const Poster: React.FC<Props> = ({ anime, children, ...rest }) => {
 	const { cwd } = useRecoilValue(settingsState)
 
 	const posterPath = anime.poster
-		? `url(file://${[cwd, 'attachments', anime.poster].join('/')})`
+		? `file://${[cwd, 'attachments', anime.poster].join('/')}`
 		: ''
 
 	return (
-		<div
-			{...rest}
-			className={[styles.root, rest.className].join(' ')}
-			style={{ backgroundImage: posterPath, ...rest.style }}
-		>
+		<div {...rest} className={[styles.root, rest.className].join(' ')}>
+			<img
+				src={posterPath}
+				alt='Test'
+				onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
+				onLoad={(e) => (e.currentTarget.style.visibility = 'visible')}
+			/>
 			{children}
 		</div>
 	)
