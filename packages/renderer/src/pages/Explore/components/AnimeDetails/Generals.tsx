@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, MouseEvent } from 'react'
 import {
 	MdOutlineFolder,
 	MdOutlineMoreHoriz,
@@ -21,7 +21,13 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 	const [open, setOpen] = useState(false)
 
 	const onCloseModal = () => setOpen(false)
-	const onOpenModal = () => setOpen(true)
+	const onOpenModal = (e: MouseEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+		e.nativeEvent.stopImmediatePropagation()
+
+		setOpen(true)
+	}
 
 	const onActivateTag = (tag: string) =>
 		setFilter((prevVal) => {
@@ -43,7 +49,11 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 			}
 		})
 
-	const onChangePoster = async () => {
+	const onChangePoster = async (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault()
+		e.stopPropagation()
+		e.nativeEvent.stopImmediatePropagation()
+
 		const result = await window.myAPI.changePoster(data)
 		setSeries((prevVal) => {
 			const newSeries = [...prevVal]
