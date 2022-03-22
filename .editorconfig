@@ -1,0 +1,11 @@
+# Top most EditorConfig file
+root = true
+
+# For all languages and extensions
+[*]
+end_of_line = lf
+indent_style = tab
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
