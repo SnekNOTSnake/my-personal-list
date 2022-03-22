@@ -25,6 +25,7 @@
 </p>
 
 <p align="center">
+	<a href="#usage">Usage</a>
   <a href="#features">Features</a> •
   <a href="#installation-and-running">Installation and Running</a> •
   <a href="#building">Building</a>
@@ -32,9 +33,38 @@
 
 ![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/screenshots/explore.png?raw=true)
 
+## 🪤 Usage and Conventions
+
+1. Install the app
+
+2. Select a directory where the program should work on by pressing `alt` -> click `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
+
+3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, and not recursively.
+
+Something like this:
+
+```
+Selected Dir
+├── anime
+│   ├── Haibane Renmei
+│   ├── Mushishi
+│   │   └── Unrecognized Anime
+│   └── Shoujo Shuumatsu Ryokou
+└── Unrecognized Anime
+```
+
+4. Start Using The App!
+
 ## 🗡️ Features
 
 Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bulletproof-architecture/blob/master/assets) directory.
+
+- Filter by Tags
+- Filter by [fuzzy](https://en.wikipedia.org/wiki/Approximate_string_matching) search
+- Storing Metadata per series
+- Stockpile Insight
+- Watch Scheduling
+- And More!
 
 ## ⛷️ Installation and Running
 
@@ -46,3 +76,9 @@ yarn start
 ```
 
 ## ⛰️ Building and Packaging
+
+When you execute below command `electron-builder` will create an executable package for your OS (I think). If that fails, try to play around with `.electron-builder.config.js` file and the `electron-builder` [docs](https://www.electron.build/configuration/configuration.html).
+
+```bash
+yarn build
+```
