@@ -1,6 +1,6 @@
 <h1 align="center">
 	<a href="https://github.com/SnekNOTSnake">
-		<img src="https://github.com/SnekNOTSnake/my-personal-list/blob/main/assets/icon.png?raw=true" alt="Markdownify" width="200">
+		<img src="https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/icon.png?raw=true" alt="Markdownify" width="200">
 	</a>
 	<br>
   	My Personal List
@@ -11,16 +11,16 @@
 
 <p align="center">
   <a href="https://vitejs.dev/">
-    <img src="https://img.shields.io/badge/Renderer-Vite-informational?style=flat&logo=vite&logoColor=white&color=25292d" alt="Vite">
+    <img src="https://img.shields.io/badge/Renderer-Vite-informational?style=flat&logo=vite&logoColor=white&color=2f80ed" alt="Vite">
   </a>
   <a href="https://electronjs.org/">
-  <img src="https://img.shields.io/badge/Framework-Electron-informational?style=flat&logo=electron&logoColor=white&color=25292d" alt="Electron">
+  <img src="https://img.shields.io/badge/Framework-Electron-informational?style=flat&logo=electron&logoColor=white&color=2f80ed" alt="Electron">
  </a>
   <a href="https://reactjs.org/">
-    <img src="https://img.shields.io/badge/Library-React-informational?style=flat&logo=react&logoColor=white&color=25292d" alt="React.js">
+    <img src="https://img.shields.io/badge/Library-React-informational?style=flat&logo=react&logoColor=white&color=2f80ed" alt="React.js">
   </a>
   <a href="https://typescriptlang.org/">
-    <img src="https://img.shields.io/badge/Language-TypeScript-informational?style=flat&logo=typescript&logoColor=white&color=25292d" alt="TypeScript">
+    <img src="https://img.shields.io/badge/Language-TypeScript-informational?style=flat&logo=typescript&logoColor=white&color=2f80ed" alt="TypeScript">
   </a>
 </p>
 
@@ -30,11 +30,11 @@
   <a href="#building">Building</a>
 </p>
 
-![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/main/assets/screenshots/explore.png?raw=true)
+![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/screenshots/explore.png?raw=true)
 
 ## 🗡️ Features
 
-Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bulletproof-architecture/blob/main/assets) directory.
+Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bulletproof-architecture/blob/master/assets) directory.
 
 ## ⛷️ Installation and Running
 
