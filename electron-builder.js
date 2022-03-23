@@ -19,15 +19,15 @@ module.exports = {
 				arch: ['x64'],
 			},
 		],
-		artifactName: '${name}-${version}.${ext}',
+		artifactName: 'v${version}-${name}.${ext}',
 	},
 	mac: {
 		target: ['dmg'],
-		artifactName: '${name}-${version}.${ext}',
+		artifactName: 'v${version}-${name}.${ext}',
 	},
 	linux: {
 		target: ['AppImage', 'deb'],
-		artifactName: '${name}-${version}.${ext}',
+		artifactName: 'v${version}-${name}.${ext}',
 		category: 'Utility',
 	},
 	extraResources: ['./assets/**'],
