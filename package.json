@@ -9,10 +9,9 @@
 		"build": "yarn run typecheck && yarn build:renderer && yarn build:main",
 		"build:main": "NODE_ENV=production tsc --build",
 		"build:renderer": "NODE_ENV=production vite build",
-		"package:all": "package:win && package:mac && package:linux",
-		"package:win": "NODE_ENV=production electron-builder --config .electron-builder.config.js --win",
-		"package:mac": "NODE_ENV=production electron-builder --config .electron-builder.config.js --mac",
-		"package:linux": "NODE_ENV=production electron-builder --config .electron-builder.config.js --linux",
+		"package:win": "electron-builder --win",
+		"package:mac": "electron-builder --mac",
+		"package:linux": "electron-builder --linux",
 		"typecheck": "tsc --noEmit && tsc --noEmit --project packages/renderer",
 		"test": "mocha"
 	},
