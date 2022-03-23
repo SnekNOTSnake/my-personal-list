@@ -25,33 +25,35 @@
 </p>
 
 <p align="center">
-	<a href="#usage">Usage</a>
-  <a href="#features">Features</a> •
-  <a href="#installation-and-running">Installation and Running</a> •
-  <a href="#building">Building</a>
+	<a href="https://github.com/SnekNOTSnake/my-personal-list#%EF%B8%8F-usage-and-conventions">Usage</a> •
+  <a href="https://github.com/SnekNOTSnake/my-personal-list#%EF%B8%8F-features">Features</a> •
+  <a href="https://github.com/SnekNOTSnake/my-personal-list#%EF%B8%8F-installation-and-running">Installation and Running</a> •
+  <a href="https://github.com/SnekNOTSnake/my-personal-list#%EF%B8%8F-building-and-packaging">Building</a>
 </p>
 
 ![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/screenshots/explore.png?raw=true)
 
 ## 🚀️ Usage and Conventions
 
+> **Note**: All of the series are default to be *irregular series*, meaning they will not be included in the statistics. Its purpose is to differentiate short anime (eg 3 mins/eps) with regular anime (eg 24 min/eps). To change this, edit the series' regular checkbox.
+
 1. Install the app
 
-2. Select a directory where the program should work on by pressing `alt` -> click `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
+2. Select a directory where the program should work on by pressing `alt` -> `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
 
 3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, but not recursively.
 
-Something like this:
+	Something like this:
 
-```
-Selected Dir
-├── anime
-│   ├── Haibane Renmei
-│   ├── Mushishi
-│   │   └── Unrecognized Anime
-│   └── Shoujo Shuumatsu Ryokou
-└── Unrecognized Anime
-```
+	```
+	Selected Dir
+	├── anime
+	│   ├── Haibane Renmei
+	│   ├── Mushishi
+	│   │   └── Unrecognized Anime
+	│   └── Shoujo Shuumatsu Ryokou
+	└── Unrecognized Anime
+	```
 
 4. Start Using The App!
 
