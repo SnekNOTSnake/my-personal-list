@@ -33,13 +33,13 @@
 
 ![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/screenshots/explore.png?raw=true)
 
-## 🪤 Usage and Conventions
+## 🚀️ Usage and Conventions
 
 1. Install the app
 
 2. Select a directory where the program should work on by pressing `alt` -> click `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
 
-3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, and not recursively.
+3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, but not recursively.
 
 Something like this:
 
@@ -66,6 +66,11 @@ Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bu
 - Watch Scheduling
 - And More!
 
+Roadmap:
+
+- AniDB (Or MyAnimeList) integration, so that you don't have to write everything manually
+- English and Japanese title
+
 ## ⛷️ Installation and Running
 
 Before installing this project, make sure you're using the newer version of Node. After that you can install it simply by executing `yarn` command.
@@ -79,6 +84,23 @@ yarn start
 
 When you execute below command `electron-builder` will create an executable package for your OS (I think). If that fails, try to play around with `.electron-builder.config.js` file and the `electron-builder` [docs](https://www.electron.build/configuration/configuration.html).
 
+### Building
+
 ```bash
 yarn build
+```
+
+### Packaging
+
+Only available after you execute `yarn build`
+
+```bash
+# Windows
+yarn package:win
+
+# Mac
+yarn package:mac
+
+# Linux
+yarn package:linux
 ```
