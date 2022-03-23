@@ -1,12 +1,21 @@
 import { app } from 'electron'
+import { autoUpdater } from 'electron-updater'
+
 import { initializeIpcEvents } from './ipcEvents'
 import { createMainMenu } from './menu'
 import { createMainWindow, win } from './windowManager'
+
+const initializeAutoUpdate = () => {
+	autoUpdater.autoDownload = true
+	autoUpdater.autoInstallOnAppQuit = true
+	autoUpdater.checkForUpdatesAndNotify()
+}
 
 app.on('ready', async () => {
 	createMainWindow()
 	createMainMenu()
 	initializeIpcEvents()
+	initializeAutoUpdate()
 
 	// Install React Extension if in dev mode
 	if (!app.isPackaged) {
