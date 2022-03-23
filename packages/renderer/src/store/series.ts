@@ -92,9 +92,9 @@ export const seriesStats = selector({
 
 		let stockpileLasts, suffix
 		const daysRunsOut = (totalEpisodes - watchedEpisodes) / avgEpsPerDay
-		if (daysRunsOut === Infinity) {
-			stockpileLasts = daysRunsOut
-			suffix = ''
+		if (totalEpisodes === 0) {
+			stockpileLasts = 0
+			suffix = 'M'
 		} else if (daysRunsOut > 365) {
 			stockpileLasts = daysRunsOut / 365
 			suffix = 'Y'

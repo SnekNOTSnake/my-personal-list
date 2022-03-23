@@ -46,7 +46,10 @@ const ChartBar: React.FC = () => {
 					tickColor: 'transparent',
 				},
 				ticks: {
-					stepSize: Math.ceil(Math.max(...tags.map((tag) => tag.epsNum)) / 5),
+					stepSize:
+						tags.length > 0
+							? Math.ceil(Math.max(...tags.map((tag) => tag.epsNum)) / 5)
+							: 100,
 					color: textColor,
 				},
 			},

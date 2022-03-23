@@ -51,12 +51,15 @@ const DoughnutChart: React.FC = () => {
 		],
 	}
 
+	const percentage =
+		stats.totalEpisodes > 0
+			? Math.ceil((stats.watchedEpisodes / stats.totalEpisodes) * 100)
+			: 0
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.label}>
-				<div className={styles.percentage}>
-					{Math.ceil((stats.watchedEpisodes / stats.totalEpisodes) * 100)}%
-				</div>
+				<div className={styles.percentage}>{percentage}%</div>
 				<div className={styles.episodes}>
 					{stats.watchedEpisodes} / {stats.totalEpisodes} Eps
 				</div>
