@@ -4,7 +4,6 @@ import { ensureSeries } from '@/utils/helpers'
 
 Object.typedKeys = Object.keys as any
 
-window.myAPI.getSeries().then((val) => console.log(val))
 type OrderBy = 'relevance' | 'title' | 'duration' | 'resolution' | 'epsNum'
 
 export const seriesState = atom({
