@@ -71,6 +71,7 @@ Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bu
 Roadmap:
 
 - AniDB (Or MyAnimeList) integration, so that you don't have to write everything manually
+- Multiple data directories
 - English and Japanese title
 
 ## ⛷️ Installation and Running
