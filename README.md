@@ -74,7 +74,7 @@ Roadmap:
 - Multiple data directories
 - English and Japanese title
 
-## ⛷️ Installation and Running
+## ⛷️ Running for Development
 
 Before installing this project, make sure you're using the newer version of Node. After that you can install it simply by executing `yarn` command.
 
