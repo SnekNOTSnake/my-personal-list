@@ -35,27 +35,72 @@
 
 ## 🚀️ Usage and Conventions
 
-> **Note**: All of the series are default to be *irregular series*, meaning they will not be included in the statistics. Its purpose is to differentiate short anime (eg 3 mins/eps) with regular anime (eg 24 min/eps). To change this, edit the series' regular checkbox.
-
 1. Install the app
 
 2. Select a directory where the program should work on by pressing `alt` -> `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
 
 3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, but not recursively.
 
-	Something like this:
-
-	```
-	Selected Dir
-	├── anime
-	│   ├── Haibane Renmei
-	│   ├── Mushishi
-	│   │   └── Unrecognized Anime
-	│   └── Shoujo Shuumatsu Ryokou
-	└── Unrecognized Anime
-	```
-
 4. Start Using The App!
+
+### Example Folder Structure
+
+```bash
+# ❌ BAD
+
+selected
+├── anime
+│   ├── Mushishi
+│   │   ├── Season 1
+│   │   │   ├── 01.mkv
+│   │   │   └── 02.mkv
+│   │   └── Season 2
+│   │       ├── 01.mkv
+│   │       └── 02.mkv
+│   └── Sora no Woto
+│       ├── 01.mkv
+│       └── 02.mkv
+├── posters
+├── Saraiya Goyou
+│   ├── 01.mkv
+│   └── 02.mkv
+└── schedule.json
+
+
+# ✅ Good
+
+selected
+├── anime
+│   ├── Mushishi 1
+│   │   ├── 01.mkv
+│   │   └── 02.mkv
+│   ├── Mushishi 2
+│   │   ├── 01.mkv
+│   │   └── 02.mkv
+│   ├── Saraiya Goyou
+│   │   ├── 01.mkv
+│   │   └── 02.mkv
+│   └── Sora no Woto
+│       ├── 01.mkv
+│       └── 02.mkv
+├── posters
+└── schedule.json
+```
+
+### Conventions
+
+1. Irregular Series
+
+	All of the series are default to be *irregular series*, meaning they will not be included in the statistics. Its purpose is to differentiate short anime (eg 3 mins/eps) with regular anime (eg 24 min/eps). To change this, edit the series' regular checkbox.
+	
+2. Episodes Naming
+
+	In order for the system to recognize an episode's number (For "current-episode" highlight), the filename should follow the convention: `<number>.<title>.<extension>` OR `<number>.<extension>`. Examples:
+	
+	- ✅ `01. Resounding Sound - The City at Dawn.mkv`
+	- ✅ `01.mkv`
+	- ❌ `01 - Resounding Sound - The City at Dawn.mkv`
+	- ❌ `Ep 01.mkv`
 
 ## 🗡️ Features
 
