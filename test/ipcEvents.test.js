@@ -163,14 +163,12 @@ describe('ipcEvents', () => {
 	describe('onRemoveUnusedPosters', () => {
 		it('Should remove unused posters', async () => {
 			await events.onRemoveUnusedPosters('')
+			const items = fs.readdirSync(POSTER)
 
-			fs.readdir(POSTER, (err, items) => {
-				expect(err).toBeFalsy()
-				expect(items.length).toBe(2)
-				expect(items.includes('fate-zero.jpg')).toBe(false)
-				expect(items.includes('read-or-die.jpg')).toBe(true)
-				expect(items.includes('isekai-shokudou.jpg')).toBe(true)
-			})
+			expect(items.length).toBe(2)
+			expect(items.includes('fate-zero.jpg')).toBe(false)
+			expect(items.includes('read-or-die.jpg')).toBe(true)
+			expect(items.includes('isekai-shokudou.jpg')).toBe(true)
 		})
 	})
 

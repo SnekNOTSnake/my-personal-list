@@ -104,7 +104,7 @@ export class Events {
 		if (!cwd) return series
 		const POSTER = path.join(cwd, POSTER_DIR)
 		const posterDirExists = await exists(POSTER)
-		if (!posterDirExists) fs.mkdir(POSTER)
+		if (!posterDirExists) await fs.mkdir(POSTER)
 
 		const isExists = await exists(series.fullPath)
 		if (!isExists) return series
@@ -121,7 +121,7 @@ export class Events {
 		const ext = filenameParts[filenameParts.length - 1]
 		const filename = `${nanoid()}.${ext}`
 
-		fs.copyFile(filePath, path.join(POSTER, filename))
+		await fs.copyFile(filePath, path.join(POSTER, filename))
 
 		const newSeries = { ...series, poster: filename }
 		await this.onEditSeries(e, newSeries)

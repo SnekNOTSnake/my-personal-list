@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { RecoilRoot } from 'recoil'
 import { HashRouter as Router } from 'react-router-dom'
 
@@ -7,7 +7,7 @@ import App from './App'
 import '@fontsource/roboto'
 import './index.css'
 
-ReactDOM.render(
+createRoot(document.querySelector('#root')!).render(
 	<React.StrictMode>
 		<RecoilRoot>
 			<Router>
@@ -15,5 +15,4 @@ ReactDOM.render(
 			</Router>
 		</RecoilRoot>
 	</React.StrictMode>,
-	document.querySelector('#root'),
 )

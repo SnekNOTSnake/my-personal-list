@@ -22,6 +22,7 @@ export const createMainWindow = () => {
 		webPreferences: {
 			preload: path.resolve(__dirname, '../common/preload.js'),
 			webSecurity: app.isPackaged,
+			nodeIntegration: true,
 		},
 	})
 
