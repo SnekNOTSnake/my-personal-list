@@ -10,7 +10,7 @@ type Props = { edit: () => any; data: Series }
 const AnimeDetails: React.FC<Props> = ({ edit, data }) => (
 	<div className={styles.root}>
 		<Generals data={data} edit={edit} />
-		<Notes data={data} />
+		{data.notes.length > 0 && <Notes data={data} />}
 		<Related data={data} />
 		<Episodes data={data} />
 	</div>

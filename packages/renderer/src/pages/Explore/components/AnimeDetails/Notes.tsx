@@ -5,7 +5,7 @@ type Props = { data: Series }
 
 const Notes: React.FC<Props> = ({ data }) => (
 	<div className={styles.notes}>
-		<p>{data.notes}</p>
+		<pre>{data.notes}</pre>
 	</div>
 )
 

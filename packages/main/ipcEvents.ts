@@ -89,11 +89,14 @@ export class Events {
 		series: Series,
 	): Promise<Series> => {
 		const sanitized = sanitizeSeries(series)
-		const trimmed = trimSeries(sanitized)
+		// const trimmed = trimSeries(sanitized)
 
-		await write(path.join(series.fullPath, DATA_FILE), JSON.stringify(trimmed))
+		await write(
+			path.join(series.fullPath, DATA_FILE),
+			JSON.stringify(sanitized),
+		)
 
-		return trimmed
+		return sanitized
 	}
 
 	onChangePoster = async (
