@@ -145,11 +145,11 @@ export const filteredSeries = selector({
 		let orderBy = filter.order.by as OrderBy
 		let searched: Series[] = filtered
 		if (filter.query) {
-			const results = fuzzysort.go(filter.query, filtered, { keys: ['title'] })
+			const results = fuzzysort.go(filter.query, filtered, { keys: ['path'] })
 			const sorted = [...results]
 			sorted.sort((a, b) => {
 				if (a.score !== b.score) return b.score - a.score
-				return b.obj.path.localeCompare(a.obj.path)
+				return a.obj.path.localeCompare(b.obj.path)
 			})
 
 			orderBy = 'relevance'
@@ -164,11 +164,7 @@ export const filteredSeries = selector({
 			case 'title':
 				ordered.sort((a, b) =>
 					filter.order.descending
-						? b.path
-							? b.path.localeCompare(a.path)
-							: b.path.localeCompare(a.path)
-						: a.path
-						? a.path.localeCompare(b.path)
+						? b.path.localeCompare(a.path)
 						: a.path.localeCompare(b.path),
 				)
 				break
