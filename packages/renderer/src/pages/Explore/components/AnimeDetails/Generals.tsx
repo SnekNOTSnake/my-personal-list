@@ -112,7 +112,7 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 					</button>
 				</div>
 
-				<h1>{data.title || data.path}</h1>
+				<h1>{data.path}</h1>
 				<div className={styles.watchInfo}>
 					<button onClick={onIncreaseEpsWatched} type='button'>
 						<MdOutlineAdd />

@@ -26,10 +26,10 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 			if (el.path === data.path) return false
 			if (relatedI.some((relatedAnime) => relatedAnime.path === el.path))
 				return false
-			return el.title.toLowerCase().startsWith(relatedInput.toLowerCase())
+			return el.path.toLowerCase().startsWith(relatedInput.toLowerCase())
 		})
 
-		filtered.sort((a, b) => a.title.localeCompare(b.title))
+		filtered.sort((a, b) => a.path.localeCompare(b.path))
 		filtered.slice(0, 10)
 
 		return filtered
@@ -77,7 +77,7 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 					<ul>
 						{localFilteredSeries.map((el) => (
 							<li onClick={() => onAddRelation(el.path)} key={el.path}>
-								{el.title || el.path}
+								{el.path}
 							</li>
 						))}
 					</ul>

@@ -164,7 +164,7 @@ const ExplorerRight: React.FC = () => {
 								className={({ isActive }) => (isActive ? styles.active : '')}
 								to={`/explore/${encodeURI(el.path)}`}
 							>
-								<span>{el.title || el.path}</span>
+								<span>{el.path}</span>
 							</NavLink>
 						</li>
 					))}

@@ -93,7 +93,7 @@ describe('ipcEvents', () => {
 
 	describe('onEditSeries', () => {
 		const editedSeries = {
-			title: 'Mushishi Edited',
+			jpTitle: 'Mushishi Edited',
 			regular: false,
 			tags: ['Adventure', 'Supernatural', 'Mystery'],
 
@@ -146,17 +146,6 @@ describe('ipcEvents', () => {
 			})
 
 			expect(mushishi.unnecessaryField).toBeUndefined()
-		})
-
-		it('Should remove unnecessary whitespaces', async () => {
-			const mushishi = await events.onEditSeries('', {
-				...editedSeries,
-				title: ' Mushishi       Extra     Spaces ',
-				path: 'Mushishi',
-				fullPath: path.join(ANIME, 'Mushishi'),
-			})
-
-			expect(mushishi.title).toBe('Mushishi Extra Spaces')
 		})
 	})
 

@@ -28,7 +28,7 @@ const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
 
 			<div className={styles.details}>
 				<Link to={`/explore/${anime.path}`}>
-					<h3>{anime.title}</h3>
+					<h3>{anime.path}</h3>
 				</Link>
 				<div className={styles.episode}>
 					EP {anime.epsWatched}/{anime.epsNum}

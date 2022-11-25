@@ -28,10 +28,10 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 
 	const localFiltered = series
 		.filter((el) =>
-			el.title.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()),
+			el.path.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()),
 		)
 		.filter((el) => !schedule[day].includes(el.path))
-		.sort((a, b) => a.title.localeCompare(b.title))
+		.sort((a, b) => a.path.localeCompare(b.path))
 		.slice(0, 5)
 
 	return (
@@ -42,7 +42,7 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 					<ul>
 						{localFiltered.map((el) => (
 							<li onClick={() => addSeries(el.path)} key={el.path}>
-								{el.title}
+								{el.path}
 							</li>
 						))}
 					</ul>

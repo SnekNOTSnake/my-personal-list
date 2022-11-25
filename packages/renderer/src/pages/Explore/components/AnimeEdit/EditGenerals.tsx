@@ -4,7 +4,7 @@ import styles from './AnimeEdit.module.css'
 
 type Props = {
 	generalInfo: {
-		title: string
+		jpTitle: string
 		epsNum: number
 		epsWatched: number
 		rewatchCount: number
@@ -14,18 +14,18 @@ type Props = {
 }
 
 const EditGenerals: React.FC<Props> = ({
-	generalInfo: { epsNum, epsWatched, rewatchCount, title, regular },
+	generalInfo: { epsNum, epsWatched, rewatchCount, jpTitle, regular },
 	onInputChange,
 }) => (
 	<div>
 		<div className={styles.numberInputs}>
 			<div className={styles.labeledInput}>
-				<div className={styles.label}>Title</div>
+				<div className={styles.label}>Japanese Title</div>
 				<input
 					type='text'
-					name='title'
+					name='jpTitle'
 					onChange={onInputChange}
-					value={title}
+					value={jpTitle}
 				/>
 			</div>
 			<div className={styles.labeledInput}>

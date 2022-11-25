@@ -13,7 +13,7 @@ type Props = { closeEdit: () => any; data: Series }
 
 const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 	const defaultInputs = {
-		title: data.title,
+		jpTitle: data.jpTitle,
 		epsNum: data.epsNum,
 		epsWatched: data.epsWatched,
 		rewatchCount: data.rewatchCount,

@@ -150,7 +150,7 @@ export const filteredSeries = selector({
 			const sorted = [...results]
 			sorted.sort((a, b) => {
 				if (a.score !== b.score) return b.score - a.score
-				return b.obj.title.localeCompare(a.obj.title)
+				return b.obj.path.localeCompare(a.obj.path)
 			})
 
 			orderBy = 'relevance'
@@ -165,11 +165,11 @@ export const filteredSeries = selector({
 			case 'title':
 				ordered.sort((a, b) =>
 					filter.order.descending
-						? b.title
-							? b.title.localeCompare(a.title)
+						? b.path
+							? b.path.localeCompare(a.path)
 							: b.path.localeCompare(a.path)
-						: a.title
-						? a.title.localeCompare(b.title)
+						: a.path
+						? a.path.localeCompare(b.path)
 						: a.path.localeCompare(b.path),
 				)
 				break

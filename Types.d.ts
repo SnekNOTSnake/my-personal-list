@@ -54,7 +54,7 @@ interface Series extends Metadata {
 	fullPath: string
 	files: string[]
 
-	title: string
+	jpTitle: string
 	poster: string
 	regular: boolean
 	tags: string[]

@@ -3,7 +3,7 @@ export const defSeries: Series = {
 	fullPath: '',
 	files: [],
 
-	title: '[Not Found]',
+	jpTitle: '[Not Found]',
 	poster: '',
 	regular: false,
 	tags: [],

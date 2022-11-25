@@ -13,7 +13,7 @@ export const defSeries: Series = {
 	fullPath: '',
 	files: [],
 
-	title: '',
+	jpTitle: '',
 	poster: '',
 	regular: false,
 	tags: [],

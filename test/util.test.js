@@ -49,7 +49,7 @@ describe('Utils', () => {
 			const buffer = await read(path.join(ANIME, 'Princess Connect', DATA_FILE))
 			const priconne = JSON.parse(buffer.toString())
 
-			expect(priconne.title).toBe('Princess Connect')
+			expect(priconne.jpTitle).toBe('Princess Connect')
 		})
 
 		it('Should return false when unable to read file', async () => {
@@ -73,7 +73,7 @@ describe('Utils', () => {
 
 	describe('ensureSeries', () => {
 		it('Should create the default series object structure', () => {
-			const series = ensureSeries({ title: 'Mushishi Zoku Shou' })
+			const series = ensureSeries({ jpTitle: 'Mushishi Zoku Shou' })
 
 			expect(series).toHaveProperty('tags')
 			expect(series).toHaveProperty('related')
@@ -86,7 +86,7 @@ describe('Utils', () => {
 	describe('sanitizeSeries', () => {
 		it('Should eliminate unnecessary properties, including path, fullPath, and files', () => {
 			const mushishi = ensureSeries({
-				title: 'Mushishi Zoku Shou 2',
+				jpTitle: 'Mushishi Zoku Shou 2',
 				unnecessaryField: true,
 				path: 'somewhere',
 				fullPath: '/media/Alpha/somewhere',
