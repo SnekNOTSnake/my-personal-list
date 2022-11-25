@@ -66,14 +66,15 @@ export const seriesStats = selector({
 
 		// Untagged series
 		const untaggeds = series.filter((el) => !el.tags.length)
-		tags.push({
-			name: 'untagged',
-			count: untaggeds.length,
-			epsNum: untaggeds.map((el) => el.epsNum).reduce((p, c) => p + c, 0),
-			epsWatched: untaggeds
-				.map((el) => el.epsWatched)
-				.reduce((p, c) => p + c, 0),
-		})
+		if (untaggeds.length > 0)
+			tags.push({
+				name: 'Untagged',
+				count: untaggeds.length,
+				epsNum: untaggeds.map((el) => el.epsNum).reduce((p, c) => p + c, 0),
+				epsWatched: untaggeds
+					.map((el) => el.epsWatched)
+					.reduce((p, c) => p + c, 0),
+			})
 
 		const watchedEpisodes = series
 			.filter((el) => el.regular)
