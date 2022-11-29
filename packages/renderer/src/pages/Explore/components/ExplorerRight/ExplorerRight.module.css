@@ -3,6 +3,7 @@
 	flex-direction: column;
 	background-color: var(--background-secondary);
 	padding: 0 1px;
+	position: relative;
 }
 
 .root .toolBar {
@@ -37,8 +38,83 @@
 	margin-right: 8px;
 }
 
+.root .toolBar .icon.active {
+	color: var(--color-primary);
+}
+
 .root .toolBar .descending {
 	transform: rotate(180deg);
+}
+
+.root .advancedFilter {
+	position: absolute;
+	top: var(--explorer-item-height);
+	bottom: var(--explorer-item-height);
+	left: 0;
+	right: 0;
+	display: none;
+	padding: 16px;
+	background-color: var(--background-secondary);
+}
+
+.root .advancedFilter.open {
+	display: block;
+}
+
+.root .advancedFilter .inputGroup {
+	display: flex;
+	align-items: center;
+	height: var(--explorer-item-height);
+}
+
+.root .advancedFilter .inputGroup div:nth-child(1) {
+	width: 40%;
+}
+
+.root .advancedFilter .inputGroup div:nth-child(2) {
+	width: 60%;
+	display: flex;
+}
+
+.root .advancedFilter .inputGroup input,
+.root .advancedFilter .inputGroup select,
+.root .advancedFilter .inputGroup textarea {
+	padding: 4px 8px;
+	max-width: 175px;
+}
+
+.root .advancedFilter .inputGroup div:nth-child(2) select {
+	width: initial;
+	margin-right: 8px;
+	display: inline-block;
+}
+
+.root .advancedFilter .inputGroup div:nth-child(2) input[type='number'] {
+	width: 45px;
+	display: inline-block;
+	margin: 0;
+}
+
+.root .advancedFilter .actions {
+	margin-top: 24px;
+}
+
+.root .advancedFilter .actions button {
+	background-color: var(--background);
+	border-radius: var(--border-radius);
+	border: none;
+	padding: 8px 16px;
+	margin-right: 8px;
+}
+
+.root .advancedFilter .actions button.apply {
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+.root .advancedFilter .actions button.remove {
+	background-color: var(--color-red);
+	color: #fff;
 }
 
 .root .titles {

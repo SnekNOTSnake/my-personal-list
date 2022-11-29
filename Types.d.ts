@@ -79,6 +79,40 @@ interface Relation {
 		| 'alternative-version'
 }
 
+type NumOperators = 'gte' | 'lte'
+type NumFilter = {
+	value: number
+	operator: NumOperators
+}
+
+type StrOperators = 'normal' | 'regexp'
+type StrFilter = {
+	value: string
+	operator: StrOperators
+}
+
+type OrderOperators = 'asc' | 'desc'
+type Order = {
+	value: 'relevance' | 'title' | 'resolution' | 'epsNum'
+	operator: OrderOperators
+}
+
+interface AdvFilter {
+	regular: 'any' | 'regular' | 'irregular'
+	epsNum: NumFilter
+	epsWatched: NumFilter
+	rewatchCount: NumFilter
+	encoder: StrFilter
+	source: StrFilter
+	quality: StrFilter
+	res: NumFilter
+	video: StrFilter
+	audio: StrFilter
+	subtitle: StrFilter
+	notes: StrFilter
+	order: Order
+}
+
 interface Window {
 	myAPI: {
 		changeTheme: (theme: Theme) => Promise<Settings>

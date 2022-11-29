@@ -4,8 +4,6 @@ import { ensureSeries } from '@/utils/helpers'
 
 Object.typedKeys = Object.keys as any
 
-type OrderBy = 'relevance' | 'title' | 'duration' | 'resolution' | 'epsNum'
-
 export const seriesState = atom({
 	key: 'series',
 	default: window.myAPI.getSeries(),
@@ -20,14 +18,11 @@ export const seriesFilter = atom({
 	key: 'seriesFilter',
 	default: {
 		query: '',
-		order: {
-			descending: false,
-			by: 'title' as OrderBy,
-		},
 		tags: {
 			active: [] as string[],
 			deactive: [] as string[],
 		},
+		advFilter: [] as AdvFilter[],
 	},
 })
 
@@ -142,8 +137,106 @@ export const filteredSeries = selector({
 				)
 		}
 
-		let orderBy = filter.order.by as OrderBy
+		if (filter.advFilter.length) {
+			const f = filter.advFilter[0]
+			if (f.regular !== 'any')
+				filtered = filtered.filter((s) => {
+					return f.regular === 'regular' ? s.regular : !s.regular
+				})
+
+			const strMatch = (
+				textBase: string,
+				textToFind: string,
+				operator: StrOperators = 'normal',
+			) => {
+				if (operator === 'normal') {
+					return textBase.toLowerCase().indexOf(textToFind.toLowerCase()) > -1
+				}
+				return new RegExp(textToFind.toLowerCase()).test(
+					textBase.toLocaleLowerCase(),
+				)
+			}
+
+			const numMatch = (
+				numBase: number,
+				numToCompare: number,
+				operator: NumOperators = 'gte',
+			) => {
+				if (operator === 'gte') return numBase >= numToCompare
+				return numBase <= numToCompare
+			}
+
+			if (f.epsNum) {
+				filtered = filtered.filter((s) => {
+					return numMatch(s.epsNum, f.epsNum.value, f.epsNum.operator)
+				})
+			}
+			if (f.epsWatched) {
+				filtered = filtered.filter((s) => {
+					return numMatch(
+						s.epsWatched,
+						f.epsWatched.value,
+						f.epsWatched.operator,
+					)
+				})
+			}
+			if (f.rewatchCount) {
+				filtered = filtered.filter((s) => {
+					return numMatch(
+						s.rewatchCount,
+						f.rewatchCount.value,
+						f.rewatchCount.operator,
+					)
+				})
+			}
+			if (f.encoder) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.encoder, f.encoder.value, f.encoder.operator)
+				})
+			}
+			if (f.source) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.source, f.source.value, f.source.operator)
+				})
+			}
+			if (f.quality) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.quality, f.quality.value, f.quality.operator)
+				})
+			}
+			if (f.res) {
+				filtered = filtered.filter((s) => {
+					return numMatch(s.res, f.res.value, f.res.operator)
+				})
+			}
+			if (f.video) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.video, f.video.value, f.video.operator)
+				})
+			}
+			if (f.audio) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.audio, f.audio.value, f.audio.operator)
+				})
+			}
+			if (f.subtitle) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.subtitle, f.subtitle.value, f.subtitle.operator)
+				})
+			}
+			if (f.notes) {
+				filtered = filtered.filter((s) => {
+					return strMatch(s.notes, f.notes.value, f.notes.operator)
+				})
+			}
+		}
+
+		const order: Order = filter.advFilter.length
+			? filter.advFilter[0].order
+			: { value: 'title', operator: 'asc' }
+		let orderBy = order.value
 		let searched: Series[] = filtered
+
 		if (filter.query) {
 			const results = fuzzysort.go(filter.query, filtered, { keys: ['path'] })
 			const sorted = [...results]
@@ -162,31 +255,25 @@ export const filteredSeries = selector({
 				break
 
 			case 'title':
-				ordered.sort((a, b) =>
-					filter.order.descending
+				ordered.sort((a, b) => {
+					return order.operator === 'desc'
 						? b.path.localeCompare(a.path)
-						: a.path.localeCompare(b.path),
-				)
-				break
-
-			case 'duration':
-				ordered.sort((a, b) =>
-					filter.order.descending
-						? b.duration - a.duration
-						: a.duration - b.duration,
-				)
+						: a.path.localeCompare(b.path)
+				})
 				break
 
 			case 'epsNum':
-				ordered.sort((a, b) =>
-					filter.order.descending ? b.epsNum - a.epsNum : a.epsNum - b.epsNum,
-				)
+				ordered.sort((a, b) => {
+					return order.operator === 'desc'
+						? b.epsNum - a.epsNum
+						: a.epsNum - b.epsNum
+				})
 				break
 
 			case 'resolution':
-				ordered.sort((a, b) =>
-					filter.order.descending ? b.res - a.res : a.res - b.res,
-				)
+				ordered.sort((a, b) => {
+					return order.operator === 'desc' ? b.res - a.res : a.res - b.res
+				})
 				break
 
 			default:

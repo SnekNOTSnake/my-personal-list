@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
-import { MdSearch, MdOutlineExpandMore } from 'react-icons/md'
+import { MdFilterAlt } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 import { filteredSeries, seriesFilter } from '@/store/series'
 import styles from './ExplorerRight.module.css'
+import AdvancedFilter from './AdvancedFilter'
 
 const getPath = (path: string) => `/explore/${path}`
 
@@ -13,6 +14,11 @@ const ExplorerRight: React.FC = () => {
 	const { '*': path } = useParams()
 	const inputRef = React.useRef<HTMLInputElement | null>(null)
 	const titlesRef = React.useRef<HTMLDivElement | null>(null)
+
+	const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false)
+	const openFilter = () => setIsFilterOpen(true)
+	const closeFilter = () => setIsFilterOpen(false)
+	const toggleFilter = () => setIsFilterOpen((prevVal) => !prevVal)
 
 	const filtered = useRecoilValue(filteredSeries)
 	const [filter, setFilter] = useRecoilState(seriesFilter)
@@ -106,19 +112,6 @@ const ExplorerRight: React.FC = () => {
 		setFilter((prevVal) => ({ ...prevVal, query: e.target.value }))
 	}
 
-	const onOrderByChange = (e: SelectChange) => {
-		setFilter((prevVal) => ({
-			...prevVal,
-			order: { ...prevVal.order, by: e.target.value as any },
-		}))
-	}
-
-	const onAscDescClick = () =>
-		setFilter((prevVal) => ({
-			...prevVal,
-			order: { ...prevVal.order, descending: !prevVal.order.descending },
-		}))
-
 	return (
 		<div className={styles.root} tabIndex={0}>
 			<div className={styles.toolBar}>
@@ -133,25 +126,11 @@ const ExplorerRight: React.FC = () => {
 					/>
 				</div>
 				<div>
-					<MdSearch className={styles.icon} />
-				</div>
-			</div>
-			<div className={styles.toolBar}>
-				<div>
-					<select value={filter.order.by} onChange={onOrderByChange}>
-						<option value='relevance'>Relevance</option>
-						<option value='title'>Title</option>
-						<option value='duration'>Duration</option>
-						<option value='resolution'>Resolution</option>
-						<option value='epsNum'>Number of Episodes</option>
-					</select>
-				</div>
-				<div>
-					<MdOutlineExpandMore
-						onClick={onAscDescClick}
+					<MdFilterAlt
+						onClick={toggleFilter}
 						className={[
 							styles.icon,
-							...[filter.order.descending ? styles.descending : ''],
+							filter.advFilter.length ? styles.active : '',
 						].join(' ')}
 					/>
 				</div>
@@ -170,6 +149,7 @@ const ExplorerRight: React.FC = () => {
 					))}
 				</ul>
 			</div>
+			<AdvancedFilter isFilterOpen={isFilterOpen} closeFilter={closeFilter} />
 			<div className={styles.matches}>{filtered.length} Items</div>
 		</div>
 	)
