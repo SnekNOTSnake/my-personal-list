@@ -118,7 +118,7 @@ export const filteredSeries = selector({
 		const series = get(seriesState)
 		const filter = get(seriesFilter)
 
-		let filtered
+		let filtered: Series[]
 		if (filter.tags.active.includes('Untagged')) {
 			filtered = series.filter((el) => el.tags.length === 0)
 		} else if (filter.tags.deactive.includes('Untagged')) {
@@ -139,10 +139,6 @@ export const filteredSeries = selector({
 
 		if (filter.advFilter.length) {
 			const f = filter.advFilter[0]
-			if (f.regular !== 'any')
-				filtered = filtered.filter((s) => {
-					return f.regular === 'regular' ? s.regular : !s.regular
-				})
 
 			const strMatch = (
 				textBase: string,
@@ -166,69 +162,45 @@ export const filteredSeries = selector({
 				return numBase <= numToCompare
 			}
 
-			if (f.epsNum) {
-				filtered = filtered.filter((s) => {
-					return numMatch(s.epsNum, f.epsNum.value, f.epsNum.operator)
-				})
+			const numFilterers = {
+				epsNum: f.epsNum,
+				epsWatched: f.epsWatched,
+				rewatchCount: f.rewatchCount,
+				res: f.res,
 			}
-			if (f.epsWatched) {
-				filtered = filtered.filter((s) => {
-					return numMatch(
-						s.epsWatched,
-						f.epsWatched.value,
-						f.epsWatched.operator,
-					)
-				})
+
+			const strFilterers = {
+				encoder: f.encoder,
+				source: f.source,
+				quality: f.quality,
+				video: f.video,
+				audio: f.audio,
+				subtitle: f.subtitle,
+				notes: f.notes,
 			}
-			if (f.rewatchCount) {
+
+			if (f.regular !== 'any')
 				filtered = filtered.filter((s) => {
-					return numMatch(
-						s.rewatchCount,
-						f.rewatchCount.value,
-						f.rewatchCount.operator,
-					)
+					return f.regular === 'regular' ? s.regular : !s.regular
 				})
-			}
-			if (f.encoder) {
+
+			// Numeric Filterers
+			Object.typedKeys(numFilterers).forEach((key) => {
+				const field = f[key]
+				if (!field.value) return
 				filtered = filtered.filter((s) => {
-					return strMatch(s.encoder, f.encoder.value, f.encoder.operator)
+					return numMatch(s[key], field.value, field.operator)
 				})
-			}
-			if (f.source) {
+			})
+
+			// String Filterers
+			Object.typedKeys(strFilterers).forEach((key) => {
+				const field = f[key]
+				if (!field.value) return
 				filtered = filtered.filter((s) => {
-					return strMatch(s.source, f.source.value, f.source.operator)
+					return strMatch(s[key], field.value, field.operator)
 				})
-			}
-			if (f.quality) {
-				filtered = filtered.filter((s) => {
-					return strMatch(s.quality, f.quality.value, f.quality.operator)
-				})
-			}
-			if (f.res) {
-				filtered = filtered.filter((s) => {
-					return numMatch(s.res, f.res.value, f.res.operator)
-				})
-			}
-			if (f.video) {
-				filtered = filtered.filter((s) => {
-					return strMatch(s.video, f.video.value, f.video.operator)
-				})
-			}
-			if (f.audio) {
-				filtered = filtered.filter((s) => {
-					return strMatch(s.audio, f.audio.value, f.audio.operator)
-				})
-			}
-			if (f.subtitle) {
-				filtered = filtered.filter((s) => {
-					return strMatch(s.subtitle, f.subtitle.value, f.subtitle.operator)
-				})
-			}
-			if (f.notes) {
-				filtered = filtered.filter((s) => {
-					return strMatch(s.notes, f.notes.value, f.notes.operator)
-				})
-			}
+			})
 		}
 
 		const order: Order = filter.advFilter.length
