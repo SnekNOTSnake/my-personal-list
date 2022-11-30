@@ -55,6 +55,7 @@
 	display: none;
 	padding: 16px;
 	background-color: var(--background-secondary);
+	text-align: center;
 }
 
 .root .advancedFilter.open {
@@ -65,14 +66,16 @@
 	display: flex;
 	align-items: center;
 	height: var(--explorer-item-height);
+	text-align: right;
 }
 
 .root .advancedFilter .inputGroup div:nth-child(1) {
-	width: 40%;
+	width: 35%;
+	padding-right: 8px;
 }
 
 .root .advancedFilter .inputGroup div:nth-child(2) {
-	width: 60%;
+	width: 65%;
 	display: flex;
 }
 
@@ -80,7 +83,7 @@
 .root .advancedFilter .inputGroup select,
 .root .advancedFilter .inputGroup textarea {
 	padding: 4px 8px;
-	max-width: 175px;
+	max-width: 150px;
 }
 
 .root .advancedFilter .inputGroup div:nth-child(2) select {
