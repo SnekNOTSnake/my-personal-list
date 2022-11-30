@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { seriesState, seriesFilter, seriesStats } from '@/store/series'
+import { seriesState, seriesFilterState, seriesStats } from '@/store/series'
 
 import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
@@ -32,7 +32,7 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 	}
 
 	const stats = useRecoilValue(seriesStats)
-	const setFilters = useSetRecoilState(seriesFilter)
+	const setFilters = useSetRecoilState(seriesFilterState)
 	const setSeries = useSetRecoilState(seriesState)
 	const [input, setInput] = useState(defaultInputs)
 

@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, MouseEvent } from 'react'
 import { MdFilterAlt } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
-import { filteredSeries, seriesFilter } from '@/store/series'
+import {
+	filteredSeries,
+	seriesFilterState,
+	selectedSeriesState,
+} from '@/store/series'
 import styles from './ExplorerRight.module.css'
 import AdvancedFilter from './AdvancedFilter'
 
-const getPath = (path: string) => `/explore/${path}`
-
 const ExplorerRight: React.FC = () => {
-	const navigate = useNavigate()
-	const { '*': path } = useParams()
 	const inputRef = React.useRef<HTMLInputElement | null>(null)
 	const titlesRef = React.useRef<HTMLDivElement | null>(null)
 
@@ -21,18 +20,43 @@ const ExplorerRight: React.FC = () => {
 	const toggleFilter = () => setIsFilterOpen((prevVal) => !prevVal)
 
 	const filtered = useRecoilValue(filteredSeries)
-	const [filter, setFilter] = useRecoilState(seriesFilter)
+	const [filter, setFilter] = useRecoilState(seriesFilterState)
+	const [selectedSeries, setSelectedSeries] =
+		useRecoilState(selectedSeriesState)
 
-	// Auto select first occurrence
-	useEffect(() => {
-		if (filtered.length && !filtered.some((el) => el.path === path))
-			navigate(getPath(filtered[0].path))
-	}, [filter])
+	const filteredPaths = filtered.map((s) => s.path)
+	const cIndex = filteredPaths.indexOf(selectedSeries[0])
+
+	const select = (e: MouseEvent<HTMLLIElement>, path: string) => {
+		if (e.shiftKey) {
+			const tIndex = filteredPaths.indexOf(path)
+			if (cIndex < 0 || tIndex < 0) return
+			const newSelections =
+				cIndex > tIndex
+					? [selectedSeries[0], ...filteredPaths.slice(tIndex, cIndex)]
+					: [...filteredPaths.slice(cIndex, tIndex), path]
+			setSelectedSeries(newSelections)
+			return
+		}
+
+		if (e.ctrlKey) {
+			const newSelections = [...selectedSeries]
+			if (selectedSeries.includes(path)) {
+				const indexToDelete = newSelections.findIndex((el) => el === path)
+				newSelections.splice(indexToDelete, 1)
+				setSelectedSeries(newSelections)
+				return
+			}
+			newSelections.push(path)
+			setSelectedSeries(newSelections)
+			return
+		}
+
+		setSelectedSeries([path])
+	}
 
 	// Shortcuts
 	useEffect(() => {
-		const index = filtered.findIndex((el) => el.path === path)
-
 		const listener = (e: KeyboardEvent) => {
 			const iFocused = document.querySelector(`.${styles.search}:focus`)
 			const focused = document.querySelector(`.${styles.root}:focus-within`)
@@ -42,21 +66,21 @@ const ExplorerRight: React.FC = () => {
 			const scrollAccordingly = () => {
 				if (!titlesRef.current) return
 
-				const pth = filtered[index - (e.key === 'ArrowUp' ? 1 : -1)].path
+				const pth = filteredPaths[cIndex - (e.key === 'ArrowUp' ? 1 : -1)]
 				const next = document.querySelector(
 					`[data-path="${pth}"]`,
 				) as HTMLElement
 
 				const pastBottom =
-					next.offsetTop - 35 >=
+					next.offsetTop >=
 					titlesRef.current.scrollTop + titlesRef.current.offsetHeight
-				const pastTop = next.offsetTop - 70 <= titlesRef.current.scrollTop
+				const pastTop = next.offsetTop - 35 <= titlesRef.current.scrollTop
 
 				if (pastTop) {
-					titlesRef.current.scrollTo({ top: next.offsetTop - 70 })
+					titlesRef.current.scrollTo({ top: next.offsetTop - 35 })
 				} else if (pastBottom) {
 					titlesRef.current.scrollTo({
-						top: next.offsetTop - 35 - titlesRef.current.offsetHeight,
+						top: next.offsetTop - titlesRef.current.offsetHeight,
 					})
 				}
 			}
@@ -64,28 +88,18 @@ const ExplorerRight: React.FC = () => {
 			switch (e.key) {
 				case 'ArrowUp':
 					e.preventDefault()
-					if (!filtered[index - 1]) return
+					if (!filteredPaths[cIndex - 1]) return
 
 					scrollAccordingly()
-					navigate(getPath(filtered[index - 1].path))
+					setSelectedSeries([filteredPaths[cIndex - 1]])
 					break
 
 				case 'ArrowDown':
 					e.preventDefault()
-					if (!filtered[index + 1]) return
+					if (!filteredPaths[cIndex + 1]) return
 
 					scrollAccordingly()
-					navigate(getPath(filtered[index + 1].path))
-					break
-
-				case 'Home':
-					if (!filtered.length || iFocused) return
-					navigate(getPath(filtered[0].path))
-					break
-
-				case 'End':
-					if (!filtered.length || iFocused) return
-					navigate(getPath(filtered[filtered.length - 1].path))
+					setSelectedSeries([filteredPaths[cIndex + 1]])
 					break
 
 				case 'f':
@@ -95,7 +109,6 @@ const ExplorerRight: React.FC = () => {
 					break
 
 				case 'Escape':
-					inputRef.current.blur()
 					setFilter((prevVal) => ({ ...prevVal, query: '' }))
 					break
 
@@ -106,7 +119,7 @@ const ExplorerRight: React.FC = () => {
 
 		window.addEventListener('keydown', listener)
 		return () => window.removeEventListener('keydown', listener)
-	}, [path, filtered])
+	}, [cIndex, filtered])
 
 	const onSearchChange = (e: InputChange) => {
 		setFilter((prevVal) => ({ ...prevVal, query: e.target.value }))
@@ -138,13 +151,13 @@ const ExplorerRight: React.FC = () => {
 			<div ref={titlesRef} className={styles.titles}>
 				<ul>
 					{filtered.map((el) => (
-						<li key={el.path} data-path={el.path}>
-							<NavLink
-								className={({ isActive }) => (isActive ? styles.active : '')}
-								to={`/explore/${encodeURI(el.path)}`}
-							>
-								<span>{el.path}</span>
-							</NavLink>
+						<li
+							className={selectedSeries.includes(el.path) ? styles.active : ''}
+							key={el.path}
+							data-path={el.path}
+							onClick={(e) => select(e, el.path)}
+						>
+							<span>{el.path}</span>
 						</li>
 					))}
 				</ul>

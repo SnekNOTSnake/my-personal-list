@@ -2,12 +2,12 @@ import React from 'react'
 import { MdDeleteOutline } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { seriesFilter, seriesStats } from '@/store/series'
+import { seriesFilterState, seriesStats } from '@/store/series'
 import styles from './ExplorerLeft.module.css'
 
 const ExplorerLeft: React.FC = () => {
 	const { tags } = useRecoilValue(seriesStats)
-	const [filter, setFilter] = useRecoilState(seriesFilter)
+	const [filter, setFilter] = useRecoilState(seriesFilterState)
 
 	const onClearClick = () =>
 		setFilter((prev) => ({ ...prev, tags: { active: [], deactive: [] } }))

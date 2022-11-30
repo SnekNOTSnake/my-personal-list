@@ -15,7 +15,7 @@ const TodayAnime: React.FC = () => {
 			<div className={styles.items}>
 				{series.length === 0 ? <h1>No anime for today.</h1> : ''}
 				{series.map((anime) => (
-					<Link key={anime.path} to={`explore/${anime.path}`}>
+					<Link key={anime.path} to={`/explore?select=${anime.path}`}>
 						<Poster anime={anime} className={styles.poster} />
 					</Link>
 				))}

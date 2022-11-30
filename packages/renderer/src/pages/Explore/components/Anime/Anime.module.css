@@ -1,11 +1,3 @@
-.root {
-	overflow-y: auto;
-	padding: 24px 32px;
-	margin-left: calc(40% + 20px);
-	width: 100%;
-	height: 100vh;
-}
-
 .root > div {
 	max-width: 800px;
 }

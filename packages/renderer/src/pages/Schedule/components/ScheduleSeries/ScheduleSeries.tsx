@@ -27,7 +27,7 @@ const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
 			<Poster anime={anime} className={styles.poster} />
 
 			<div className={styles.details}>
-				<Link to={`/explore/${anime.path}`}>
+				<Link to={`/explore?select=${anime.path}`}>
 					<h3>{anime.path}</h3>
 				</Link>
 				<div className={styles.episode}>

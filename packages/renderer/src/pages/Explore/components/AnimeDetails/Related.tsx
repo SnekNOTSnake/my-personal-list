@@ -24,7 +24,7 @@ const Related: React.FC<Props> = ({ data }) => {
 				<ul>
 					{data.related.map((series, i) => (
 						<li key={series.path || i}>
-							<Link to={`/explore/${decodeURI(series.path)}`}>
+							<Link to={`/explore?select=${decodeURI(series.path)}`}>
 								{series.type}: {series.path}
 							</Link>
 						</li>

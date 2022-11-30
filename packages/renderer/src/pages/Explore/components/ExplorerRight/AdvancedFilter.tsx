@@ -1,7 +1,7 @@
 import React, { useState, MouseEvent } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { seriesFilter } from '@/store/series'
+import { seriesFilterState } from '@/store/series'
 import styles from './ExplorerRight.module.css'
 
 type Props = { isFilterOpen: boolean; closeFilter: any }
@@ -23,7 +23,7 @@ const emptyInputs: AdvFilter = {
 }
 
 const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
-	const [filter, setFilter] = useRecoilState(seriesFilter)
+	const [filter, setFilter] = useRecoilState(seriesFilterState)
 	const [input, setInput] = useState(
 		filter.advFilter.length ? filter.advFilter[0] : emptyInputs,
 	)

@@ -14,7 +14,7 @@ export const scheduleState = atom({
 	default: window.myAPI.getSchedule(),
 })
 
-export const seriesFilter = atom({
+export const seriesFilterState = atom({
 	key: 'seriesFilter',
 	default: {
 		query: '',
@@ -24,6 +24,11 @@ export const seriesFilter = atom({
 		},
 		advFilter: [] as AdvFilter[],
 	},
+})
+
+export const selectedSeriesState = atom({
+	key: 'selectedSeries',
+	default: [] as string[],
 })
 
 export const seriesStats = selector({
@@ -116,7 +121,7 @@ export const filteredSeries = selector({
 	key: 'filteredSeries',
 	get: ({ get }) => {
 		const series = get(seriesState)
-		const filter = get(seriesFilter)
+		const filter = get(seriesFilterState)
 
 		let filtered: Series[]
 		if (filter.tags.active.includes('Untagged')) {
@@ -253,6 +258,18 @@ export const filteredSeries = selector({
 		}
 
 		return ordered
+	},
+})
+
+export const populatedSelectedSeries = selector({
+	key: 'populatedSelectedSeries',
+	get: ({ get }) => {
+		const series = get(seriesState)
+		const selectedSeries = get(selectedSeriesState)
+
+		return selectedSeries
+			.map((path) => series.find((s) => s.path === path))
+			.filter((s) => s)
 	},
 })
 

@@ -124,26 +124,24 @@
 
 .root .titles li {
 	height: var(--explorer-item-height);
-}
-
-.root .titles li a {
 	display: flex;
 	align-items: center;
 	padding: 0 16px;
-	height: 100%;
 	border: 1px solid transparent;
+	cursor: pointer;
+	user-select: none;
 }
 
-.root .titles li a:hover {
+.root .titles li:hover {
 	background-color: var(--background-light);
 }
 
-.root .titles li a.active {
+.root .titles li.active {
 	background-color: var(--background-light);
 	border-color: var(--border);
 }
 
-.root .titles li a > span {
+.root .titles li > span {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

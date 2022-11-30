@@ -8,7 +8,7 @@ import {
 } from 'react-icons/md'
 import { useSetRecoilState } from 'recoil'
 
-import { seriesFilter, seriesState } from '@/store/series'
+import { seriesFilterState, seriesState } from '@/store/series'
 import Poster from '@/components/Poster'
 import Modal from '@/components/Modal'
 import styles from './AnimeDetails.module.css'
@@ -16,7 +16,7 @@ import styles from './AnimeDetails.module.css'
 type Props = { edit: () => any; data: Series }
 
 const Generals: React.FC<Props> = ({ data, edit }) => {
-	const setFilter = useSetRecoilState(seriesFilter)
+	const setFilter = useSetRecoilState(seriesFilterState)
 	const setSeries = useSetRecoilState(seriesState)
 	const [open, setOpen] = useState(false)
 
