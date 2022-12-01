@@ -8,9 +8,9 @@ import {
 	IpcMainInvokeEvent,
 	shell,
 	Notification,
-	app,
 } from 'electron'
 import { nanoid } from 'nanoid'
+import { autoUpdater } from 'electron-updater'
 
 import {
 	IPCKey,
@@ -23,20 +23,20 @@ import {
 	ensureSchedule,
 	ensureSeries,
 	exists,
+	getUpdateAvailableMsg,
 	read,
 	sanitizeSchedule,
 	sanitizeSeries,
-	trimSeries,
 	write,
 } from './util'
 
 /* Events */
 
 export class Events {
-	store: Store<Settings>
+	store: Store<MyStore>
 	dialog: Dialog
 
-	constructor(store: Store<Settings>, dialog: Dialog) {
+	constructor(store: Store<MyStore>, dialog: Dialog) {
 		this.store = store
 		this.dialog = dialog
 	}
@@ -46,7 +46,7 @@ export class Events {
 		return this.store.store
 	}
 
-	onGetSettings = (e: IpcMainInvokeEvent): Settings => {
+	onGetSettings = (e: IpcMainInvokeEvent): MyStore => {
 		return this.store.store
 	}
 
@@ -162,7 +162,7 @@ export class Events {
 	}
 
 	onOpenDataDir = () => {
-		const cwd = store.get('cwd')
+		const cwd = this.store.get('cwd')
 		if (!cwd)
 			return new Notification({
 				title: 'Error Opening Data Directory',
@@ -172,12 +172,12 @@ export class Events {
 		shell.openPath(cwd)
 	}
 
-	onChangeDataDir = async (): Promise<Settings> => {
+	onChangeDataDir = async (): Promise<MyStore> => {
 		const res = await dialog.showOpenDialog({
 			properties: ['openDirectory'],
 		})
 
-		if (res.canceled) return store.store
+		if (res.canceled) return this.store.store
 		// Make sure the selected has `anime` directory in it
 		const dirExists = await exists(path.join(res.filePaths[0], 'anime'))
 		if (!dirExists) {
@@ -186,11 +186,11 @@ export class Events {
 				body: "Data directory must contain 'anime' dir",
 				urgency: 'critical',
 			}).show()
-			return store.store
+			return this.store.store
 		}
 
-		store.set('cwd', res.filePaths[0])
-		return store.store
+		this.store.set('cwd', res.filePaths[0])
+		return this.store.store
 	}
 
 	onGetSchedule = async (e: IpcMainInvokeEvent): Promise<Schedule> => {
@@ -220,20 +220,24 @@ export class Events {
 
 		return sanitized
 	}
+
+	onCheckForUpdate = async (e: IpcMainInvokeEvent) => {
+		const res = await autoUpdater.checkForUpdates()
+		if (!res) return alert('No new update')
+
+		const update = confirm(getUpdateAvailableMsg(res.updateInfo))
+		if (!update) return
+
+		await autoUpdater.downloadUpdate()
+		autoUpdater.quitAndInstall()
+	}
 }
 
 /* End of Events */
 
 let initialized = false
-export const store = new Store<Settings>({
-	defaults: {
-		cwd: null,
-		theme: 'light',
-		lastPosterPath: app ? app.getPath('home') : '/',
-	},
-})
 
-export const initializeIpcEvents = () => {
+export const initializeIpcEvents = (store: Store<MyStore>) => {
 	const events = new Events(store, dialog)
 
 	ipcMain.handle(IPCKey.ChangeTheme, events.onChangeTheme)
@@ -247,6 +251,7 @@ export const initializeIpcEvents = () => {
 	ipcMain.handle(IPCKey.ChangeDataDir, events.onChangeDataDir)
 	ipcMain.handle(IPCKey.GetSchedule, events.onGetSchedule)
 	ipcMain.handle(IPCKey.ChangeSchedule, events.onChangeSchedule)
+	ipcMain.handle(IPCKey.CheckForUpdate, events.onCheckForUpdate)
 
 	initialized = true
 }
@@ -264,6 +269,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.ChangeDataDir)
 	ipcMain.removeAllListeners(IPCKey.GetSchedule)
 	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
+	ipcMain.removeAllListeners(IPCKey.CheckForUpdate)
 
 	initialized = false
 }

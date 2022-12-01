@@ -32,10 +32,12 @@ interface PopulatedSchedule {
 	sat: Series[]
 }
 
-interface Settings {
+interface MyStore {
 	theme: Theme
 	cwd: string | null
 	lastPosterPath: string
+	lastUpdateCheck: number
+	neverCheckUpdate: boolean
 }
 
 interface Metadata {
@@ -115,8 +117,8 @@ interface AdvFilter {
 
 interface Window {
 	myAPI: {
-		changeTheme: (theme: Theme) => Promise<Settings>
-		getSettings: () => Promise<Settings>
+		changeTheme: (theme: Theme) => Promise<MyStore>
+		getSettings: () => Promise<MyStore>
 		getSeries: () => Promise<Series[]>
 		editSeries: (series: Series) => Promise<Series>
 		changePoster: (series: Series) => Promise<Series>
@@ -124,6 +126,6 @@ interface Window {
 		getSchedule: () => Schedule
 		changeSchedule: (schedule: Schedule) => Promise<Schedule>
 
-		onUpdateSettings: (listener: (newSettings: Settings) => void) => void
+		onUpdateSettings: (listener: (newSettings: MyStore) => void) => void
 	}
 }

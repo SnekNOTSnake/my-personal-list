@@ -1,12 +1,22 @@
 import { Menu, MenuItemConstructorOptions } from 'electron'
-import { IPCKey } from '../common/constants'
-import { store } from './ipcEvents'
+import Store from 'electron-store'
 
-const createTemplate = (): MenuItemConstructorOptions[] => [
+import { IPCKey } from '../common/constants'
+
+const createTemplate = (
+	store: Store<MyStore>,
+): MenuItemConstructorOptions[] => [
 	{
 		label: 'MyPersonalList',
 		submenu: [
 			{ label: 'About My Personal List' },
+			{
+				label: 'Check For Updates',
+				click: async (menuItem, browser) => {
+					if (!browser) return
+					browser.webContents.send(IPCKey.CheckForUpdate)
+				},
+			},
 			{ type: 'separator' },
 			{
 				label: 'Theme',
@@ -101,7 +111,7 @@ const createTemplate = (): MenuItemConstructorOptions[] => [
 	},
 ]
 
-export const createMainMenu = () => {
-	const template = Menu.buildFromTemplate(createTemplate())
+export const createMainMenu = (store: Store<MyStore>) => {
+	const template = Menu.buildFromTemplate(createTemplate(store))
 	Menu.setApplicationMenu(template)
 }

@@ -1,21 +1,26 @@
 import { app } from 'electron'
-import { autoUpdater } from 'electron-updater'
+import Store from 'electron-store'
 
 import { initializeIpcEvents } from './ipcEvents'
 import { createMainMenu } from './menu'
+import { initializeUpdater } from './updater'
 import { createMainWindow, win } from './windowManager'
 
-const initializeAutoUpdate = () => {
-	autoUpdater.autoDownload = true
-	autoUpdater.autoInstallOnAppQuit = true
-	autoUpdater.checkForUpdatesAndNotify()
-}
+const store = new Store<MyStore>({
+	defaults: {
+		cwd: null,
+		theme: 'light',
+		lastPosterPath: app ? app.getPath('home') : '/',
+		lastUpdateCheck: 0,
+		neverCheckUpdate: false,
+	},
+})
 
 app.on('ready', async () => {
 	createMainWindow()
-	createMainMenu()
-	initializeIpcEvents()
-	initializeAutoUpdate()
+	createMainMenu(store)
+	initializeIpcEvents(store)
+	initializeUpdater(store)
 
 	// Install React Extension if in dev mode
 	if (!app.isPackaged) {

@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 		ipc.invoke(IPCKey.ChangeSchedule, schedule),
 
 	// Settings subscription
-	onUpdateSettings: (listener: (newSettings: Settings) => void) => {
+	onUpdateSettings: (listener: (newSettings: MyStore) => void) => {
 		ipc.on(IPCKey.ChangeTheme, async (e, theme) => {
 			const settings = await ipc.invoke(IPCKey.ChangeTheme, theme)
 			listener(settings)
@@ -29,3 +29,4 @@ contextBridge.exposeInMainWorld('myAPI', {
 // Menu-Main communications
 ipc.on(IPCKey.RemoveUnusedPosters, () => ipc.invoke(IPCKey.RemoveUnusedPosters))
 ipc.on(IPCKey.OpenDataDir, () => ipc.invoke(IPCKey.OpenDataDir))
+ipc.on(IPCKey.CheckForUpdate, () => ipc.invoke(IPCKey.CheckForUpdate))

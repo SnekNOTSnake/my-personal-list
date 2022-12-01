@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs/promises'
 import { constants } from 'fs'
 import prettier from 'prettier'
+import { UpdateInfo } from 'electron-updater'
 
 Object.typedKeys = Object.keys as any
 
@@ -136,3 +137,10 @@ export const sanitizeSchedule = (schedule: Schedule): Schedule => {
 
 	return newSchedule
 }
+
+export const getUpdateAvailableMsg = (
+	updateInfo: UpdateInfo,
+	additional?: string,
+) =>
+	`Update available: ${updateInfo.version}. Update now? It will download in the background. When it's finished downloading, it will forcefully (sorry) close the app and install. ` +
+	additional
