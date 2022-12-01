@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 	changeSchedule: (schedule: Partial<Schedule>) =>
 		ipc.invoke(IPCKey.ChangeSchedule, schedule),
 
-	// Settings subscription
+	// Menu-renderer communications
 	onUpdateSettings: (listener: (newSettings: MyStore) => void) => {
 		ipc.on(IPCKey.ChangeTheme, async (e, theme) => {
 			const settings = await ipc.invoke(IPCKey.ChangeTheme, theme)
