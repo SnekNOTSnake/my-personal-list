@@ -54,6 +54,7 @@
 	right: 0;
 	display: none;
 	padding: 16px;
+	padding-top: 40px;
 	background-color: var(--background-secondary);
 	text-align: center;
 }

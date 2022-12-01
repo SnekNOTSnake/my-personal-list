@@ -1,0 +1,145 @@
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.root input[type='checkbox'] {
+	height: 33px;
+	width: 33px;
+	margin: 0;
+}
+
+.root .center {
+	max-width: 800px;
+}
+
+.root table {
+	border-collapse: collapse;
+	margin: 24px 0;
+	border-radius: var(--border-radius);
+	width: 100%;
+}
+
+.root table th,
+.root table td {
+	border: 1px solid var(--border);
+	position: relative;
+}
+
+.root table button {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 12px;
+	background-color: transparent;
+	border: none;
+	border-left: 1px solid var(--border);
+}
+
+.root table td:hover button {
+	display: block;
+}
+
+.root h1 {
+	text-align: center;
+}
+
+.root table th {
+	padding: 0 16px;
+	text-align: left;
+	font-weight: normal;
+}
+
+.root table input {
+	border-radius: 0;
+	background-color: transparent;
+	border: none;
+}
+
+.root .labeledInput {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
+}
+
+.root .labeledInput .label {
+	font-size: 1.1em;
+	margin-bottom: 8px;
+	white-space: nowrap;
+}
+
+.root .inputsGroup {
+	display: flex;
+	margin-bottom: 24px;
+}
+
+.root .inputsGroup > div {
+	flex-grow: 1;
+	margin: 0 16px 0 0;
+}
+
+.root .inputsGroup > div:last-child {
+	margin: 0;
+}
+
+.root .inputsGroup .inputGroup {
+	display: flex;
+	position: relative;
+}
+
+.root .inputsGroup .inputGroup button {
+	padding: 0 12px;
+	background-color: var(--background-light);
+	border: 1px solid var(--border);
+	border-left: none;
+	white-space: nowrap;
+}
+
+.root .inputsGroup .inputGroup button.all {
+	position: absolute;
+	background-color: transparent;
+	border: none;
+	border-left: 1px solid var(--border);
+	top: 50%;
+	transform: translateY(-50%);
+	right: 45px;
+	height: 100%;
+	display: none;
+}
+
+.root .inputsGroup .inputGroup:hover button.all {
+	display: block;
+}
+
+.root .inputsGroup ul {
+	margin-top: 12px;
+}
+
+.root .inputsGroup ul li {
+	cursor: pointer;
+	user-select: none;
+	position: relative;
+	display: inline-block;
+	background-color: var(--background-secondary);
+	border-radius: var(--border-radius);
+	padding: 2px 16px;
+	margin: 0 8px 8px 0;
+}
+
+.root .inputsGroup ul li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.root .inputsGroup ul li:hover::before {
+	background-color: var(--background-light);
+}

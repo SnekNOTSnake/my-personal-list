@@ -7,6 +7,7 @@ import LeftExplorer from './components/ExplorerLeft'
 import RightExplorer from './components/ExplorerRight'
 import Anime from './components/Anime'
 import styles from './Explore.module.css'
+import AnimeBatchEdit from './components/AnimeBatchEdit'
 
 const Explore: React.FC = () => {
 	const setSelectedSeries = useSetRecoilState(selectedSeriesState)
@@ -31,7 +32,9 @@ const Explore: React.FC = () => {
 				{selectedPopulatedSeries.length === 1 && (
 					<Anime anime={selectedPopulatedSeries[0]!} />
 				)}
-				{selectedPopulatedSeries.length > 1 && <div>Multiple Selected</div>}
+				{selectedPopulatedSeries.length > 1 && (
+					<AnimeBatchEdit selectedAnime={selectedPopulatedSeries} />
+				)}
 			</div>
 		</div>
 	)

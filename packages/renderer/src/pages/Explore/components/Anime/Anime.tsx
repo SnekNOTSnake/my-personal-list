@@ -8,7 +8,7 @@ type Props = { anime: Series }
 
 const Anime: React.FC<Props> = ({ anime }) => {
 	const [isEditing, setIsEditing] = React.useState(false)
-	useEffect(() => setIsEditing(false), [anime])
+	useEffect(() => setIsEditing(false), [anime.path])
 
 	const edit = () => setIsEditing(true)
 	const close = () => setIsEditing(false)

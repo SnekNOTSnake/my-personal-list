@@ -266,10 +266,11 @@ export const populatedSelectedSeries = selector({
 	get: ({ get }) => {
 		const series = get(seriesState)
 		const selectedSeries = get(selectedSeriesState)
-
-		return selectedSeries
+		const filtered = selectedSeries
 			.map((path) => series.find((s) => s.path === path))
-			.filter((s) => s)
+			.filter((s) => s) as Series[]
+
+		return filtered
 	},
 })
 
