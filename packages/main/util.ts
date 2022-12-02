@@ -140,7 +140,7 @@ export const sanitizeSchedule = (schedule: Schedule): Schedule => {
 
 export const getUpdateAvailableMsg = (
 	updateInfo: UpdateInfo,
-	additional?: string,
+	additional: string = '',
 ) =>
 	`Update available: ${updateInfo.version}. Update now? It will download in the background. When it's finished downloading, it will forcefully (sorry) close the app and install. ` +
 	additional

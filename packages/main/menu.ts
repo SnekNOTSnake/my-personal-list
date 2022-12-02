@@ -1,5 +1,6 @@
 import { Menu, MenuItemConstructorOptions } from 'electron'
 import Store from 'electron-store'
+import { autoUpdater } from 'electron-updater'
 
 import { IPCKey } from '../common/constants'
 
@@ -12,7 +13,7 @@ const createTemplate = (
 			{ label: 'About My Personal List' },
 			{
 				label: 'Check For Updates',
-				click: async (menuItem, browser) => {
+				click: (menuItem, browser) => {
 					if (!browser) return
 					browser.webContents.send(IPCKey.CheckForUpdate)
 				},
@@ -50,7 +51,7 @@ const createTemplate = (
 			},
 			{
 				label: 'Change Data Directory',
-				click: async (menuItem, browser) => {
+				click: (menuItem, browser) => {
 					if (!browser) return
 					browser.webContents.send(IPCKey.ChangeDataDir)
 				},

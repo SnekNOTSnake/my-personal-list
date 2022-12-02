@@ -1,7 +1,7 @@
 {
 	"name": "my-personal-list",
 	"description": "My personal anime tracking list",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"scripts": {
 		"start": "concurrently \"yarn start:renderer\" \"yarn start:main\" --kill-others",
 		"start:main": "tsc && electron .",

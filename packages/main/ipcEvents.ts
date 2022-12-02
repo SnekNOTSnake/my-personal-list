@@ -223,26 +223,37 @@ export class Events {
 	}
 
 	onCheckForUpdate = async (e: IpcMainInvokeEvent) => {
+		// Make all of the below listeners only apply in here
+		autoUpdater.removeAllListeners()
+
 		const browser = BrowserWindow.fromWebContents(e.sender)
 		if (!browser) return
 
-		const res = await autoUpdater.checkForUpdates()
-		if (!res) {
-			this.dialog.showMessageBox(browser, { message: 'No new update' })
-			return
-		}
+		autoUpdater.on('update-available', async (info) => {
+			const answer = await this.dialog.showMessageBox(browser, {
+				title: 'Update Available',
+				message: getUpdateAvailableMsg(info),
+				type: 'question',
+				buttons: ['Not Now', 'Update'],
+			})
 
-		const answer = await this.dialog.showMessageBox(browser, {
-			title: 'Update Available',
-			message: getUpdateAvailableMsg(res.updateInfo),
-			type: 'question',
-			buttons: ['Later', 'Update Now'],
+			// close = 0, Not Now = 0, Update = 1
+			switch (answer.response) {
+				case 1:
+					await autoUpdater.downloadUpdate()
+					autoUpdater.quitAndInstall()
+					break
+
+				default:
+					break
+			}
 		})
-		// close = 0, Later = 0, Update Now = 1
-		if (answer.response === 0) return
 
-		await autoUpdater.downloadUpdate()
-		autoUpdater.quitAndInstall()
+		autoUpdater.on('update-not-available', () => {
+			this.dialog.showMessageBox(browser, { message: 'No new update' })
+		})
+
+		await autoUpdater.checkForUpdates()
 	}
 }
 
