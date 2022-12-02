@@ -8,6 +8,7 @@ import {
 	IpcMainInvokeEvent,
 	shell,
 	Notification,
+	BrowserWindow,
 } from 'electron'
 import { nanoid } from 'nanoid'
 import { autoUpdater } from 'electron-updater'
@@ -173,7 +174,7 @@ export class Events {
 	}
 
 	onChangeDataDir = async (): Promise<MyStore> => {
-		const res = await dialog.showOpenDialog({
+		const res = await this.dialog.showOpenDialog({
 			properties: ['openDirectory'],
 		})
 
@@ -222,11 +223,23 @@ export class Events {
 	}
 
 	onCheckForUpdate = async (e: IpcMainInvokeEvent) => {
-		const res = await autoUpdater.checkForUpdates()
-		if (!res) return alert('No new update')
+		const browser = BrowserWindow.fromWebContents(e.sender)
+		if (!browser) return
 
-		const update = confirm(getUpdateAvailableMsg(res.updateInfo))
-		if (!update) return
+		const res = await autoUpdater.checkForUpdates()
+		if (!res) {
+			this.dialog.showMessageBox(browser, { message: 'No new update' })
+			return
+		}
+
+		const answer = await this.dialog.showMessageBox(browser, {
+			title: 'Update Available',
+			message: getUpdateAvailableMsg(res.updateInfo),
+			type: 'question',
+			buttons: ['Later', 'Update Now'],
+		})
+		// close = 0, Later = 0, Update Now = 1
+		if (answer.response === 0) return
 
 		await autoUpdater.downloadUpdate()
 		autoUpdater.quitAndInstall()

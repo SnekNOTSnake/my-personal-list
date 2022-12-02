@@ -17,10 +17,10 @@ const store = new Store<MyStore>({
 })
 
 app.on('ready', async () => {
-	createMainWindow()
+	const window = createMainWindow()
 	createMainMenu(store)
 	initializeIpcEvents(store)
-	initializeUpdater(store)
+	initializeUpdater(store, window)
 
 	// Install React Extension if in dev mode
 	if (!app.isPackaged) {
