@@ -7,6 +7,7 @@ import {
 	MdOutlineEventNote,
 	MdOutlineLightMode,
 	MdOutlineNightsStay,
+	MdOutlineSettings,
 } from 'react-icons/md'
 
 import styles from './Navigation.module.css'
@@ -50,6 +51,14 @@ const Navigation: React.FC = () => {
 							to='/schedule'
 						>
 							<MdOutlineEventNote className={styles.icon} />
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							className={({ isActive }) => (isActive ? styles.active : '')}
+							to='/settings'
+						>
+							<MdOutlineSettings className={styles.icon} />
 						</NavLink>
 					</li>
 				</ul>
