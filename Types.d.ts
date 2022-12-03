@@ -32,6 +32,11 @@ interface PopulatedSchedule {
 	sat: Series[]
 }
 
+interface CWD {
+	name: string
+	path: string
+}
+
 interface MyStore {
 	theme: Theme
 	cwd: string | null
@@ -117,15 +122,14 @@ interface AdvFilter {
 
 interface Window {
 	myAPI: {
-		changeTheme: (theme: Theme) => Promise<MyStore>
+		selectDirectory: () => Promise<string>
 		getSettings: () => Promise<MyStore>
+		setSettings: (settings: MyStore) => Promise<MyStore>
 		getSeries: () => Promise<Series[]>
 		editSeries: (series: Series) => Promise<Series>
 		changePoster: (series: Series) => Promise<Series>
 		openItem: (fullPath: string) => Promise<void>
-		getSchedule: () => Schedule
+		getSchedule: () => Promise<Schedule>
 		changeSchedule: (schedule: Schedule) => Promise<Schedule>
-
-		onUpdateSettings: (listener: (newSettings: MyStore) => void) => void
 	}
 }

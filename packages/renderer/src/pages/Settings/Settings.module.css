@@ -22,13 +22,33 @@
 	background-color: var(--background-secondary);
 	border: none;
 	padding: 0 12px;
+	height: 100%;
+}
+
+.root .cwds .cwd {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	height: 33px;
+	border: 1px solid var(--border);
+}
+
+.root .cwds .cwd > div {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	padding: 8px 12px;
+}
+
+.root .cwds .cwd > div:nth-child(2) {
+	flex: 1;
 }
 
 .root .labeledInput {
 	display: inline-flex;
 	width: 50%;
 	flex-direction: column;
-	margin-bottom: 32px;
+	margin-bottom: 24px;
 }
 
 .root .labeledInput:first-child {
@@ -44,6 +64,8 @@
 .root .labeledInput .input {
 	display: flex;
 	white-space: nowrap;
+	height: 33px;
+	align-items: center;
 }
 
 .root .labeledInput .input button {

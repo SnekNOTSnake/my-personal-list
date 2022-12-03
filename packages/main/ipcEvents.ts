@@ -42,12 +42,12 @@ export class Events {
 		this.dialog = dialog
 	}
 
-	onChangeTheme = (e: IpcMainInvokeEvent, theme: Theme) => {
-		this.store.set('theme', theme)
+	onGetSettings = (e: IpcMainInvokeEvent): MyStore => {
 		return this.store.store
 	}
 
-	onGetSettings = (e: IpcMainInvokeEvent): MyStore => {
+	onSetSettings = (e: IpcMainInvokeEvent, settings: MyStore) => {
+		this.store.set(settings)
 		return this.store.store
 	}
 
@@ -173,12 +173,12 @@ export class Events {
 		shell.openPath(cwd)
 	}
 
-	onChangeDataDir = async (): Promise<MyStore> => {
+	onSelectDirectory = async () => {
 		const res = await this.dialog.showOpenDialog({
 			properties: ['openDirectory'],
 		})
 
-		if (res.canceled) return this.store.store
+		if (res.canceled) return this.store.get('cwd')
 		// Make sure the selected has `anime` directory in it
 		const dirExists = await exists(path.join(res.filePaths[0], 'anime'))
 		if (!dirExists) {
@@ -187,11 +187,10 @@ export class Events {
 				body: "Data directory must contain 'anime' dir",
 				urgency: 'critical',
 			}).show()
-			return this.store.store
+			return this.store.get('cwd')
 		}
 
-		this.store.set('cwd', res.filePaths[0])
-		return this.store.store
+		return res.filePaths[0]
 	}
 
 	onGetSchedule = async (e: IpcMainInvokeEvent): Promise<Schedule> => {
@@ -264,15 +263,15 @@ let initialized = false
 export const initializeIpcEvents = (store: Store<MyStore>) => {
 	const events = new Events(store, dialog)
 
-	ipcMain.handle(IPCKey.ChangeTheme, events.onChangeTheme)
+	ipcMain.handle(IPCKey.SelectDirectory, events.onSelectDirectory)
 	ipcMain.handle(IPCKey.GetSettings, events.onGetSettings)
+	ipcMain.handle(IPCKey.SetSettings, events.onSetSettings)
 	ipcMain.handle(IPCKey.GetSeries, events.onGetSeries)
 	ipcMain.handle(IPCKey.EditSeries, events.onEditSeries)
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
 	ipcMain.handle(IPCKey.OpenItem, events.onOpenItem)
 	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
 	ipcMain.handle(IPCKey.OpenDataDir, events.onOpenDataDir)
-	ipcMain.handle(IPCKey.ChangeDataDir, events.onChangeDataDir)
 	ipcMain.handle(IPCKey.GetSchedule, events.onGetSchedule)
 	ipcMain.handle(IPCKey.ChangeSchedule, events.onChangeSchedule)
 	ipcMain.handle(IPCKey.CheckForUpdate, events.onCheckForUpdate)
@@ -283,14 +282,14 @@ export const initializeIpcEvents = (store: Store<MyStore>) => {
 export const releaseIpcEvents = () => {
 	if (!initialized) return
 
-	ipcMain.removeAllListeners(IPCKey.ChangeTheme)
+	ipcMain.removeAllListeners(IPCKey.SelectDirectory)
 	ipcMain.removeAllListeners(IPCKey.GetSettings)
+	ipcMain.removeAllListeners(IPCKey.SetSettings)
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
 	ipcMain.removeAllListeners(IPCKey.OpenDataDir)
-	ipcMain.removeAllListeners(IPCKey.ChangeDataDir)
 	ipcMain.removeAllListeners(IPCKey.GetSchedule)
 	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
 	ipcMain.removeAllListeners(IPCKey.CheckForUpdate)

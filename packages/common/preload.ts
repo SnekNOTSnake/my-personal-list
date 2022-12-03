@@ -2,8 +2,9 @@ import { contextBridge, ipcRenderer as ipc } from 'electron'
 import { IPCKey } from './constants'
 
 contextBridge.exposeInMainWorld('myAPI', {
-	changeTheme: (theme: Theme) => ipc.invoke(IPCKey.ChangeTheme, theme),
+	selectDirectory: () => ipc.invoke(IPCKey.SelectDirectory),
 	getSettings: () => ipc.invoke(IPCKey.GetSettings),
+	setSettings: (settings: MyStore) => ipc.invoke(IPCKey.SetSettings, settings),
 	getSeries: () => ipc.invoke(IPCKey.GetSeries),
 	editSeries: (series: Series) => ipc.invoke(IPCKey.EditSeries, series),
 	changePoster: (series: Series) => ipc.invoke(IPCKey.ChangePoster, series),
@@ -11,19 +12,6 @@ contextBridge.exposeInMainWorld('myAPI', {
 	getSchedule: () => ipc.invoke(IPCKey.GetSchedule),
 	changeSchedule: (schedule: Partial<Schedule>) =>
 		ipc.invoke(IPCKey.ChangeSchedule, schedule),
-
-	// Menu-renderer communications
-	onUpdateSettings: (listener: (newSettings: MyStore) => void) => {
-		ipc.on(IPCKey.ChangeTheme, async (e, theme) => {
-			const settings = await ipc.invoke(IPCKey.ChangeTheme, theme)
-			listener(settings)
-		})
-
-		ipc.on(IPCKey.ChangeDataDir, async (e) => {
-			const settings = await ipc.invoke(IPCKey.ChangeDataDir)
-			listener(settings)
-		})
-	},
 })
 
 // Menu-Main communications

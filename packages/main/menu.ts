@@ -20,40 +20,10 @@ const createTemplate = (
 			},
 			{ type: 'separator' },
 			{
-				label: 'Theme',
-				submenu: [
-					{
-						label: 'Light',
-						type: 'radio',
-						checked: store.get('theme') === 'light',
-						click: (menuItem, browser) => {
-							if (!browser) return
-							browser.webContents.send(IPCKey.ChangeTheme, 'light')
-						},
-					},
-					{
-						label: 'Dark',
-						type: 'radio',
-						checked: store.get('theme') === 'dark',
-						click: (menuItem, browser) => {
-							if (!browser) return
-							browser.webContents.send(IPCKey.ChangeTheme, 'dark')
-						},
-					},
-				],
-			},
-			{
 				label: 'Open Data Directory',
 				click: (menuItem, browser) => {
 					if (!browser) return
 					browser.webContents.send(IPCKey.OpenDataDir)
-				},
-			},
-			{
-				label: 'Change Data Directory',
-				click: (menuItem, browser) => {
-					if (!browser) return
-					browser.webContents.send(IPCKey.ChangeDataDir)
 				},
 			},
 			{

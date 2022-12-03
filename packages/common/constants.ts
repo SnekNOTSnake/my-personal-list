@@ -1,6 +1,7 @@
 export enum IPCKey {
-	ChangeTheme = 'ChangeTheme',
+	SelectDirectory = 'SelectDirectory',
 	GetSettings = 'GetSettings',
+	SetSettings = 'SetSettings',
 	GetSeries = 'GetSeries',
 	EditSeries = 'EditSeries',
 	ChangePoster = 'ChangePoster',
@@ -11,7 +12,6 @@ export enum IPCKey {
 	UpdateSettings = 'UpdateSettings',
 	RemoveUnusedPosters = 'RemoveUnusedPosters',
 	OpenDataDir = 'OpenDataDir',
-	ChangeDataDir = 'ChangeDataDir',
 	CheckForUpdate = 'CheckForUpdate',
 }
 
