@@ -8,11 +8,12 @@ import { createMainWindow, win } from './windowManager'
 
 const store = new Store<MyStore>({
 	defaults: {
-		cwd: null,
+		cwds: [],
 		theme: 'light',
 		lastPosterPath: app ? app.getPath('home') : '/',
 		lastUpdateCheck: 0,
 		neverCheckUpdate: false,
+		userDataDir: app.getPath('userData'),
 	},
 })
 

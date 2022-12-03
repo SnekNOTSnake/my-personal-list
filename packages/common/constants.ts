@@ -1,5 +1,6 @@
 export enum IPCKey {
 	SelectDirectory = 'SelectDirectory',
+	GetUserDataDir = 'GetUserDataDir',
 	GetSettings = 'GetSettings',
 	SetSettings = 'SetSettings',
 	GetSeries = 'GetSeries',
@@ -11,7 +12,6 @@ export enum IPCKey {
 
 	UpdateSettings = 'UpdateSettings',
 	RemoveUnusedPosters = 'RemoveUnusedPosters',
-	OpenDataDir = 'OpenDataDir',
 	CheckForUpdate = 'CheckForUpdate',
 }
 

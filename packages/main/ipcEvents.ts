@@ -9,6 +9,8 @@ import {
 	shell,
 	Notification,
 	BrowserWindow,
+	app,
+	App,
 } from 'electron'
 import { nanoid } from 'nanoid'
 import { autoUpdater } from 'electron-updater'
@@ -16,7 +18,6 @@ import { autoUpdater } from 'electron-updater'
 import {
 	IPCKey,
 	DATA_FILE,
-	ANIME_DIR,
 	POSTER_DIR,
 	SCHEDULE_FILE,
 } from '../common/constants'
@@ -36,11 +37,24 @@ import {
 export class Events {
 	store: Store<MyStore>
 	dialog: Dialog
+	app: App
 
-	constructor(store: Store<MyStore>, dialog: Dialog) {
+	constructor(store: Store<MyStore>, dialog: Dialog, app: App) {
 		this.store = store
 		this.dialog = dialog
+		this.app = app
 	}
+
+	onSelectDirectory = async (e: IpcMainInvokeEvent): Promise<string> => {
+		const res = await this.dialog.showOpenDialog({
+			properties: ['openDirectory'],
+		})
+
+		if (res.canceled) return this.store.get('cwds')[0].path
+		return res.filePaths[0]
+	}
+
+	onGetUserDataDir = (): string => app.getPath('userData')
 
 	onGetSettings = (e: IpcMainInvokeEvent): MyStore => {
 		return this.store.store
@@ -52,33 +66,37 @@ export class Events {
 	}
 
 	onGetSeries = async (e: IpcMainInvokeEvent): Promise<Series[]> => {
-		const cwd = this.store.get('cwd')
-		if (!cwd) return []
-		const ANIME = path.join(cwd, ANIME_DIR)
-
-		const items = await fs.readdir(ANIME, { withFileTypes: true })
-		const dirs = items.filter((item) => item.isDirectory())
+		const cwds = this.store.get('cwds')
 		const series: Series[] = []
 
 		await Promise.all(
-			dirs.map(async (dir) => {
-				const mplPath = path.join(ANIME, dir.name, DATA_FILE)
-				const paths = {
-					path: dir.name,
-					fullPath: path.join(ANIME, dir.name),
-				}
+			cwds.map(async (cwd) => {
+				const items = await fs.readdir(cwd.path, { withFileTypes: true })
+				const dirs = items.filter((item) => item.isDirectory())
 
-				const items = await fs.readdir(paths.fullPath, { withFileTypes: true })
-				const files = items.filter((el) => el.isFile()).map((el) => el.name)
+				await Promise.all(
+					dirs.map(async (dir) => {
+						const mplPath = path.join(cwd.path, dir.name, DATA_FILE)
+						const paths = {
+							path: dir.name,
+							fullPath: path.join(cwd.path, dir.name),
+						}
 
-				const isExists = await exists(mplPath)
-				if (!isExists) return series.push(ensureSeries({ ...paths, files }))
+						const items = await fs.readdir(paths.fullPath, {
+							withFileTypes: true,
+						})
+						const files = items.filter((el) => el.isFile()).map((el) => el.name)
 
-				const data = await read(mplPath)
-				if (!data) return series.push(ensureSeries({ ...paths, files }))
+						const isExists = await exists(mplPath)
+						if (!isExists) return series.push(ensureSeries({ ...paths, files }))
 
-				const animeObj: Series = sanitizeSeries(JSON.parse(data.toString()))
-				series.push(ensureSeries({ ...paths, ...animeObj, files }))
+						const data = await read(mplPath)
+						if (!data) return series.push(ensureSeries({ ...paths, files }))
+
+						const animeObj: Series = sanitizeSeries(JSON.parse(data.toString()))
+						series.push(ensureSeries({ ...paths, ...animeObj, files }))
+					}),
+				)
 			}),
 		)
 
@@ -104,9 +122,7 @@ export class Events {
 		e: IpcMainInvokeEvent,
 		series: Series,
 	): Promise<Series> => {
-		const cwd = this.store.get('cwd')
-		if (!cwd) return series
-		const POSTER = path.join(cwd, POSTER_DIR)
+		const POSTER = path.join(this.app.getPath('userData'), POSTER_DIR)
 		const posterDirExists = await exists(POSTER)
 		if (!posterDirExists) await fs.mkdir(POSTER)
 
@@ -142,11 +158,8 @@ export class Events {
 	}
 
 	onRemoveUnusedPosters = async (e: IpcMainInvokeEvent): Promise<void> => {
-		const cwd = this.store.get('cwd')
-		if (!cwd) return
-
 		const series = await this.onGetSeries(e)
-		const POSTER = path.join(cwd, POSTER_DIR)
+		const POSTER = path.join(this.app.getPath('userData'), POSTER_DIR)
 
 		const files = await fs.readdir(POSTER, { withFileTypes: true })
 		const filesToDelete = files.filter((file) => {
@@ -162,42 +175,9 @@ export class Events {
 		)
 	}
 
-	onOpenDataDir = () => {
-		const cwd = this.store.get('cwd')
-		if (!cwd)
-			return new Notification({
-				title: 'Error Opening Data Directory',
-				body: 'Data directory is not set',
-			})
-
-		shell.openPath(cwd)
-	}
-
-	onSelectDirectory = async () => {
-		const res = await this.dialog.showOpenDialog({
-			properties: ['openDirectory'],
-		})
-
-		if (res.canceled) return this.store.get('cwd')
-		// Make sure the selected has `anime` directory in it
-		const dirExists = await exists(path.join(res.filePaths[0], 'anime'))
-		if (!dirExists) {
-			new Notification({
-				title: 'Error Changing Data Directory',
-				body: "Data directory must contain 'anime' dir",
-				urgency: 'critical',
-			}).show()
-			return this.store.get('cwd')
-		}
-
-		return res.filePaths[0]
-	}
-
 	onGetSchedule = async (e: IpcMainInvokeEvent): Promise<Schedule> => {
 		const defaultSchedule = ensureSchedule()
-		const cwd = this.store.get('cwd')
-		if (!cwd) return defaultSchedule
-		const SCHEDULE = path.join(cwd, SCHEDULE_FILE)
+		const SCHEDULE = path.join(this.app.getPath('userData'), SCHEDULE_FILE)
 
 		const result = await read(SCHEDULE)
 		if (!result) return defaultSchedule
@@ -210,10 +190,7 @@ export class Events {
 		e: IpcMainInvokeEvent,
 		schedule: Schedule,
 	): Promise<Schedule> => {
-		const cwd = this.store.get('cwd')
-		if (!cwd) return ensureSchedule()
-
-		const SCHEDULE = path.join(cwd, SCHEDULE_FILE)
+		const SCHEDULE = path.join(this.app.getPath('userData'), SCHEDULE_FILE)
 		const sanitized = sanitizeSchedule(schedule)
 
 		await write(SCHEDULE, JSON.stringify(sanitized))
@@ -261,9 +238,10 @@ export class Events {
 let initialized = false
 
 export const initializeIpcEvents = (store: Store<MyStore>) => {
-	const events = new Events(store, dialog)
+	const events = new Events(store, dialog, app)
 
 	ipcMain.handle(IPCKey.SelectDirectory, events.onSelectDirectory)
+	ipcMain.handle(IPCKey.GetUserDataDir, events.onGetUserDataDir)
 	ipcMain.handle(IPCKey.GetSettings, events.onGetSettings)
 	ipcMain.handle(IPCKey.SetSettings, events.onSetSettings)
 	ipcMain.handle(IPCKey.GetSeries, events.onGetSeries)
@@ -271,7 +249,6 @@ export const initializeIpcEvents = (store: Store<MyStore>) => {
 	ipcMain.handle(IPCKey.ChangePoster, events.onChangePoster)
 	ipcMain.handle(IPCKey.OpenItem, events.onOpenItem)
 	ipcMain.handle(IPCKey.RemoveUnusedPosters, events.onRemoveUnusedPosters)
-	ipcMain.handle(IPCKey.OpenDataDir, events.onOpenDataDir)
 	ipcMain.handle(IPCKey.GetSchedule, events.onGetSchedule)
 	ipcMain.handle(IPCKey.ChangeSchedule, events.onChangeSchedule)
 	ipcMain.handle(IPCKey.CheckForUpdate, events.onCheckForUpdate)
@@ -283,13 +260,13 @@ export const releaseIpcEvents = () => {
 	if (!initialized) return
 
 	ipcMain.removeAllListeners(IPCKey.SelectDirectory)
+	ipcMain.removeAllListeners(IPCKey.GetUserDataDir)
 	ipcMain.removeAllListeners(IPCKey.GetSettings)
 	ipcMain.removeAllListeners(IPCKey.SetSettings)
 	ipcMain.removeAllListeners(IPCKey.GetSeries)
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
-	ipcMain.removeAllListeners(IPCKey.OpenDataDir)
 	ipcMain.removeAllListeners(IPCKey.GetSchedule)
 	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
 	ipcMain.removeAllListeners(IPCKey.CheckForUpdate)

@@ -1,6 +1,5 @@
 import { Menu, MenuItemConstructorOptions } from 'electron'
 import Store from 'electron-store'
-import { autoUpdater } from 'electron-updater'
 
 import { IPCKey } from '../common/constants'
 
@@ -19,13 +18,6 @@ const createTemplate = (
 				},
 			},
 			{ type: 'separator' },
-			{
-				label: 'Open Data Directory',
-				click: (menuItem, browser) => {
-					if (!browser) return
-					browser.webContents.send(IPCKey.OpenDataDir)
-				},
-			},
 			{
 				label: 'Remove Unused Posters',
 				click: (menuItem, browser) => {

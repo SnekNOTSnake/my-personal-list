@@ -1,16 +1,14 @@
 import React from 'react'
-import { settingsState } from '@/store/settings'
 import { useRecoilValue } from 'recoil'
-
+import { settingsState } from '@/store/settings'
 import styles from './Poster.module.css'
 
 type Props = { anime: Series } & JSX.IntrinsicElements['div']
 
 const Poster: React.FC<Props> = ({ anime, children, ...rest }) => {
-	const { cwd } = useRecoilValue(settingsState)
-
+	const { userDataDir } = useRecoilValue(settingsState)
 	const posterPath = anime.poster
-		? `file://${[cwd, 'attachments', anime.poster].join('/')}`
+		? `file://${[userDataDir, 'attachments', anime.poster].join('/')}`
 		: ''
 
 	return (

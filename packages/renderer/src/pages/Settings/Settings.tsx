@@ -10,24 +10,10 @@ const Settings: React.FC = () => {
 	const setSeries = useSetRecoilState(seriesState)
 	const setSchedule = useSetRecoilState(scheduleState)
 
-	const defaultSettings = {
-		...settings,
-		cwd: settings.cwd ? [{ name: 'Dir1', path: settings.cwd }] : [],
-	}
 	const [cwd, setCwd] = useState({ name: '', path: '' })
-	const [input, setInput] = useState<Omit<MyStore, 'cwd'> & { cwd: CWD[] }>(
-		defaultSettings,
-	)
+	const [input, setInput] = useState<MyStore>(settings)
 
 	// CWD
-	/*
-	 * Note: The purpose of all of this mess is to migrate from single
-	 * cwd to multiple cwds.
-	 * Currently, the mess is caused by app logic that uses single cwd,
-	 * while the UI or the form is already using multiple cwds.
-	 * The logic only uses the first cwd from an array of multiple cwds.
-	 * I just want to see how it feels to add multiple cwds.
-	 */
 	const onCwdNameChange = (e: InputChange) => {
 		setCwd((prevVal) => ({ ...prevVal, name: e.target.value }))
 	}
@@ -39,19 +25,17 @@ const Settings: React.FC = () => {
 
 	const onCwdSubmit = () => {
 		if (!cwd.path || !cwd.name) return
-		if (input.cwd.findIndex((el) => el.path === cwd.path) > -1) return
-		setInput((prevVal) => {
-			return { ...prevVal, cwd: [...prevVal.cwd, cwd] }
-		})
+		if (input.cwds.findIndex((el) => el.path === cwd.path) > -1) return
+		setInput((prevVal) => ({ ...prevVal, cwds: [...prevVal.cwds, cwd] }))
 		setCwd({ name: '', path: '' })
 	}
 
 	const onCwdRemove = (path: string) => {
-		const newCwds = [...input.cwd]
+		const newCwds = [...input.cwds]
 		const index = newCwds.findIndex((el) => el.path === path)
 		if (index < 0) return
 		newCwds.splice(index, 1)
-		setInput((prevVal) => ({ ...prevVal, cwd: newCwds }))
+		setInput((prevVal) => ({ ...prevVal, cwds: newCwds }))
 	}
 
 	// General Form
@@ -67,15 +51,12 @@ const Settings: React.FC = () => {
 		})
 	}
 
-	const onReset = () => setInput(defaultSettings)
+	const onReset = () => setInput(settings)
 
 	const onSubmit = async (e: FormSubmit) => {
 		e.preventDefault()
 
-		const settingsPromise = window.myAPI.setSettings({
-			...input,
-			cwd: input.cwd.length ? input.cwd[0].path : '',
-		})
+		const settingsPromise = window.myAPI.setSettings(input)
 		const seriesPromise = window.myAPI.getSeries()
 		const schedulePromise = window.myAPI.getSchedule()
 
@@ -98,7 +79,7 @@ const Settings: React.FC = () => {
 				<div className={styles.labeledInput}>
 					<div className={styles.label}>Working directories</div>
 					<div className={styles.cwds}>
-						{input.cwd.map((el) => (
+						{input.cwds.map((el) => (
 							<div className={styles.cwd} key={el.path}>
 								<div>{el.name}</div>
 								<div>{el.path}</div>

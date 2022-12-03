@@ -39,10 +39,11 @@ interface CWD {
 
 interface MyStore {
 	theme: Theme
-	cwd: string | null
+	cwds: CWD[]
 	lastPosterPath: string
 	lastUpdateCheck: number
 	neverCheckUpdate: boolean
+	userDataDir: string
 }
 
 interface Metadata {
@@ -123,6 +124,7 @@ interface AdvFilter {
 interface Window {
 	myAPI: {
 		selectDirectory: () => Promise<string>
+		getUserDataDir: () => Promise<string>
 		getSettings: () => Promise<MyStore>
 		setSettings: (settings: MyStore) => Promise<MyStore>
 		getSeries: () => Promise<Series[]>

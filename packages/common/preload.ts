@@ -3,6 +3,7 @@ import { IPCKey } from './constants'
 
 contextBridge.exposeInMainWorld('myAPI', {
 	selectDirectory: () => ipc.invoke(IPCKey.SelectDirectory),
+	getUserDataDir: () => ipc.invoke(IPCKey.GetUserDataDir),
 	getSettings: () => ipc.invoke(IPCKey.GetSettings),
 	setSettings: (settings: MyStore) => ipc.invoke(IPCKey.SetSettings, settings),
 	getSeries: () => ipc.invoke(IPCKey.GetSeries),
@@ -16,5 +17,4 @@ contextBridge.exposeInMainWorld('myAPI', {
 
 // Menu-Main communications
 ipc.on(IPCKey.RemoveUnusedPosters, () => ipc.invoke(IPCKey.RemoveUnusedPosters))
-ipc.on(IPCKey.OpenDataDir, () => ipc.invoke(IPCKey.OpenDataDir))
 ipc.on(IPCKey.CheckForUpdate, () => ipc.invoke(IPCKey.CheckForUpdate))
