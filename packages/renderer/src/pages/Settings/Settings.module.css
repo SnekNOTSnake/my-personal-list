@@ -88,3 +88,7 @@
 	height: 33px;
 	margin: 8px 8px 0 0;
 }
+
+.root .actions button.apply {
+	background-color: var(--color-primary);
+}

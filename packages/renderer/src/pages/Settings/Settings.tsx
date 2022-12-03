@@ -161,7 +161,9 @@ const Settings: React.FC = () => {
 					</div>
 				</div>
 				<div className={styles.actions}>
-					<button type='submit'>Apply</button>
+					<button type='submit' className={styles.apply}>
+						Apply
+					</button>
 					<button type='button' onClick={onReset}>
 						Reset
 					</button>
