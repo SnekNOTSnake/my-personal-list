@@ -56,7 +56,7 @@ Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/my
 
 Roadmap:
 
-- External database integration, so that you don't have to write everything manually
+- Fetch animation metadata (eg tags and poster) from AniDB
 - Manga support
 - Series grouping
 
