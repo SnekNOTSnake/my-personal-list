@@ -116,7 +116,7 @@ Anime
 
 ## 🗡️ Features
 
-Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bulletproof-architecture/blob/master/assets) directory.
+Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/my-personal-list/tree/master/assets) directory.
 
 - Filter by Tags, [Fuzzy Search](https://en.wikipedia.org/wiki/Approximate_string_matching), or Metadata
 - Tracking
