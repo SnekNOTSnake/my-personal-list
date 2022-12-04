@@ -33,6 +33,16 @@
 
 ![Explore](https://github.com/SnekNOTSnake/my-personal-list/blob/master/assets/screenshots/explore.png?raw=true)
 
+## 🎭 Who is this app for?
+
+- People who watch and hoards animations
+- People who want easy finding and organizing their downloaded animations
+- People who want to keep video's metadata (eg encoder, video/audio encoding, etc)
+- People who don't trust external databases
+- People who hate automatons but love tools
+
+If you care about trends, automatons (eg automatically increase track count when you open an episode with VLC), online sharing (eg MAL, AniList, AniDB), in-app torrent, or other online stuffs, this app might not suite you. This is offline-friendly software.
+
 ## 🚀️ Usage and Conventions
 
 1. Install the app
