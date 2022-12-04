@@ -1,15 +1,17 @@
 import { Menu, MenuItemConstructorOptions } from 'electron'
-import Store from 'electron-store'
-
 import { IPCKey } from '../common/constants'
 
-const createTemplate = (
-	store: Store<MyStore>,
-): MenuItemConstructorOptions[] => [
+const createTemplate = (): MenuItemConstructorOptions[] => [
 	{
 		label: 'MyPersonalList',
 		submenu: [
-			{ label: 'About My Personal List' },
+			{
+				label: 'About My Personal List',
+				click: (menuItem, browser) => {
+					if (!browser) return
+					browser.webContents.send(IPCKey.GetAboutMPL)
+				},
+			},
 			{
 				label: 'Check For Updates',
 				click: (menuItem, browser) => {
@@ -17,7 +19,6 @@ const createTemplate = (
 					browser.webContents.send(IPCKey.CheckForUpdate)
 				},
 			},
-			{ type: 'separator' },
 			{
 				label: 'Remove Unused Posters',
 				click: (menuItem, browser) => {
@@ -74,7 +75,7 @@ const createTemplate = (
 	},
 ]
 
-export const createMainMenu = (store: Store<MyStore>) => {
-	const template = Menu.buildFromTemplate(createTemplate(store))
+export const createMainMenu = () => {
+	const template = Menu.buildFromTemplate(createTemplate())
 	Menu.setApplicationMenu(template)
 }

@@ -19,7 +19,7 @@ const store = new Store<MyStore>({
 
 app.on('ready', async () => {
 	const window = createMainWindow()
-	createMainMenu(store)
+	createMainMenu()
 	initializeIpcEvents(store)
 	initializeUpdater(store, window)
 

@@ -1,4 +1,5 @@
 export enum IPCKey {
+	GetAboutMPL = 'GetAboutMPL',
 	SelectDirectory = 'SelectDirectory',
 	GetUserDataDir = 'GetUserDataDir',
 	GetSettings = 'GetSettings',

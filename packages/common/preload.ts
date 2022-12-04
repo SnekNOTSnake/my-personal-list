@@ -16,5 +16,6 @@ contextBridge.exposeInMainWorld('myAPI', {
 })
 
 // Menu-Main communications
+ipc.on(IPCKey.GetAboutMPL, () => ipc.invoke(IPCKey.GetAboutMPL))
 ipc.on(IPCKey.RemoveUnusedPosters, () => ipc.invoke(IPCKey.RemoveUnusedPosters))
 ipc.on(IPCKey.CheckForUpdate, () => ipc.invoke(IPCKey.CheckForUpdate))

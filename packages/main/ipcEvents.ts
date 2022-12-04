@@ -44,6 +44,17 @@ export class Events {
 		this.app = app
 	}
 
+	onGetAboutMPL = (e: IpcMainInvokeEvent) => {
+		const browser = BrowserWindow.fromWebContents(e.sender)
+		if (!browser) return
+
+		this.dialog.showMessageBox(browser, {
+			title: 'About MyPersonalList',
+			message: `My Personal List v${app.getVersion()}`,
+			detail: '🄯 Copyleft Akhmad Najmuddin',
+		})
+	}
+
 	onSelectDirectory = async (e: IpcMainInvokeEvent): Promise<string> => {
 		const res = await this.dialog.showOpenDialog({
 			properties: ['openDirectory'],
@@ -239,6 +250,7 @@ let initialized = false
 export const initializeIpcEvents = (store: Store<MyStore>) => {
 	const events = new Events(store, dialog, app)
 
+	ipcMain.handle(IPCKey.GetAboutMPL, events.onGetAboutMPL)
 	ipcMain.handle(IPCKey.SelectDirectory, events.onSelectDirectory)
 	ipcMain.handle(IPCKey.GetUserDataDir, events.onGetUserDataDir)
 	ipcMain.handle(IPCKey.GetSettings, events.onGetSettings)
@@ -258,6 +270,7 @@ export const initializeIpcEvents = (store: Store<MyStore>) => {
 export const releaseIpcEvents = () => {
 	if (!initialized) return
 
+	ipcMain.removeAllListeners(IPCKey.GetAboutMPL)
 	ipcMain.removeAllListeners(IPCKey.SelectDirectory)
 	ipcMain.removeAllListeners(IPCKey.GetUserDataDir)
 	ipcMain.removeAllListeners(IPCKey.GetSettings)
@@ -266,6 +279,7 @@ export const releaseIpcEvents = () => {
 	ipcMain.removeAllListeners(IPCKey.EditSeries)
 	ipcMain.removeAllListeners(IPCKey.ChangePoster)
 	ipcMain.removeAllListeners(IPCKey.OpenItem)
+	ipcMain.removeAllListeners(IPCKey.RemoveUnusedPosters)
 	ipcMain.removeAllListeners(IPCKey.GetSchedule)
 	ipcMain.removeAllListeners(IPCKey.ChangeSchedule)
 	ipcMain.removeAllListeners(IPCKey.CheckForUpdate)
