@@ -43,6 +43,23 @@
 
 If you care about trends, automatons (eg automatically increase track count when you open an episode with VLC), online sharing (eg MAL, AniList, AniDB), in-app torrent, or other online stuffs, this app might not suite you. This is offline-friendly software.
 
+## 🗡️ Features
+
+Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/my-personal-list/tree/master/assets) directory.
+
+- Filter by Tags, [Fuzzy Search](https://en.wikipedia.org/wiki/Approximate_string_matching), or Metadata
+- Tracking
+- Stockpile Insight
+- Watch Scheduling
+- Batch Update
+- Multiple working directories
+
+Roadmap:
+
+- External database integration, so that you don't have to write everything manually
+- Manga support
+- Series grouping
+
 ## 🚀️ Usage and Conventions
 
 1. Install the app
@@ -123,23 +140,6 @@ Anime
 	- ✅ `01.mkv`
 	- ❌ `01 - Resounding Sound - The City at Dawn.mkv`
 	- ❌ `Ep 01.mkv`
-
-## 🗡️ Features
-
-Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/my-personal-list/tree/master/assets) directory.
-
-- Filter by Tags, [Fuzzy Search](https://en.wikipedia.org/wiki/Approximate_string_matching), or Metadata
-- Tracking
-- Stockpile Insight
-- Watch Scheduling
-- Batch Update
-- Multiple working directories
-
-Roadmap:
-
-- External database integration, so that you don't have to write everything manually
-- Manga support
-- Series grouping
 
 ## ⛷️ Running for Development
 
