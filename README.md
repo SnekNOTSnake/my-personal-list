@@ -92,7 +92,7 @@ Anime
 2. Move `attachments` and `schedule.json` to your user data directory
 
 	- `%APPDATA%/my-personal-list` on Windows
-	- `~/Library/Application` on MacOS
+	- `~/Library/Application/my-personal-list` on MacOS
 	- `~/.config/my-personal-list` on Linux
 
 3. Move your series from `E:/Anime/anime` to `E:/Anime`.
