@@ -36,11 +36,8 @@
 ## 🚀️ Usage and Conventions
 
 1. Install the app
-
-2. Select a directory where the program should work on by pressing `alt` -> `MyPersonalList` -> `Change Data Directory`. It's suggested that the directory contains nothing but `anime` directory.
-
-3. Move all your animated series into the `anime` directory *directly*. The system only recognize directories *directly* inside `anime` to be series, but not recursively.
-
+2. Go to settings page
+3. Add folders containing your downloaded series as `working directoreis`
 4. Start Using The App!
 
 ### Example Folder Structure
@@ -48,55 +45,70 @@
 ```bash
 # ❌ BAD
 
-selected
-├── anime
-│   ├── Mushishi
-│   │   ├── Season 1
-│   │   │   ├── 01.mkv
-│   │   │   └── 02.mkv
-│   │   └── Season 2
-│   │       ├── 01.mkv
-│   │       └── 02.mkv
-│   └── Sora no Woto
+Anime
+├── Mushishi
+│   ├── Season 1
+│   │   ├── 01.mkv
+│   │   └── 02.mkv
+│   └── Season 2
 │       ├── 01.mkv
 │       └── 02.mkv
-├── posters
-├── Saraiya Goyou
-│   ├── 01.mkv
-│   └── 02.mkv
-└── schedule.json
-
+└── Sora no Woto
+    ├── 01.mkv
+    └── 02.mkv
 
 # ✅ Good
 
-selected
+Anime
+├── Mushishi 1
+│   ├── 01.mkv
+│   └── 02.mkv
+├── Mushishi 2
+│   ├── 01.mkv
+│   └── 02.mkv
+└── Sora no Woto
+    ├── 01.mkv
+    └── 02.mkv
+```
+
+### Migrating From v1 to v2
+
+For example, your current working directory is `E:/Anime`.
+
+```
+Anime
 ├── anime
 │   ├── Mushishi 1
 │   │   ├── 01.mkv
 │   │   └── 02.mkv
-│   ├── Mushishi 2
-│   │   ├── 01.mkv
-│   │   └── 02.mkv
-│   ├── Saraiya Goyou
-│   │   ├── 01.mkv
-│   │   └── 02.mkv
-│   └── Sora no Woto
-│       ├── 01.mkv
-│       └── 02.mkv
-├── posters
+│   └── Mushishi 2
+│       ├── 01.mkv
+│       └── 02.mkv
+├── attachments
 └── schedule.json
 ```
+
+1. Open your previous working directory (E:/Anime) in your file explorer
+2. Move `attachments` and `schedule.json` to your user data directory
+
+	- `%APPDATA%/my-personal-list` on Windows
+	- `~/Library/Application` on MacOS
+	- `~/.config/my-personal-list` on Linux
+
+3. Move your series from `E:/Anime/anime` to `E:/Anime`.
+4. Open the app, go to the newly created `Settings` page
+5. Add `E:/Anime` as one of your new working directories
 
 ### Conventions
 
 1. Irregular Series
 
 	All of the series are default to be *irregular series*, meaning they will not be included in the statistics. Its purpose is to differentiate short anime (eg 3 mins/eps) with regular anime (eg 24 min/eps). To change this, edit the series' regular checkbox.
-	
+
 2. Episodes Naming
 
 	In order for the system to recognize an episode's number (For "current-episode" highlight), the filename should follow the convention: `<number>.<title>.<extension>` OR `<number>.<extension>`. Examples:
-	
+
 	- ✅ `01. Resounding Sound - The City at Dawn.mkv`
 	- ✅ `01.mkv`
 	- ❌ `01 - Resounding Sound - The City at Dawn.mkv`
@@ -106,18 +118,18 @@ selected
 
 Some screenshots are placed inside [`assets`](https://github.com/SnekNOTSnake/bulletproof-architecture/blob/master/assets) directory.
 
-- Filter by Tags
-- Filter by [fuzzy](https://en.wikipedia.org/wiki/Approximate_string_matching) search
-- Storing Metadata per series
+- Filter by Tags, [Fuzzy Search](https://en.wikipedia.org/wiki/Approximate_string_matching), or Metadata
+- Tracking
 - Stockpile Insight
 - Watch Scheduling
-- And More!
+- Batch Update
+- Multiple working directories
 
 Roadmap:
 
-- AniDB (Or MyAnimeList) integration, so that you don't have to write everything manually
-- Multiple data directories
-- English and Japanese title
+- External database integration, so that you don't have to write everything manually
+- Manga support
+- Series grouping
 
 ## ⛷️ Running for Development
 
