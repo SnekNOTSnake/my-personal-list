@@ -1,5 +1,5 @@
 {
-	"jpTitle": "Princess Connect",
+	"jpTitle": "Priconne",
 	"regular": true,
 	"tags": ["Action", "Adventure"],
 	"poster": "read-or-die.jpg",
@@ -18,7 +18,7 @@
 	"subtitle": "Subsplease",
 
 	"notes": "Lorem ipsum dolor sit, something cool.",
-	"related": [{ "type": "sequel", "path": "Princess Connect 2" }],
+	"related": [{ "type": "sequel", "path": "Priconne 2" }],
 
 	"unrelatedField": "Something cool"
 }

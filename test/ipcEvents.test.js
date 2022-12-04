@@ -3,13 +3,20 @@ import path from 'path'
 import expect from 'expect'
 import { Events } from '../packages/main/ipcEvents'
 import { defSeries, exists, ensureSchedule } from '../packages/main/util'
-import {
-	ANIME_DIR,
-	POSTER_DIR,
-	SCHEDULE_FILE,
-} from '../packages/common/constants'
+import { POSTER_DIR, SCHEDULE_FILE } from '../packages/common/constants'
 
-const defaultStore = { cwd: null, theme: 'light', lastPosterPath: '/' }
+const SAMPLE_CWD1 = path.join(__dirname, 'SAMPLE_CWD1_COPY')
+const SAMPLE_CWD2 = path.join(__dirname, 'SAMPLE_CWD2_COPY')
+const SAMPLE_USER_DATA_DIR = path.join(__dirname, 'SAMPLE_USER_DATA_DIR_COPY')
+
+const defaultStore = {
+	cwds: [],
+	theme: 'light',
+	lastPosterPath: '/',
+	lastUpdateCheck: 0,
+	neverCheckUpdate: false,
+	userDataDir: SAMPLE_USER_DATA_DIR,
+}
 
 class Store {
 	store = defaultStore
@@ -19,75 +26,126 @@ class Store {
 	}
 
 	set(key, value) {
-		this.store[key] = value
-		return value
+		if (typeof key === 'string') {
+			this.store[key] = value
+			return value
+		}
+		this.store = key
 	}
 }
 
 const store = new Store()
-const events = new Events(store, {})
+const events = new Events(
+	store,
+	{ showOpenDialog: () => 'test' },
+	{ getPath: (name) => (name === 'userData' ? SAMPLE_USER_DATA_DIR : '') },
+)
 
-const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
-const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
-const POSTER = path.join(SAMPLE_CWD, POSTER_DIR)
-const SCHEDULE = path.join(SAMPLE_CWD, SCHEDULE_FILE)
+const POSTER = path.join(SAMPLE_USER_DATA_DIR, POSTER_DIR)
+const SCHEDULE = path.join(SAMPLE_USER_DATA_DIR, SCHEDULE_FILE)
 
 describe('ipcEvents', () => {
-	describe('onGetSettings', () => {
-		it('Should return default settings if not yet set', () => {
-			const settings = events.onGetSettings('')
+	describe('onSelectDirectory', () => {
+		it("Should return empty path when it's cancelled", async () => {
+			events.dialog.showOpenDialog = () => ({ canceled: true })
+			const result = await events.onSelectDirectory('')
+			expect(result).toBe('')
+		})
 
-			expect(settings.cwd).toBeNull()
-			expect(settings.theme).toBe('light')
+		it('Should return the first selected files', async () => {
+			events.dialog.showOpenDialog = () => ({
+				canceled: false,
+				filePaths: ['somewhere', 'sometime'],
+			})
+			const result = await events.onSelectDirectory('')
+			expect(result).toBe('somewhere')
 		})
 	})
 
-	describe('onChangeTheme', () => {
-		it('Should be able to change theme', () => {
-			expect(events.onGetSettings('').theme).toBe('light')
-			events.onChangeTheme('', 'dark')
-			expect(events.onGetSettings('').theme).toBe('dark')
+	describe('onGetUserDataDir', () => {
+		it("Should return the user's data directory", () => {
+			const result = events.onGetUserDataDir('')
+			expect(result).toBe(SAMPLE_USER_DATA_DIR)
+		})
+	})
+
+	describe('onGetSettings', () => {
+		it('Should return a settings object', async () => {
+			const result = await events.onGetSettings('')
+
+			expect(result.cwds.length).toBe(0)
+			expect(result.theme).toBe('light')
+			expect(result.lastPosterPath).toBe('/')
+			expect(result.lastUpdateCheck).toBe(0)
+			expect(result.neverCheckUpdate).toBe(false)
+			expect(result.userDataDir).toBe(SAMPLE_USER_DATA_DIR)
+		})
+	})
+
+	describe('onSetSettings', () => {
+		it('Should be able to change setting values', async () => {
+			const settings = await events.onGetSettings('')
+
+			expect(settings.cwds.length).toBe(0)
+			expect(settings.theme).toBe('light')
+
+			const newSettings = await events.onSetSettings('', {
+				...settings,
+				cwds: [{ name: 'Dir1', path: '/somewhere' }],
+				theme: 'dark',
+			})
+
+			expect(newSettings.cwds.length).toBe(1)
+			expect(newSettings.theme).toBe('dark')
 		})
 	})
 
 	describe('onGetSeries', () => {
-		it('Should return empty array when CWD is not set', async () => {
+		it('Should return empty array when CWDs length is 0', async () => {
+			store.set('cwds', [])
 			const series = await events.onGetSeries('')
 			expect(series.length).toBe(0)
 		})
 
-		it('Should return all dirs series inside cwd, empty or not, but not files', async () => {
-			store.set('cwd', SAMPLE_CWD)
-
+		it('Should return all dirs inside CWDs, empty or not, but not files', async () => {
+			store.set('cwds', [
+				{ name: 'Dir1', path: SAMPLE_CWD1 },
+				{ name: 'Dir2', path: SAMPLE_CWD2 },
+			])
 			const series = await events.onGetSeries('')
 			expect(series.length).toBe(4)
 		})
 
 		it('Should sanitize any unnecessary fields from series', async () => {
 			const series = await events.onGetSeries('')
-			expect(series.every((el) => el.unrelatedField === undefined)).toBe(true)
+			const test1 = series.every((anime) => {
+				return (el) => el.unrelatedField === undefined
+			})
+			expect(test1).toBe(true)
 		})
 
 		it("Should populate all series' default properties, regardless of empty, broken, or present mpl.json", async () => {
 			const series = await events.onGetSeries('')
-			expect(
-				series.every((el) => Object.keys(defSeries).every((key) => key in el)),
-			).toBeTruthy()
+			const test1 = series.every((anime) => {
+				return Object.keys(defSeries).every((key) => key in anime)
+			})
+
+			expect(test1).toBeTruthy()
 		})
 
 		it('Should contain all filenames inside each series', async () => {
 			const series = await events.onGetSeries('')
 
-			const priconne = series.find((el) => el.path === 'Princess Connect')
-			const exp = priconne.files.every(
+			const priconne = series.find((el) => el.path === 'Priconne 2')
+			const test1 = priconne.files.every(
 				(file) => file === 'some_random.file' || file === 'mpl.json',
 			)
 
 			const yashahime = series.find((el) => el.path === 'Yashahime')
-			const exp2 = yashahime.files.some((file) => file === 'sample.file')
+			const test2 = yashahime.files.some((file) => file === 'sample.file')
 
-			expect(exp).toBe(true)
-			expect(exp2).toBe(true)
+			expect(test1).toBe(true)
+			expect(test2).toBe(true)
 		})
 	})
 
@@ -118,7 +176,7 @@ describe('ipcEvents', () => {
 			await events.onEditSeries('', {
 				...editedSeries,
 				path: 'Mushishi',
-				fullPath: path.join(ANIME, 'Mushishi'),
+				fullPath: path.join(SAMPLE_CWD1, 'Mushishi'),
 			})
 
 			const series = await events.onGetSeries('')
@@ -135,17 +193,20 @@ describe('ipcEvents', () => {
 					return editedSeries[key] === mushishi[key]
 				}),
 			).toBeTruthy()
-		})
 
-		it('Should sanitize all unnecessary fields', async () => {
-			const mushishi = await events.onEditSeries('', {
-				...editedSeries,
-				unnecessaryField: 'Something cool',
-				path: 'Mushishi',
-				fullPath: path.join(ANIME, 'Mushishi'),
+			it('Should sanitize all unnecessary fields', async () => {
+				await events.onEditSeries('', {
+					...editedSeries,
+					unnecessaryField: 'Something cool',
+					path: 'Mushishi',
+					fullPath: path.join(ANIME, 'Mushishi'),
+				})
+
+				const series = await events.onGetSeries('')
+				const mushishi = series.find((s) => s.path === 'Mushishi')
+
+				expect(mushishi.unnecessaryField).toBeUndefined()
 			})
-
-			expect(mushishi.unnecessaryField).toBeUndefined()
 		})
 	})
 
@@ -162,12 +223,13 @@ describe('ipcEvents', () => {
 	})
 
 	describe('onChangePoster', () => {
-		it('Should generate `attachments` dir if not exists', async () => {
+		it('Should generate `attachments` dir if not exist', async () => {
 			fs.rmSync(POSTER, { recursive: true })
 
 			const poster = path.join(__dirname, 'assets/urasekai.jpg')
-			const events = new Events(store, {
-				showOpenDialog: async () => ({ filePaths: [poster], canceled: false }),
+			events.dialog.showOpenDialog = async () => ({
+				filePaths: [poster],
+				cancelled: false,
 			})
 
 			const series = await events.onGetSeries('')
@@ -182,8 +244,9 @@ describe('ipcEvents', () => {
 
 		it('Should be able to copy selected poster to `attachments` and then update the series', async () => {
 			const poster = path.join(__dirname, 'assets/urasekai.jpg')
-			const events = new Events(store, {
-				showOpenDialog: async () => ({ filePaths: [poster], canceled: false }),
+			events.dialog.showOpenDialog = async () => ({
+				filePaths: [poster],
+				canceled: false,
 			})
 
 			const series = await events.onGetSeries('')

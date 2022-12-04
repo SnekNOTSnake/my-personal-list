@@ -7,7 +7,6 @@ import {
 	ipcMain,
 	IpcMainInvokeEvent,
 	shell,
-	Notification,
 	BrowserWindow,
 	app,
 	App,
@@ -50,11 +49,11 @@ export class Events {
 			properties: ['openDirectory'],
 		})
 
-		if (res.canceled) return this.store.get('cwds')[0].path
+		if (res.canceled) return ''
 		return res.filePaths[0]
 	}
 
-	onGetUserDataDir = (): string => app.getPath('userData')
+	onGetUserDataDir = (): string => this.app.getPath('userData')
 
 	onGetSettings = (e: IpcMainInvokeEvent): MyStore => {
 		return this.store.store

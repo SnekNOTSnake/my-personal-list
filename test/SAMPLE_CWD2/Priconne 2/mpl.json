@@ -1,5 +1,5 @@
 {
-	"jpTitle": "Princess Connect 2",
+	"jpTitle": "Priconne 2",
 	"regular": true,
 	"tags": ["Action", "Adventure", "Gourmet"],
 	"poster": "isekai-shokudou.jpg",
@@ -18,5 +18,5 @@
 	"subtitle": "Subsplease ",
 
 	"notes": "Lorem ipsum dolor sit, something cool.",
-	"related": [{ "type": "prequel", "path": "Princess Connect" }]
+	"related": [{ "type": "prequel", "path": "Priconne 2" }]
 }

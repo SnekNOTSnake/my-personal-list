@@ -11,10 +11,10 @@ import {
 	ensureSchedule,
 	sanitizeSchedule,
 } from '../packages/main/util'
-import { ANIME_DIR, DATA_FILE } from '../packages/common/constants'
+import { DATA_FILE } from '../packages/common/constants'
 
-const SAMPLE_CWD = path.join(__dirname, 'sampleCwd_copy')
-const ANIME = path.join(SAMPLE_CWD, ANIME_DIR)
+const CWD1 = path.join(__dirname, 'SAMPLE_CWD1_COPY')
+const CWD2 = path.join(__dirname, 'SAMPLE_CWD2_COPY')
 
 describe('Utils', () => {
 	describe('resolveHtmlPath', () => {
@@ -31,29 +31,29 @@ describe('Utils', () => {
 
 	describe('exists', () => {
 		it('Should return true if exists', async () => {
-			const isExists = await exists(SAMPLE_CWD)
-			const isExists2 = await exists(path.join(ANIME, 'Mushishi', DATA_FILE))
+			const isExists = await exists(CWD1)
+			const isExists2 = await exists(path.join(CWD1, 'Mushishi', DATA_FILE))
 
 			expect(isExists).toBeTruthy()
 			expect(isExists2).toBeTruthy()
 		})
 
 		it('Should return false if not exists', async () => {
-			const isExists = await exists(path.join(SAMPLE_CWD, 'tahu.txt'))
+			const isExists = await exists(path.join(CWD1, 'tahu.txt'))
 			expect(isExists).toBeFalsy()
 		})
 	})
 
 	describe('read', () => {
 		it("Should be able to read file's content", async () => {
-			const buffer = await read(path.join(ANIME, 'Princess Connect', DATA_FILE))
+			const buffer = await read(path.join(CWD2, 'Priconne 2', DATA_FILE))
 			const priconne = JSON.parse(buffer.toString())
 
-			expect(priconne.jpTitle).toBe('Princess Connect')
+			expect(priconne.jpTitle).toBe('Priconne 2')
 		})
 
 		it('Should return false when unable to read file', async () => {
-			const buffer = await read(path.join(SAMPLE_CWD, 'nonexists.file'))
+			const buffer = await read(path.join(CWD1, 'nonexists.file'))
 			expect(buffer).toBeFalsy()
 		})
 	})
@@ -61,10 +61,10 @@ describe('Utils', () => {
 	describe('write', () => {
 		it('Should be able to write into files', async () => {
 			await write(
-				path.join(SAMPLE_CWD, 'sample.json'),
+				path.join(CWD1, 'sample.json'),
 				JSON.stringify({ something: 'cool' }),
 			)
-			const buffer = await read(path.join(SAMPLE_CWD, 'sample.json'))
+			const buffer = await read(path.join(CWD1, 'sample.json'))
 			const data = JSON.parse(buffer.toString())
 
 			expect(data.something).toBe('cool')
