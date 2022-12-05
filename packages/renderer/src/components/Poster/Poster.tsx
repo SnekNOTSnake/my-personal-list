@@ -12,7 +12,7 @@ const Poster: React.FC<Props> = ({ anime, children, ...rest }) => {
 		: ''
 
 	return (
-		<div {...rest} className={[styles.root, rest.className].join(' ')}>
+		<div {...rest} className={[styles.poster, rest.className].join(' ')}>
 			<img
 				src={posterPath}
 				alt='Test'

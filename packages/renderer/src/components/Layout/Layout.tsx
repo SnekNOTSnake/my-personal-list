@@ -6,7 +6,7 @@ import styles from './Layout.module.css'
 type Props = { children?: React.ReactNode }
 
 const Layout: React.FC<Props> = ({ children }) => (
-	<div className={styles.root}>
+	<div className={styles.layout}>
 		<React.Suspense fallback={<div>Loading...</div>}>
 			<Navigation />
 			<main className={styles.main}>{children}</main>

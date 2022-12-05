@@ -8,7 +8,7 @@ import styles from './AnimeDetails.module.css'
 type Props = { edit: () => any; data: Series }
 
 const AnimeDetails: React.FC<Props> = ({ edit, data }) => (
-	<div className={styles.root}>
+	<div className={styles.details}>
 		<Generals data={data} edit={edit} />
 		{data.notes.length > 0 && <Notes data={data} />}
 		<Related data={data} />

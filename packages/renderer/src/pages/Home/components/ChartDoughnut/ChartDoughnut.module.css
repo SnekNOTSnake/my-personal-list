@@ -1,8 +1,8 @@
-.root {
+.doughnut {
 	position: relative;
 }
 
-.root .label {
+.doughnut .label {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -14,11 +14,11 @@
 	justify-content: center;
 }
 
-.root .label .percentage {
+.doughnut .label .percentage {
 	font-size: 2.5em;
 }
 
-.root .label .episodes {
+.doughnut .label .episodes {
 	color: var(--text-secondary);
 	font-size: 1.2em;
 }

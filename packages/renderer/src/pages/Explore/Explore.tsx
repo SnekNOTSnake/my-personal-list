@@ -22,7 +22,7 @@ const Explore: React.FC = () => {
 	}, [selectPath])
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.explore}>
 			<div className={styles.explorer}>
 				<LeftExplorer />
 				<RightExplorer />

@@ -29,7 +29,7 @@ const Navigation: React.FC = () => {
 	}, [theme])
 
 	return (
-		<div className={styles.root}>
+		<nav className={styles.nav}>
 			<div className={styles.menu}>
 				<ul>
 					<li>
@@ -76,7 +76,7 @@ const Navigation: React.FC = () => {
 					</a>
 				</div>
 			</div>
-		</div>
+		</nav>
 	)
 }
 

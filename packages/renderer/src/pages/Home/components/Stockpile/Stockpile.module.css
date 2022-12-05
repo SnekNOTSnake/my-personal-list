@@ -1,36 +1,36 @@
-.root {
+.stockpile {
 	width: 100%;
 	max-width: 1024px;
 }
 
-.root .chart {
+.stockpile .chart {
 	display: flex;
 	margin-bottom: 24px;
 	align-items: center;
 }
 
-.root .chart .doughnut {
+.stockpile .chart .doughnut {
 	flex: 0 0 250px;
 	margin-left: 32px;
 	text-align: center;
 }
 
-.root .chart .bar {
+.stockpile .chart .bar {
 	flex: 1;
 }
 
-.root .totals {
+.stockpile .totals {
 	display: flex;
 	justify-content: space-around;
 	margin: 0 282px 40px 0;
 }
 
-.root .totals .number {
+.stockpile .totals .number {
 	font-size: 3em;
 	text-align: center;
 }
 
-.root .totals .text {
+.stockpile .totals .text {
 	font-size: 1.2em;
 	text-align: center;
 	color: var(--text-secondary);

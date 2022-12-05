@@ -1,33 +1,33 @@
-.root {
+.batchEdit {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.root input[type='checkbox'] {
+.batchEdit input[type='checkbox'] {
 	height: 33px;
 	width: 33px;
 	margin: 0;
 }
 
-.root .center {
+.batchEdit .center {
 	max-width: 800px;
 }
 
-.root table {
+.batchEdit table {
 	border-collapse: collapse;
 	margin: 24px 0;
 	border-radius: var(--border-radius);
 	width: 100%;
 }
 
-.root table th,
-.root table td {
+.batchEdit table th,
+.batchEdit table td {
 	border: 1px solid var(--border);
 	position: relative;
 }
 
-.root table button {
+.batchEdit table button {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -39,58 +39,58 @@
 	border-left: 1px solid var(--border);
 }
 
-.root table td:hover button {
+.batchEdit table td:hover button {
 	display: block;
 }
 
-.root h1 {
+.batchEdit h1 {
 	text-align: center;
 }
 
-.root table th {
+.batchEdit table th {
 	padding: 0 12px;
 	text-align: left;
 	font-weight: normal;
 }
 
-.root table input {
+.batchEdit table input {
 	border-radius: 0;
 	background-color: transparent;
 	border: none;
 }
 
-.root .labeledInput {
+.batchEdit .labeledInput {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 24px;
 }
 
-.root .labeledInput .label {
+.batchEdit .labeledInput .label {
 	font-size: 1.1em;
 	margin-bottom: 8px;
 	white-space: nowrap;
 }
 
-.root .inputsGroup {
+.batchEdit .inputsGroup {
 	display: flex;
 	margin-bottom: 24px;
 }
 
-.root .inputsGroup > div {
+.batchEdit .inputsGroup > div {
 	flex-grow: 1;
 	margin: 0 16px 0 0;
 }
 
-.root .inputsGroup > div:last-child {
+.batchEdit .inputsGroup > div:last-child {
 	margin: 0;
 }
 
-.root .inputsGroup .inputGroup {
+.batchEdit .inputsGroup .inputGroup {
 	display: flex;
 	position: relative;
 }
 
-.root .inputsGroup .inputGroup button {
+.batchEdit .inputsGroup .inputGroup button {
 	padding: 0 12px;
 	background-color: var(--background-light);
 	border: 1px solid var(--border);
@@ -98,7 +98,7 @@
 	white-space: nowrap;
 }
 
-.root .inputsGroup .inputGroup button.all {
+.batchEdit .inputsGroup .inputGroup button.all {
 	position: absolute;
 	background-color: transparent;
 	border: none;
@@ -110,15 +110,15 @@
 	display: none;
 }
 
-.root .inputsGroup .inputGroup:hover button.all {
+.batchEdit .inputsGroup .inputGroup:hover button.all {
 	display: block;
 }
 
-.root .inputsGroup ul {
+.batchEdit .inputsGroup ul {
 	margin-top: 12px;
 }
 
-.root .inputsGroup ul li {
+.batchEdit .inputsGroup ul li {
 	cursor: pointer;
 	user-select: none;
 	position: relative;
@@ -129,7 +129,7 @@
 	margin: 0 8px 8px 0;
 }
 
-.root .inputsGroup ul li::before {
+.batchEdit .inputsGroup ul li::before {
 	content: '';
 	display: block;
 	position: absolute;
@@ -140,6 +140,6 @@
 	background-color: transparent;
 }
 
-.root .inputsGroup ul li:hover::before {
+.batchEdit .inputsGroup ul li:hover::before {
 	background-color: var(--background-light);
 }

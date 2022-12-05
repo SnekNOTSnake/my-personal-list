@@ -5,7 +5,7 @@ import TodayAnime from './components/TodayAnime'
 import styles from './Home.module.css'
 
 const Home: React.FC = () => (
-	<div className={styles.root}>
+	<div className={styles.home}>
 		<TodayAnime />
 		<Stockpile />
 	</div>

@@ -1,4 +1,4 @@
-.root {
+.poster {
 	aspect-ratio: var(--poster-aspect-ratio);
 	border-radius: var(--border-radius);
 	background-color: rgba(0, 0, 0, 0.25);
@@ -6,7 +6,7 @@
 	overflow: hidden;
 }
 
-.root img {
+.poster img {
 	position: absolute;
 	top: 0;
 	left: 0;

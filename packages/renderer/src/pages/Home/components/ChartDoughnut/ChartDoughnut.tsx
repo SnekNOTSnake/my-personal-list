@@ -57,7 +57,7 @@ const DoughnutChart: React.FC = () => {
 			: 0
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.doughnut}>
 			<div className={styles.label}>
 				<div className={styles.percentage}>{percentage}%</div>
 				<div className={styles.episodes}>

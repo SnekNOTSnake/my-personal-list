@@ -23,7 +23,7 @@ const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
 	}
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.scheduleSeries}>
 			<Poster anime={anime} className={styles.poster} />
 
 			<div className={styles.details}>

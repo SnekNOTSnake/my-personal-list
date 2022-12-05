@@ -1,8 +1,8 @@
-.root {
+.explore {
 	display: flex;
 }
 
-.root .explorer {
+.explore .explorer {
 	position: fixed;
 	top: 0;
 	left: 50px;
@@ -11,19 +11,19 @@
 	width: 40%;
 }
 
-.root .explorer > div:first-child {
+.explore .explorer > div:first-child {
 	width: 40%;
 }
 
-.root .explorer > div:last-child {
+.explore .explorer > div:last-child {
 	width: 60%;
 }
 
-.root .selected {
+.explore .selected {
 	width: 100%;
 }
 
-.root .selected > div {
+.explore .selected > div {
 	overflow-y: auto;
 	padding: 24px 32px;
 	margin-left: calc(40% + 20px);

@@ -1,4 +1,4 @@
-.root {
+.right {
 	display: flex;
 	flex-direction: column;
 	background-color: var(--background-secondary);
@@ -6,7 +6,7 @@
 	position: relative;
 }
 
-.root .toolBar {
+.right .toolBar {
 	display: flex;
 	position: relative;
 	border-bottom: 1px solid var(--background-secondary);
@@ -14,17 +14,17 @@
 	flex: 0 0 var(--explorer-item-height);
 }
 
-.root .toolBar > div {
+.right .toolBar > div {
 	display: flex;
 	align-items: center;
 }
 
-.root .toolBar > div:first-child {
+.right .toolBar > div:first-child {
 	width: 100%;
 }
 
-.root .toolBar input.search,
-.root .toolBar select {
+.right .toolBar input.search,
+.right .toolBar select {
 	width: 100%;
 	height: 100%;
 	padding: 0 16px;
@@ -32,21 +32,21 @@
 	border: none;
 }
 
-.root .toolBar .icon {
+.right .toolBar .icon {
 	cursor: pointer;
 	font-size: 1.5em;
 	margin-right: 8px;
 }
 
-.root .toolBar .icon.active {
+.right .toolBar .icon.active {
 	color: var(--color-primary);
 }
 
-.root .toolBar .descending {
+.right .toolBar .descending {
 	transform: rotate(180deg);
 }
 
-.root .advancedFilter {
+.right .advancedFilter {
 	position: absolute;
 	top: var(--explorer-item-height);
 	bottom: var(--explorer-item-height);
@@ -59,51 +59,51 @@
 	text-align: center;
 }
 
-.root .advancedFilter.open {
+.right .advancedFilter.open {
 	display: block;
 }
 
-.root .advancedFilter .inputGroup {
+.right .advancedFilter .inputGroup {
 	display: flex;
 	align-items: center;
 	height: var(--explorer-item-height);
 	text-align: right;
 }
 
-.root .advancedFilter .inputGroup div:nth-child(1) {
+.right .advancedFilter .inputGroup div:nth-child(1) {
 	width: 35%;
 	padding-right: 8px;
 }
 
-.root .advancedFilter .inputGroup div:nth-child(2) {
+.right .advancedFilter .inputGroup div:nth-child(2) {
 	width: 65%;
 	display: flex;
 }
 
-.root .advancedFilter .inputGroup input,
-.root .advancedFilter .inputGroup select,
-.root .advancedFilter .inputGroup textarea {
+.right .advancedFilter .inputGroup input,
+.right .advancedFilter .inputGroup select,
+.right .advancedFilter .inputGroup textarea {
 	padding: 4px 8px;
 	max-width: 150px;
 }
 
-.root .advancedFilter .inputGroup div:nth-child(2) select {
+.right .advancedFilter .inputGroup div:nth-child(2) select {
 	width: initial;
 	margin-right: 8px;
 	display: inline-block;
 }
 
-.root .advancedFilter .inputGroup div:nth-child(2) input[type='number'] {
+.right .advancedFilter .inputGroup div:nth-child(2) input[type='number'] {
 	width: 45px;
 	display: inline-block;
 	margin: 0;
 }
 
-.root .advancedFilter .actions {
+.right .advancedFilter .actions {
 	margin-top: 24px;
 }
 
-.root .advancedFilter .actions button {
+.right .advancedFilter .actions button {
 	background-color: var(--background);
 	border-radius: var(--border-radius);
 	border: none;
@@ -111,22 +111,22 @@
 	margin-right: 8px;
 }
 
-.root .advancedFilter .actions button.apply {
+.right .advancedFilter .actions button.apply {
 	background-color: var(--color-primary);
 	color: #fff;
 }
 
-.root .advancedFilter .actions button.remove {
+.right .advancedFilter .actions button.remove {
 	background-color: var(--color-red);
 	color: #fff;
 }
 
-.root .titles {
+.right .titles {
 	overflow-y: auto;
 	flex: 1;
 }
 
-.root .titles li {
+.right .titles li {
 	height: var(--explorer-item-height);
 	display: flex;
 	align-items: center;
@@ -136,22 +136,22 @@
 	user-select: none;
 }
 
-.root .titles li:hover {
+.right .titles li:hover {
 	background-color: var(--background-light);
 }
 
-.root .titles li.active {
+.right .titles li.active {
 	background-color: var(--background-light);
 	border-color: var(--border);
 }
 
-.root .titles li > span {
+.right .titles li > span {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-.root .matches {
+.right .matches {
 	display: flex;
 	align-items: center;
 	padding: 0 16px;

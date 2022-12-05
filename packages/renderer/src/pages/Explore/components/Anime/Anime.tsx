@@ -14,7 +14,7 @@ const Anime: React.FC<Props> = ({ anime }) => {
 	const close = () => setIsEditing(false)
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.anime}>
 			{isEditing ? (
 				<Edit closeEdit={close} data={anime} />
 			) : (

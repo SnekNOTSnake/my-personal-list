@@ -1,63 +1,63 @@
-.root {
+.edit {
 	max-width: 768px;
 }
 
-.root input.regular {
+.edit input.regular {
 	width: 25px;
 	height: 25px;
 }
 
-.root table {
+.edit table {
 	border-collapse: collapse;
 	margin: 24px 0;
 	border-radius: var(--border-radius);
 	width: 100%;
 }
 
-.root th,
-.root td {
+.edit th,
+.edit td {
 	border: 1px solid var(--border);
 }
 
-.root table th {
+.edit table th {
 	padding: 0 12px;
 	text-align: left;
 	font-weight: normal;
 }
 
-.root table input {
+.edit table input {
 	border-radius: 0;
 	background-color: transparent;
 	border: none;
 }
 
-.root textarea {
+.edit textarea {
 	height: 100px;
 	resize: vertical;
 	line-height: 1.5;
 	margin-bottom: 16px;
 }
 
-.root .labeledInput {
+.edit .labeledInput {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 24px;
 }
 
-.root .label {
+.edit .label {
 	font-size: 1.1em;
 	margin-bottom: 8px;
 }
 
-.root .tags input {
+.edit .tags input {
 	width: calc(33% - 8px);
 }
 
-.root .tags ul {
+.edit .tags ul {
 	margin-top: 12px;
 }
 
-.root .tags li {
+.edit .tags li {
 	cursor: pointer;
 	user-select: none;
 	position: relative;
@@ -68,7 +68,7 @@
 	margin: 0 8px 8px 0;
 }
 
-.root .tags li::before {
+.edit .tags li::before {
 	content: '';
 	display: block;
 	position: absolute;
@@ -79,23 +79,23 @@
 	background-color: transparent;
 }
 
-.root .tags li:hover::before {
+.edit .tags li:hover::before {
 	background-color: var(--background-light);
 }
 
-.root .relations .relationInput {
+.edit .relations .relationInput {
 	display: flex;
 	position: relative;
 }
 
-.root .relations .relationInput select.relationType {
+.edit .relations .relationInput select.relationType {
 	width: initial;
 	display: flex;
 	align-items: center;
 	margin-left: 8px;
 }
 
-.root .relations .relationInput .seriesPopover {
+.edit .relations .relationInput .seriesPopover {
 	position: absolute;
 	z-index: 10;
 	top: 50px;
@@ -110,17 +110,17 @@
 	user-select: none;
 }
 
-.root .relations .relationInput .seriesPopover.active {
+.edit .relations .relationInput .seriesPopover.active {
 	display: block;
 }
 
-.root .relations .relationInput .seriesPopover li {
+.edit .relations .relationInput .seriesPopover li {
 	padding: 4px 16px;
 	cursor: pointer;
 	position: relative;
 }
 
-.root .relations .relationInput .seriesPopover li::before {
+.edit .relations .relationInput .seriesPopover li::before {
 	content: '';
 	display: block;
 	position: absolute;
@@ -131,19 +131,19 @@
 	background-color: transparent;
 }
 
-.root .relations .relationInput .seriesPopover li:hover::before {
+.edit .relations .relationInput .seriesPopover li:hover::before {
 	background-color: var(--background-light);
 }
 
-.root .relations input {
+.edit .relations input {
 	width: calc(33% - 8px);
 }
 
-.root .relations ul.titles {
+.edit .relations ul.titles {
 	margin-top: 12px;
 }
 
-.root .relations .titles li > div {
+.edit .relations .titles li > div {
 	position: relative;
 	display: inline-flex;
 	cursor: pointer;
@@ -153,7 +153,7 @@
 	margin-bottom: 8px;
 }
 
-.root .relations .titles li > div::before {
+.edit .relations .titles li > div::before {
 	content: '';
 	display: block;
 	position: absolute;
@@ -164,41 +164,41 @@
 	background-color: transparent;
 }
 
-.root .relations .titles li > div:hover::before {
+.edit .relations .titles li > div:hover::before {
 	background-color: var(--background-light);
 }
 
-.root .relations .titles li .relatedType {
-	background-color: var(--background-light);
-	border-radius: var(--border-radius);
-	padding: 8px 16px;
-}
-
-.root .relations .titles li .relatedType {
+.edit .relations .titles li .relatedType {
 	background-color: var(--background-light);
 	border-radius: var(--border-radius);
 	padding: 8px 16px;
 }
 
-.root .relations .titles li .relatedName {
+.edit .relations .titles li .relatedType {
+	background-color: var(--background-light);
+	border-radius: var(--border-radius);
 	padding: 8px 16px;
 }
 
-.root .numberInputs {
+.edit .relations .titles li .relatedName {
+	padding: 8px 16px;
+}
+
+.edit .numberInputs {
 	display: flex;
 	margin-bottom: 24px;
 }
 
-.root .numberInputs > div {
+.edit .numberInputs > div {
 	flex-grow: 1;
 	margin: 0 16px 0 0;
 }
 
-.root .numberInputs > div:last-child {
+.edit .numberInputs > div:last-child {
 	margin: 0;
 }
 
-.root button {
+.edit button {
 	background-color: var(--background-secondary);
 	border-radius: var(--border-radius);
 	border: none;
@@ -206,7 +206,7 @@
 	margin-right: 8px;
 }
 
-.root button.save {
+.edit button.save {
 	background-color: var(--color-primary);
 	color: #fff;
 }

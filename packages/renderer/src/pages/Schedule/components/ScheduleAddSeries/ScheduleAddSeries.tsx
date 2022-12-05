@@ -36,7 +36,7 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 
 	return (
 		<Modal open={Boolean(day)} onClose={onClose}>
-			<div className={styles.root}>
+			<div className={styles.addSeries}>
 				<input autoFocus type='text' value={input} onChange={onInputChange} />
 				<div className={styles.suggestions}>
 					<ul>

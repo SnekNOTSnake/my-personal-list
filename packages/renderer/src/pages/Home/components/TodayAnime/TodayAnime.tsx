@@ -10,7 +10,7 @@ const TodayAnime: React.FC = () => {
 	const series = useRecoilValue(todaySchedule)
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.todayAnime}>
 			<h2>Today Anime</h2>
 			<div className={styles.items}>
 				{series.length === 0 ? <h1>No anime for today.</h1> : ''}

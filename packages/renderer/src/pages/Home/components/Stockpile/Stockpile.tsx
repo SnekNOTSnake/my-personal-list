@@ -30,7 +30,7 @@ const Stockpile: React.FC = () => {
 	const stats = useRecoilValue(seriesStats)
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.stockpile}>
 			<div className={styles.chart}>
 				<div className={styles.bar}>
 					<ChartBar />

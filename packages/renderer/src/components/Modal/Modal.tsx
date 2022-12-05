@@ -4,11 +4,11 @@ import s from './Modal.module.css'
 type Props = { open: boolean; onClose: Function } & JSX.IntrinsicElements['div']
 
 const Modal: React.FC<Props> = ({ open, onClose, children, ...rest }) => {
-	const rootRef = useRef<HTMLDivElement>(null)
+	const modalRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		const clickListener = (e: MouseEvent) => {
-			if (e.target === rootRef.current) onClose()
+			if (e.target === modalRef.current) onClose()
 		}
 
 		const keydownListener = (e: KeyboardEvent) => {
@@ -26,8 +26,8 @@ const Modal: React.FC<Props> = ({ open, onClose, children, ...rest }) => {
 
 	return (
 		<div
-			ref={rootRef}
-			className={[s.root, open ? s.active : '', rest.className].join(' ')}
+			ref={modalRef}
+			className={[s.modal, open ? s.active : '', rest.className].join(' ')}
 			{...rest}
 		>
 			<div className={s.content}>{children}</div>

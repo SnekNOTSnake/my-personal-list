@@ -1,9 +1,9 @@
-.root {
+.layout {
 	display: flex;
 	overflow: hidden;
 }
 
-.main {
+.layout .main {
 	flex: 1; /* same as flex-grow: 1 */
 	background-color: var(--background);
 	color: var(--text-primary);

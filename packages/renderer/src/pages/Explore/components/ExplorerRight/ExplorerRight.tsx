@@ -59,7 +59,7 @@ const ExplorerRight: React.FC = () => {
 	useEffect(() => {
 		const listener = (e: KeyboardEvent) => {
 			const iFocused = document.querySelector(`.${styles.search}:focus`)
-			const focused = document.querySelector(`.${styles.root}:focus-within`)
+			const focused = document.querySelector(`.${styles.right}:focus-within`)
 			if (!titlesRef.current || !inputRef.current) return
 			if (!focused && !['f', 'Escape'].includes(e.key)) return
 
@@ -126,7 +126,7 @@ const ExplorerRight: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.root} tabIndex={0}>
+		<div className={styles.right} tabIndex={0}>
 			<div className={styles.toolBar}>
 				<div>
 					<input

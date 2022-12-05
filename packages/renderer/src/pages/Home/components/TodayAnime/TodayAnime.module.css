@@ -1,12 +1,12 @@
-.root .items {
+.todayAnime .items {
 	display: flex;
 	margin-bottom: 64px;
 }
 
-.root .items a {
+.todayAnime .items a {
 	margin-right: 16px;
 }
 
-.root .items .poster {
+.todayAnime .items .poster {
 	width: 175px;
 }

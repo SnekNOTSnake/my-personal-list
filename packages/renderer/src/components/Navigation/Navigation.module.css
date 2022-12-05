@@ -1,4 +1,4 @@
-.root {
+.nav {
 	position: relative;
 	/*
 		The below rule is as same as these 3 following rules:
@@ -11,7 +11,7 @@
 	background-color: var(--foreground);
 }
 
-.root .menu {
+.nav .menu {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -21,7 +21,7 @@
 	bottom: 0;
 }
 
-.root .menu a {
+.nav .menu a {
 	display: block;
 	position: relative;
 	width: 100%;
@@ -30,12 +30,12 @@
 	color: var(--text-contrast);
 }
 
-.root .menu a.active {
+.nav .menu a.active {
 	color: #fff;
 	background-color: var(--color-primary);
 }
 
-.root .menu .icon {
+.nav .menu .icon {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -43,7 +43,7 @@
 	font-size: 1.5em;
 }
 
-.root .menu .settings {
+.nav .menu .settings {
 	margin-top: auto;
 	cursor: pointer;
 }

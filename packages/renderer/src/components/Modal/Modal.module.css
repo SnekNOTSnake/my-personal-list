@@ -1,4 +1,4 @@
-.root {
+.modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -9,11 +9,11 @@
 	display: none;
 }
 
-.root.active {
+.modal.active {
 	display: flex;
 }
 
-.root .content {
+.modal .content {
 	position: absolute;
 	top: 50%;
 	left: 50%;

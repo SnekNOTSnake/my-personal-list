@@ -97,7 +97,7 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 	const onResetForm = () => setInput(defaultInputs)
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.edit}>
 			<h2>Edit Details</h2>
 
 			<form onSubmit={onSubmit}>

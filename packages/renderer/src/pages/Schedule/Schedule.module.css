@@ -1,20 +1,20 @@
-.root {
+.schedule {
 	padding: 24px 8px;
 }
 
-.root .days {
+.schedule .days {
 	display: flex;
 	align-items: flex-start;
 }
 
-.root .days .day {
+.schedule .days .day {
 	display: flex;
 	flex-grow: 1;
 	flex-basis: 0;
 	margin-bottom: 24px;
 }
 
-.root .days .day .container {
+.schedule .days .day .container {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -22,27 +22,27 @@
 	border-radius: var(--border-radius);
 }
 
-.root .days .day .container.active {
+.schedule .days .day .container.active {
 	background-color: rgba(47, 128, 237, 0.15);
 }
 
-.root .days .day .container .header {
+.schedule .days .day .container .header {
 	display: flex;
 	align-items: center;
 	text-transform: capitalize;
 }
 
-.root .days .day .container .header h1 {
+.schedule .days .day .container .header h1 {
 	color: var(--text-secondary);
 	white-space: nowrap;
 	margin: 0;
 }
 
-.root .days .day .container.active .header h1 {
+.schedule .days .day .container.active .header h1 {
 	color: var(--text-primary);
 }
 
-.root .days .day button {
+.schedule .days .day button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -57,17 +57,17 @@
 	visibility: hidden;
 }
 
-.root[data-editing='on'] .days .day:hover button {
+.schedule[data-editing='on'] .days .day:hover button {
 	visibility: visible;
 }
 
-.root .edit {
+.schedule .edit {
 	position: fixed;
 	left: 74px;
 	bottom: 24px;
 }
 
-.root .edit button {
+.schedule .edit button {
 	background-color: var(--background-light);
 	border: 1px solid var(--border);
 	padding: 8px 16px;
@@ -75,29 +75,29 @@
 }
 
 @media screen and (max-width: 1024px) {
-	.root .days {
+	.schedule .days {
 		flex-wrap: wrap;
 	}
 
-	.root .days .day {
+	.schedule .days .day {
 		flex-basis: initial;
 	}
 }
 
 /* @media screen and (max-width: 1280px) {
-	.root {
+	.schedule {
 		padding: 24px 32px;
 	}
 
-	.root .days {
+	.schedule .days {
 		flex-direction: column;
 	}
 
-	.root .days .day .container {
+	.schedule .days .day .container {
 		flex-direction: row;
 	}
 
-	.root .days .day .container h1 {
+	.schedule .days .day .container h1 {
 		width: 50px;
 		display: flex;
 		align-items: center;
@@ -105,7 +105,7 @@
 		margin: 0 32px 0 0;
 	}
 
-	.root .days .day .container .series {
+	.schedule .days .day .container .series {
 		margin: 0 48px 0 0;
 	}
 } */

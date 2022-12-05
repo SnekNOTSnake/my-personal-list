@@ -1,21 +1,21 @@
-.root {
+.scheduleSeries {
 	display: flex;
 	flex-grow: 1;
 	margin-top: 32px;
 }
 
-.root .poster {
+.scheduleSeries .poster {
 	flex: 0 0 50px;
 	margin-right: 8px;
 }
 
-.root .details {
+.scheduleSeries .details {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 }
 
-.root .details h3 {
+.scheduleSeries .details h3 {
 	line-height: 1.2;
 	max-width: 150px;
 	margin-bottom: 4px;
@@ -25,23 +25,23 @@
 	overflow: hidden;
 }
 
-.root .details .episode {
+.scheduleSeries .details .episode {
 	color: var(--text-secondary);
 	margin-bottom: 4px;
 }
 
-.root .details .actions {
+.scheduleSeries .details .actions {
 	margin-top: auto;
 	visibility: hidden;
 	font-size: 1.2em;
 	color: var(--text-secondary);
 }
 
-[data-editing='on'] .root:hover .details .actions {
+[data-editing='on'] .scheduleSeries:hover .details .actions {
 	visibility: visible;
 }
 
-.root .details .actions svg {
+.scheduleSeries .details .actions svg {
 	cursor: pointer;
 	margin-right: 4px;
 }

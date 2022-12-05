@@ -1,31 +1,31 @@
-.root {
+.settings {
 	padding: 24px 32px;
 	max-width: 500px;
 }
 
-.root input {
+.settings input {
 	width: initial;
 	margin: 0;
 	margin-right: 8px;
 }
 
-.root input[type='text'] {
+.settings input[type='text'] {
 	width: 100%;
 }
 
-.root input[type='checkbox'] {
+.settings input[type='checkbox'] {
 	width: 20px;
 	height: 20px;
 }
 
-.root button {
+.settings button {
 	background-color: var(--background-secondary);
 	border: none;
 	padding: 0 12px;
 	height: 100%;
 }
 
-.root .cwds .cwd {
+.settings .cwds .cwd {
 	display: flex;
 	align-items: center;
 	margin-bottom: 8px;
@@ -33,50 +33,50 @@
 	border: 1px solid var(--border);
 }
 
-.root .cwds .cwd > div {
+.settings .cwds .cwd > div {
 	display: flex;
 	height: 100%;
 	align-items: center;
 	padding: 8px 12px;
 }
 
-.root .cwds .cwd > div:nth-child(2) {
+.settings .cwds .cwd > div:nth-child(2) {
 	flex: 1;
 }
 
-.root .labeledInput {
+.settings .labeledInput {
 	display: inline-flex;
 	width: 50%;
 	flex-direction: column;
 	margin-bottom: 24px;
 }
 
-.root .labeledInput:first-child {
+.settings .labeledInput:first-child {
 	display: flex;
 	width: 100%;
 }
 
-.root .labeledInput .label {
+.settings .labeledInput .label {
 	font-size: 1.1em;
 	margin-bottom: 8px;
 }
 
-.root .labeledInput .input {
+.settings .labeledInput .input {
 	display: flex;
 	white-space: nowrap;
 	height: 33px;
 	align-items: center;
 }
 
-.root .labeledInput .input button {
+.settings .labeledInput .input button {
 	margin-right: 8px;
 }
 
-.root .labeledInput .input button:last-child {
+.settings .labeledInput .input button:last-child {
 	margin: 0;
 }
 
-.root .labeledInput .input label {
+.settings .labeledInput .input label {
 	display: flex;
 	margin-right: 24px;
 	font-size: 1.3em;
@@ -84,11 +84,11 @@
 	cursor: pointer;
 }
 
-.root .actions button {
+.settings .actions button {
 	height: 33px;
 	margin: 8px 8px 0 0;
 }
 
-.root .actions button.apply {
+.settings .actions button.apply {
 	background-color: var(--color-primary);
 }

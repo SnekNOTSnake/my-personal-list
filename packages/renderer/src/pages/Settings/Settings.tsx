@@ -72,7 +72,7 @@ const Settings: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.settings}>
 			<h1>Settings</h1>
 
 			<form onSubmit={onSubmit}>

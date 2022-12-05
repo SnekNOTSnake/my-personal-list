@@ -18,7 +18,7 @@ const Schedule: React.FC = () => {
 	const addSeriesClose = () => setAddSeriesDay(null)
 
 	return (
-		<div className={styles.root} data-editing={isEditing ? 'on' : 'off'}>
+		<div className={styles.schedule} data-editing={isEditing ? 'on' : 'off'}>
 			<ScheduleAddSeries day={addSeriesDay} onClose={addSeriesClose} />
 
 			<div className={styles.days}>

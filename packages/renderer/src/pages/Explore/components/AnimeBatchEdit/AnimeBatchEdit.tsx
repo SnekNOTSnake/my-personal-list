@@ -134,7 +134,7 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 	}
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.batchEdit}>
 			<div className={styles.center}>
 				<h1>Selected {selectedAnime.length} Series</h1>
 
