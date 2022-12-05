@@ -69,18 +69,13 @@
 .left .clear {
 	display: flex;
 	align-items: center;
-	padding: 0 16px;
 	flex: 0 0 var(--explorer-item-height);
 	border-bottom: 1px solid var(--background-secondary);
 }
 
 .left .clear button {
-	display: inline-flex;
-	align-items: flex-end;
-	color: var(--text-primary);
-	background-color: transparent;
 	border: none;
-	padding: 0;
+	height: 100%;
 }
 
 .left .genres {

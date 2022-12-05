@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
+import {
+	MdOutlineAdd,
+	MdOutlineCheck,
+	MdOutlineDelete,
+	MdOutlineFolder,
+} from 'react-icons/md'
 
 import { settingsState } from '@/store/settings'
 import { scheduleState, seriesState } from '@/store/series'
+import Button from '@/components/Button/Button'
 import styles from './Settings.module.css'
 
 const Settings: React.FC = () => {
@@ -83,38 +90,38 @@ const Settings: React.FC = () => {
 							<div className={styles.cwd} key={el.path}>
 								<div>{el.name}</div>
 								<div>{el.path}</div>
-								<button
+								<Button
 									type='button'
 									onClick={() => onCwdRemove(el.path)}
+									Icon={MdOutlineDelete}
 									title='Delete Working Directory'
-								>
-									Delete
-								</button>
+								/>
 							</div>
 						))}
 					</div>
 					<div className={styles.input}>
 						<input
 							type='text'
-							placeholder='Working dir name'
+							placeholder='Name'
 							name='cwd'
 							onChange={onCwdNameChange}
 							value={cwd.name}
 						/>
-						<button
+						<Button
 							type='button'
+							Icon={MdOutlineFolder}
 							onClick={onCwdPathChange}
-							title='Choose Working Directory'
+							title={cwd.path || 'Choose Working Directory'}
+							className={styles.grow}
 						>
 							{cwd.path || 'Choose Directory'}
-						</button>
-						<button
+						</Button>
+						<Button
 							type='button'
+							Icon={MdOutlineAdd}
 							onClick={onCwdSubmit}
 							title='Add Working Directory'
-						>
-							Add
-						</button>
+						/>
 					</div>
 				</div>
 				<div className={styles.labeledInput}>
@@ -153,13 +160,24 @@ const Settings: React.FC = () => {
 						/>
 					</div>
 				</div>
-				<div className={styles.actions}>
-					<button type='submit' className={styles.apply} title='Apply Changes'>
+				<div>
+					<Button
+						type='submit'
+						Icon={MdOutlineCheck}
+						color='primary'
+						title='Apply Changes'
+					>
 						Apply
-					</button>
-					<button type='button' onClick={onReset} title='Reset Changes'>
+					</Button>
+					<Button
+						type='button'
+						Icon={MdOutlineDelete}
+						color='red'
+						onClick={onReset}
+						title='Reset Changes'
+					>
 						Reset
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

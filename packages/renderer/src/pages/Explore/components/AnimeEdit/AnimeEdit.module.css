@@ -202,16 +202,3 @@
 .edit .numberInputs > div:last-child {
 	margin: 0;
 }
-
-.edit button {
-	background-color: var(--background-secondary);
-	border-radius: var(--border-radius);
-	border: none;
-	padding: 8px 16px;
-	margin-right: 8px;
-}
-
-.edit button.save {
-	background-color: var(--color-primary);
-	color: #fff;
-}

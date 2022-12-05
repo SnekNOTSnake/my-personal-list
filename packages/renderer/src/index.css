@@ -144,6 +144,11 @@ select {
 	padding: 8px 12px;
 }
 
+input::placeholder,
+textarea::placeholder {
+	color: var(--text-secondary);
+}
+
 select {
 	-webkit-appearance: none;
 	-moz-appearance: none;

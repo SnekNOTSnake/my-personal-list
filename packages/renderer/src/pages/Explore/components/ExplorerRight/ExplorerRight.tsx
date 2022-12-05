@@ -1,5 +1,5 @@
 import React, { useEffect, MouseEvent } from 'react'
-import { MdFilterAlt } from 'react-icons/md'
+import { MdFilterAlt, MdOutlinePermMedia } from 'react-icons/md'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import {
@@ -9,6 +9,7 @@ import {
 } from '@/store/series'
 import styles from './ExplorerRight.module.css'
 import AdvancedFilter from './AdvancedFilter'
+import Button from '@/components/Button/Button'
 
 const ExplorerRight: React.FC = () => {
 	const inputRef = React.useRef<HTMLInputElement | null>(null)
@@ -139,7 +140,8 @@ const ExplorerRight: React.FC = () => {
 					/>
 				</div>
 				<div>
-					<MdFilterAlt
+					<Button
+						Icon={MdFilterAlt}
 						title='Advanced Filters'
 						onClick={toggleFilter}
 						className={[
@@ -171,7 +173,9 @@ const ExplorerRight: React.FC = () => {
 				</ul>
 			</div>
 			<AdvancedFilter isFilterOpen={isFilterOpen} closeFilter={closeFilter} />
-			<div className={styles.matches}>{filtered.length} Items</div>
+			<div className={styles.matches}>
+				<MdOutlinePermMedia /> {filtered.length} Items
+			</div>
 		</div>
 	)
 }

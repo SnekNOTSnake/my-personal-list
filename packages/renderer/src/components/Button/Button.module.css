@@ -1,0 +1,65 @@
+.button {
+	display: inline-flex;
+	position: relative;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 12px;
+	margin-right: 8px;
+	background-color: transparent;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--border);
+}
+
+.button:last-child {
+	margin-right: 0;
+}
+
+.button::before {
+	content: '';
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--background-light);
+}
+
+.button:hover::before {
+	display: block;
+}
+
+.button svg {
+	font-size: 1.2em;
+}
+
+.button span {
+	flex: 1;
+	text-align: left;
+	margin-left: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.button.square {
+	padding: 8px;
+}
+
+.button.primary {
+	background-color: var(--color-primary);
+	color: #fff;
+	border: none;
+}
+
+.button.red {
+	background-color: var(--color-red);
+	color: #fff;
+	border: none;
+}
+
+.button.green {
+	background-color: var(--color-green);
+	color: #fff;
+	border: none;
+}

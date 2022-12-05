@@ -1,6 +1,8 @@
 import React, { useState, MouseEvent } from 'react'
+import { MdOutlineCheck, MdOutlineDelete, MdOutlineClose } from 'react-icons/md'
 import { useRecoilState } from 'recoil'
 
+import Button from '@/components/Button/Button'
 import { seriesFilterState } from '@/store/series'
 import styles from './ExplorerRight.module.css'
 
@@ -400,24 +402,31 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 					</div>
 				</div>
 				<div className={styles.actions}>
-					<button type='submit' className={styles.apply} title='Apply Filters'>
+					<Button
+						type='submit'
+						Icon={MdOutlineCheck}
+						color='primary'
+						title='Apply Filters'
+					>
 						Apply
-					</button>
-					<button
+					</Button>
+					<Button
 						type='button'
+						Icon={MdOutlineDelete}
+						color='red'
 						onClick={onRemove}
-						className={styles.remove}
 						title='Remove Filters'
 					>
 						Remove
-					</button>
-					<button
+					</Button>
+					<Button
 						type='button'
+						Icon={MdOutlineClose}
 						onClick={closeFilter}
 						title='Close Advanced Filters'
 					>
 						Close
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

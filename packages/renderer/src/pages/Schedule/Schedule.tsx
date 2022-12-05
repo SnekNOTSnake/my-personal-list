@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { MdOutlineAdd } from 'react-icons/md'
+import { MdOutlineAdd, MdOutlineEdit } from 'react-icons/md'
 import { useRecoilValue } from 'recoil'
 
+import Button from '@/components/Button/Button'
 import { populatedSchedule } from '@/store/series'
 import ScheduleAddSeries from './components/ScheduleAddSeries'
 import ScheduleSeries from './components/ScheduleSeries'
@@ -53,11 +54,14 @@ const Schedule: React.FC = () => {
 				))}
 			</div>
 
-			<div className={styles.edit}>
-				<button type='button' onClick={toggleEditing}>
-					{isEditing ? 'Done Editing' : 'Edit Schedule'}
-				</button>
-			</div>
+			<Button
+				className={styles.edit}
+				type='button'
+				Icon={MdOutlineEdit}
+				onClick={toggleEditing}
+			>
+				{isEditing ? 'Done Editing' : 'Edit Schedule'}
+			</Button>
 		</div>
 	)
 }

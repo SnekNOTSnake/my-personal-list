@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { seriesFilterState, seriesStats } from '@/store/series'
 import styles from './ExplorerLeft.module.css'
+import Button from '@/components/Button/Button'
 
 const ExplorerLeft: React.FC = () => {
 	const { tags } = useRecoilValue(seriesStats)
@@ -36,9 +37,14 @@ const ExplorerLeft: React.FC = () => {
 	return (
 		<div className={styles.left}>
 			<div className={styles.clear}>
-				<button onClick={onClearClick} type='button' title='Clear Active Tags'>
-					<MdDeleteOutline className={styles.icon} /> Clear
-				</button>
+				<Button
+					Icon={MdDeleteOutline}
+					onClick={onClearClick}
+					type='button'
+					title='Clear Active Tags'
+				>
+					Clear
+				</Button>
 			</div>
 			<div className={styles.genres}>
 				<ul>

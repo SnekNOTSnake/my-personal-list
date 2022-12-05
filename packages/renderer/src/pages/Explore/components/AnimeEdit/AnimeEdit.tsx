@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { seriesState, seriesFilterState, seriesStats } from '@/store/series'
+import { MdOutlineCheck, MdOutlineDelete, MdOutlineClose } from 'react-icons/md'
 
+import { seriesState, seriesFilterState, seriesStats } from '@/store/series'
+import Button from '@/components/Button/Button'
 import EditMetadata from './EditMetadata'
 import EditNotes from './EditNotes'
 import EditRelations from './EditRelations'
@@ -112,15 +114,31 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 				/>
 
 				<div>
-					<button className={styles.save} type='submit' title='Save Changes'>
+					<Button
+						color='primary'
+						Icon={MdOutlineCheck}
+						type='submit'
+						title='Save Changes'
+					>
 						Save
-					</button>
-					<button type='button' onClick={onResetForm} title='Reset Changes'>
+					</Button>
+					<Button
+						color='red'
+						Icon={MdOutlineDelete}
+						type='button'
+						onClick={onResetForm}
+						title='Reset Changes'
+					>
 						Reset
-					</button>
-					<button type='button' onClick={closeEdit} title='Cancel Changes'>
+					</Button>
+					<Button
+						type='button'
+						Icon={MdOutlineClose}
+						onClick={closeEdit}
+						title='Cancel Changes'
+					>
 						Cancel
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

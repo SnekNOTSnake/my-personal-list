@@ -32,13 +32,13 @@
 	border: none;
 }
 
-.right .toolBar .icon {
-	cursor: pointer;
-	font-size: 1.5em;
-	margin-right: 8px;
+.right .toolBar button.icon {
+	border: none;
+	height: 100%;
+	width: 34px;
 }
 
-.right .toolBar .icon.active {
+.right .toolBar button.icon.active {
 	color: var(--color-primary);
 }
 
@@ -103,24 +103,6 @@
 	margin-top: 24px;
 }
 
-.right .advancedFilter .actions button {
-	background-color: var(--background);
-	border-radius: var(--border-radius);
-	border: none;
-	padding: 8px 16px;
-	margin-right: 8px;
-}
-
-.right .advancedFilter .actions button.apply {
-	background-color: var(--color-primary);
-	color: #fff;
-}
-
-.right .advancedFilter .actions button.remove {
-	background-color: var(--color-red);
-	color: #fff;
-}
-
 .right .titles {
 	overflow-y: auto;
 	flex: 1;
@@ -163,4 +145,9 @@
 	margin-top: auto;
 	background-color: var(--background);
 	flex: 0 0 var(--explorer-item-height);
+}
+
+.right .matches svg {
+	margin-right: 8px;
+	font-size: 1.2em;
 }

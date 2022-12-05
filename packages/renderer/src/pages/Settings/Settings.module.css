@@ -10,19 +10,12 @@
 }
 
 .settings input[type='text'] {
-	width: 100%;
+	width: 100px;
 }
 
 .settings input[type='checkbox'] {
 	width: 20px;
 	height: 20px;
-}
-
-.settings button {
-	background-color: var(--background-secondary);
-	border: none;
-	padding: 0 12px;
-	height: 100%;
 }
 
 .settings .cwds .cwd {
@@ -38,10 +31,17 @@
 	height: 100%;
 	align-items: center;
 	padding: 8px 12px;
+	border-right: 1px solid var(--border);
 }
 
 .settings .cwds .cwd > div:nth-child(2) {
 	flex: 1;
+	border: none;
+}
+
+.settings .cwds .cwd button {
+	border: none;
+	border-left: 1px solid var(--border);
 }
 
 .settings .labeledInput {
@@ -68,14 +68,6 @@
 	align-items: center;
 }
 
-.settings .labeledInput .input button {
-	margin-right: 8px;
-}
-
-.settings .labeledInput .input button:last-child {
-	margin: 0;
-}
-
 .settings .labeledInput .input label {
 	display: flex;
 	margin-right: 24px;
@@ -84,11 +76,7 @@
 	cursor: pointer;
 }
 
-.settings .actions button {
-	height: 33px;
-	margin: 8px 8px 0 0;
-}
-
-.settings .actions button.apply {
-	background-color: var(--color-primary);
+.settings .labeledInput .input .grow {
+	flex: 1;
+	justify-content: flex-start;
 }

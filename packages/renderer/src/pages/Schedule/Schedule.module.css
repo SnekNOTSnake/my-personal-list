@@ -61,17 +61,11 @@
 	visibility: visible;
 }
 
-.schedule .edit {
+.schedule button.edit {
 	position: fixed;
 	left: 74px;
 	bottom: 24px;
-}
-
-.schedule .edit button {
-	background-color: var(--background-light);
-	border: 1px solid var(--border);
-	padding: 8px 16px;
-	border-radius: var(--border-radius);
+	background-color: var(--background-secondary);
 }
 
 @media screen and (max-width: 1024px) {

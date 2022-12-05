@@ -12,6 +12,7 @@ import { seriesFilterState, seriesState } from '@/store/series'
 import Poster from '@/components/Poster'
 import Modal from '@/components/Modal'
 import styles from './AnimeDetails.module.css'
+import Button from '@/components/Button/Button'
 
 type Props = { edit: () => any; data: Series }
 
@@ -86,47 +87,48 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 			</Modal>
 
 			<Poster onClick={onOpenModal} anime={data} className={styles.poster}>
-				<button type='button' onClick={onChangePoster} title='Change Poster'>
-					<MdOutlineImage />
-				</button>
+				<Button
+					color='primary'
+					Icon={MdOutlineImage}
+					type='button'
+					onClick={onChangePoster}
+					title='Change Poster'
+				/>
 			</Poster>
 
 			<div className={styles.detail}>
 				<div className={styles.actions}>
-					<button
+					<Button
+						Icon={MdOutlineFolder}
+						color='primary'
 						onClick={() => window.myAPI.openItem(data.fullPath)}
-						style={{ backgroundColor: '#2f80ed' }}
 						type='button'
 						title='Open In File Explorer'
-					>
-						<MdOutlineFolder />
-					</button>
-					<button
+					/>
+					<Button
+						Icon={MdOutlineEdit}
+						color='green'
 						onClick={edit}
-						style={{ backgroundColor: '#219653' }}
 						type='button'
 						title='Edit Series'
-					>
-						<MdOutlineEdit />
-					</button>
-					<button
-						style={{ backgroundColor: '#3b3e42' }}
+					/>
+					<Button
+						className={styles.more}
+						Icon={MdOutlineMoreHoriz}
 						type='button'
 						title='Others (Unusable, for now)'
-					>
-						<MdOutlineMoreHoriz />
-					</button>
+					/>
 				</div>
 
 				<h1>{data.path}</h1>
 				<div className={styles.watchInfo}>
-					<button
+					<Button
+						Icon={MdOutlineAdd}
+						color='green'
 						onClick={onIncreaseEpsWatched}
 						type='button'
 						title='Increase Watched Episode'
-					>
-						<MdOutlineAdd />
-					</button>
+					/>
 					<div className={styles.watchedInfo}>
 						{data.epsWatched} of {data.epsNum} episodes
 					</div>

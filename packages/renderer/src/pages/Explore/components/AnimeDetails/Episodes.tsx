@@ -1,3 +1,4 @@
+import Button from '@/components/Button/Button'
 import React, { useMemo, useState } from 'react'
 import { MdOutlineFolder } from 'react-icons/md'
 import styles from './AnimeDetails.module.css'
@@ -31,9 +32,13 @@ const Episodes: React.FC<Props> = ({ data }) => {
 
 	return (
 		<div className={styles.episodes}>
-			<button onClick={onShowAllToggle} className={styles.showAllToggler}>
-				<MdOutlineFolder /> {showAll ? 'Show Videos Only' : 'Show All Files'}
-			</button>
+			<Button
+				Icon={MdOutlineFolder}
+				onClick={onShowAllToggle}
+				className={styles.showAllToggler}
+			>
+				{showAll ? 'Show Videos Only' : 'Show All Files'}
+			</Button>
 
 			<ul>
 				{files.map((file) => {
