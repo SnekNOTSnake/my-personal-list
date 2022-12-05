@@ -132,6 +132,7 @@
 	align-items: center;
 	padding: 0 16px;
 	border: 1px solid transparent;
+	border-bottom-color: transparent !important;
 	cursor: pointer;
 	user-select: none;
 }
@@ -143,6 +144,10 @@
 .right .titles li.active {
 	background-color: var(--background-light);
 	border-color: var(--border);
+}
+
+.right .titles li.active.last {
+	border-bottom-color: var(--border) !important;
 }
 
 .right .titles li > span {

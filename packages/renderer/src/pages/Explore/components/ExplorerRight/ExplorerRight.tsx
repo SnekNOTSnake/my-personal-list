@@ -150,9 +150,16 @@ const ExplorerRight: React.FC = () => {
 			</div>
 			<div ref={titlesRef} className={styles.titles}>
 				<ul>
-					{filtered.map((el) => (
+					{filtered.map((el, i) => (
 						<li
-							className={selectedSeries.includes(el.path) ? styles.active : ''}
+							className={[
+								selectedSeries.includes(el.path) ? styles.active : '',
+								selectedSeries.includes(el.path) &&
+								(!filtered[i + 1] ||
+									!selectedSeries.includes(filtered[i + 1].path))
+									? styles.last
+									: '',
+							].join(' ')}
 							key={el.path}
 							data-path={el.path}
 							onClick={(e) => select(e, el.path)}
