@@ -35,6 +35,7 @@ const Schedule: React.FC = () => {
 								<button
 									type='button'
 									onClick={() => onAddSeriesClick(day as keyof Schedule)}
+									title='Add Series'
 								>
 									<MdOutlineAdd />
 								</button>

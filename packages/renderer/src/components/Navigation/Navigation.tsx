@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
 		<nav className={styles.nav}>
 			<div className={styles.menu}>
 				<ul>
-					<li>
+					<li title='Home'>
 						<NavLink
 							className={({ isActive }) => (isActive ? styles.active : '')}
 							to='/'
@@ -40,7 +40,7 @@ const Navigation: React.FC = () => {
 							<MdOutlineSpaceDashboard className={styles.icon} />
 						</NavLink>
 					</li>
-					<li>
+					<li title='Explore'>
 						<NavLink
 							className={({ isActive }) => (isActive ? styles.active : '')}
 							to='/explore'
@@ -48,7 +48,7 @@ const Navigation: React.FC = () => {
 							<MdOutlineExplore className={styles.icon} />
 						</NavLink>
 					</li>
-					<li>
+					<li title='Schedule'>
 						<NavLink
 							className={({ isActive }) => (isActive ? styles.active : '')}
 							to='/schedule'
@@ -56,7 +56,7 @@ const Navigation: React.FC = () => {
 							<MdOutlineEventNote className={styles.icon} />
 						</NavLink>
 					</li>
-					<li>
+					<li title='Settings'>
 						<NavLink
 							className={({ isActive }) => (isActive ? styles.active : '')}
 							to='/settings'
@@ -67,7 +67,7 @@ const Navigation: React.FC = () => {
 				</ul>
 
 				<div className={styles.settings}>
-					<a onClick={onChangeTheme}>
+					<a title='Toggle Theme' onClick={onChangeTheme}>
 						{theme === 'dark' ? (
 							<MdOutlineNightsStay className={styles.icon} />
 						) : (

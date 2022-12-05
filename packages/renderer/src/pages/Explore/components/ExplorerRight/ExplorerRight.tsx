@@ -140,6 +140,7 @@ const ExplorerRight: React.FC = () => {
 				</div>
 				<div>
 					<MdFilterAlt
+						title='Advanced Filters'
 						onClick={toggleFilter}
 						className={[
 							styles.icon,

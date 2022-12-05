@@ -1,3 +1,7 @@
+.addSeries {
+	width: 300px;
+}
+
 .addSeries input {
 	margin-bottom: 8px;
 }
@@ -25,4 +29,9 @@
 
 .addSeries ul li:last-child {
 	margin: 0;
+}
+
+.addSeries .suggestions {
+	height: 200px;
+	overflow-y: scroll;
 }

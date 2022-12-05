@@ -53,13 +53,6 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 		<div className={[styles.labeledInput, styles.relations].join(' ')}>
 			<div className={styles.label}>Add relations</div>
 			<div className={styles.relationInput}>
-				<input
-					value={relatedInput}
-					onChange={onRelatedChange}
-					type='text'
-					onFocus={() => setFocused(true)}
-					onBlur={() => setTimeout(() => setFocused(false), 100)}
-				/>
 				<select className={styles.relationType} onChange={onRelTypeChange}>
 					<option value='sequel'>Sequel</option>
 					<option value='prequel'>Prequel</option>
@@ -69,18 +62,28 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 					<option value='summary'>Summary</option>
 					<option value='alternative-version'>Alternative Version</option>
 				</select>
-				<div
-					className={[styles.seriesPopover, focused ? styles.active : ''].join(
-						' ',
-					)}
-				>
-					<ul>
-						{localFilteredSeries.map((el) => (
-							<li onClick={() => onAddRelation(el.path)} key={el.path}>
-								{el.path}
-							</li>
-						))}
-					</ul>
+				<div className={styles.input}>
+					<input
+						value={relatedInput}
+						onChange={onRelatedChange}
+						type='text'
+						onFocus={() => setFocused(true)}
+						onBlur={() => setTimeout(() => setFocused(false), 100)}
+					/>
+					<div
+						className={[
+							styles.seriesPopover,
+							focused ? styles.active : '',
+						].join(' ')}
+					>
+						<ul>
+							{localFilteredSeries.map((el) => (
+								<li onClick={() => onAddRelation(el.path)} key={el.path}>
+									{el.path}
+								</li>
+							))}
+						</ul>
+					</div>
 				</div>
 			</div>
 			<ul className={styles.titles}>

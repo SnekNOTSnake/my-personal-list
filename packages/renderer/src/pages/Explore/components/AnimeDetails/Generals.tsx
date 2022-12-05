@@ -86,7 +86,7 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 			</Modal>
 
 			<Poster onClick={onOpenModal} anime={data} className={styles.poster}>
-				<button type='button' onClick={onChangePoster}>
+				<button type='button' onClick={onChangePoster} title='Change Poster'>
 					<MdOutlineImage />
 				</button>
 			</Poster>
@@ -97,6 +97,7 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 						onClick={() => window.myAPI.openItem(data.fullPath)}
 						style={{ backgroundColor: '#2f80ed' }}
 						type='button'
+						title='Open In File Explorer'
 					>
 						<MdOutlineFolder />
 					</button>
@@ -104,17 +105,26 @@ const Generals: React.FC<Props> = ({ data, edit }) => {
 						onClick={edit}
 						style={{ backgroundColor: '#219653' }}
 						type='button'
+						title='Edit Series'
 					>
 						<MdOutlineEdit />
 					</button>
-					<button style={{ backgroundColor: '#3b3e42' }} type='button'>
+					<button
+						style={{ backgroundColor: '#3b3e42' }}
+						type='button'
+						title='Others (Unusable, for now)'
+					>
 						<MdOutlineMoreHoriz />
 					</button>
 				</div>
 
 				<h1>{data.path}</h1>
 				<div className={styles.watchInfo}>
-					<button onClick={onIncreaseEpsWatched} type='button'>
+					<button
+						onClick={onIncreaseEpsWatched}
+						type='button'
+						title='Increase Watched Episode'
+					>
 						<MdOutlineAdd />
 					</button>
 					<div className={styles.watchedInfo}>

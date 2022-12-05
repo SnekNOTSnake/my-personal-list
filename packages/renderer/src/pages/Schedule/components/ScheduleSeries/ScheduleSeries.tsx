@@ -34,7 +34,10 @@ const ScheduleSeries: React.FC<Props> = ({ anime, day }) => {
 					EP {anime.epsWatched}/{anime.epsNum}
 				</div>
 				<div className={styles.actions}>
-					<MdOutlineDelete onClick={deleteSeriesFromSchedule} />
+					<MdOutlineDelete
+						onClick={deleteSeriesFromSchedule}
+						title='Remove Series'
+					/>
 				</div>
 			</div>
 		</div>

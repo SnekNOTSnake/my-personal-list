@@ -92,7 +92,11 @@
 	width: initial;
 	display: flex;
 	align-items: center;
-	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.edit .relations .relationInput .input {
+	position: relative;
 }
 
 .edit .relations .relationInput .seriesPopover {
@@ -101,7 +105,8 @@
 	top: 50px;
 	left: 0;
 	min-width: 350px;
-	min-height: 100px;
+	height: 150px;
+	overflow-y: scroll;
 	background-color: var(--background-secondary);
 	border: 1px solid var(--border);
 	display: none;
@@ -136,7 +141,7 @@
 }
 
 .edit .relations input {
-	width: calc(33% - 8px);
+	width: 200px;
 }
 
 .edit .relations ul.titles {

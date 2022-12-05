@@ -83,7 +83,11 @@ const Settings: React.FC = () => {
 							<div className={styles.cwd} key={el.path}>
 								<div>{el.name}</div>
 								<div>{el.path}</div>
-								<button type='button' onClick={() => onCwdRemove(el.path)}>
+								<button
+									type='button'
+									onClick={() => onCwdRemove(el.path)}
+									title='Delete Working Directory'
+								>
 									Delete
 								</button>
 							</div>
@@ -97,10 +101,18 @@ const Settings: React.FC = () => {
 							onChange={onCwdNameChange}
 							value={cwd.name}
 						/>
-						<button type='button' onClick={onCwdPathChange}>
+						<button
+							type='button'
+							onClick={onCwdPathChange}
+							title='Choose Working Directory'
+						>
 							{cwd.path || 'Choose Directory'}
 						</button>
-						<button type='button' onClick={onCwdSubmit}>
+						<button
+							type='button'
+							onClick={onCwdSubmit}
+							title='Add Working Directory'
+						>
 							Add
 						</button>
 					</div>
@@ -142,10 +154,10 @@ const Settings: React.FC = () => {
 					</div>
 				</div>
 				<div className={styles.actions}>
-					<button type='submit' className={styles.apply}>
+					<button type='submit' className={styles.apply} title='Apply Changes'>
 						Apply
 					</button>
-					<button type='button' onClick={onReset}>
+					<button type='button' onClick={onReset} title='Reset Changes'>
 						Reset
 					</button>
 				</div>

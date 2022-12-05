@@ -112,13 +112,13 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 				/>
 
 				<div>
-					<button className={styles.save} type='submit'>
+					<button className={styles.save} type='submit' title='Save Changes'>
 						Save
 					</button>
-					<button type='button' onClick={onResetForm}>
+					<button type='button' onClick={onResetForm} title='Reset Changes'>
 						Reset
 					</button>
-					<button type='button' onClick={closeEdit}>
+					<button type='button' onClick={closeEdit} title='Cancel Changes'>
 						Cancel
 					</button>
 				</div>

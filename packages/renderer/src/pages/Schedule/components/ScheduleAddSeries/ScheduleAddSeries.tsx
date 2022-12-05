@@ -32,7 +32,6 @@ const ScheduleAddSeries: React.FC<Props> = ({ day, onClose }) => {
 		)
 		.filter((el) => !schedule[day].includes(el.path))
 		.sort((a, b) => a.path.localeCompare(b.path))
-		.slice(0, 5)
 
 	return (
 		<Modal open={Boolean(day)} onClose={onClose}>

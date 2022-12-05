@@ -149,7 +149,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.encoder}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('encoder')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('encoder')}
+									title='Apply Encoder'
+								>
 									OK
 								</button>
 							</td>
@@ -161,7 +165,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.source}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('source')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('source')}
+									title='Apply Source'
+								>
 									OK
 								</button>
 							</td>
@@ -175,7 +183,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.quality}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('quality')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('quality')}
+									title='Apply Quality'
+								>
 									OK
 								</button>
 							</td>
@@ -187,7 +199,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.res}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('res')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('res')}
+									title='Apply Resolution'
+								>
 									OK
 								</button>
 							</td>
@@ -201,7 +217,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.video}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('video')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('video')}
+									title='Apply Video'
+								>
 									OK
 								</button>
 							</td>
@@ -213,7 +233,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.audio}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('audio')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('audio')}
+									title='Apply Audio'
+								>
 									OK
 								</button>
 							</td>
@@ -227,7 +251,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.duration}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('duration')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('duration')}
+									title='Apply Duration'
+								>
 									OK
 								</button>
 							</td>
@@ -239,7 +267,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 									value={input.subtitle}
 									onChange={onInputChange}
 								/>
-								<button type='button' onClick={() => onSubmit('subtitle')}>
+								<button
+									type='button'
+									onClick={() => onSubmit('subtitle')}
+									title='Apply Subtitle'
+								>
 									OK
 								</button>
 							</td>
@@ -258,7 +290,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 								onChange={(e) => onTagChange(e, 'add')}
 								onKeyPress={(e) => onTagSubmit(e, 'add')}
 							/>
-							<button type='button' onClick={() => onSubmit('addTags')}>
+							<button
+								type='button'
+								onClick={() => onSubmit('addTags')}
+								title='Apply Add Tags'
+							>
 								OK
 							</button>
 						</div>
@@ -286,6 +322,7 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 								type='button'
 								className={styles.all}
 								onClick={selectAllRemovableTags}
+								title='Apply Remove Tags'
 							>
 								All
 							</button>
@@ -312,7 +349,11 @@ const AnimeBatchEdit: React.FC<Props> = ({ selectedAnime }) => {
 								checked={input.regular}
 								onChange={onInputChange}
 							/>
-							<button type='button' onClick={() => onSubmit('regular')}>
+							<button
+								type='button'
+								onClick={() => onSubmit('regular')}
+								title='Apply Regulars'
+							>
 								OK
 							</button>
 						</div>

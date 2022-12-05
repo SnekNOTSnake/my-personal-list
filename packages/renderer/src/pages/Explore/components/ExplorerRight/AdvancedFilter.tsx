@@ -115,6 +115,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							value={input.epsNum.operator}
 							name='epsNum'
 							onChange={onOperatorChange}
+							title={
+								input.epsNum.operator === 'gte'
+									? 'Greater Than or Equal'
+									: 'Lesser Than or Equal'
+							}
 						>
 							<option value='gte'>GTE</option>
 							<option value='lte'>LTE</option>
@@ -134,6 +139,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							value={input.epsWatched.operator}
 							name='epsWatched'
 							onChange={onOperatorChange}
+							title={
+								input.epsWatched.operator === 'gte'
+									? 'Greater Than or Equal'
+									: 'Lesser Than or Equal'
+							}
 						>
 							<option value='gte'>GTE</option>
 							<option value='lte'>LTE</option>
@@ -153,6 +163,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							value={input.rewatchCount.operator}
 							name='rewatchCount'
 							onChange={onOperatorChange}
+							title={
+								input.rewatchCount.operator === 'gte'
+									? 'Greater Than or Equal'
+									: 'Lesser Than or Equal'
+							}
 						>
 							<option value='gte'>GTE</option>
 							<option value='lte'>LTE</option>
@@ -172,6 +187,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='encoder'
 							value={input.encoder.operator}
 							onChange={onOperatorChange}
+							title={
+								input.encoder.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -191,6 +211,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='source'
 							value={input.source.operator}
 							onChange={onOperatorChange}
+							title={
+								input.source.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -210,6 +235,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='quality'
 							value={input.quality.operator}
 							onChange={onOperatorChange}
+							title={
+								input.quality.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -229,6 +259,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							value={input.res.operator}
 							name='res'
 							onChange={onOperatorChange}
+							title={
+								input.res.operator === 'gte'
+									? 'Greater Than or Equal'
+									: 'Lesser Than or Equal'
+							}
 						>
 							<option value='gte'>GTE</option>
 							<option value='lte'>LTE</option>
@@ -248,6 +283,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='video'
 							value={input.video.operator}
 							onChange={onOperatorChange}
+							title={
+								input.video.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -267,6 +307,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='audio'
 							value={input.audio.operator}
 							onChange={onOperatorChange}
+							title={
+								input.audio.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -286,6 +331,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='subtitle'
 							value={input.subtitle.operator}
 							onChange={onOperatorChange}
+							title={
+								input.subtitle.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -305,6 +355,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='notes'
 							value={input.notes.operator}
 							onChange={onOperatorChange}
+							title={
+								input.notes.operator === 'normal'
+									? 'Normal Search'
+									: 'Regular Expression Search'
+							}
 						>
 							<option value='normal'>NOR</option>
 							<option value='regexp'>REG</option>
@@ -324,6 +379,11 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 							name='order'
 							value={input.order.operator}
 							onChange={onOperatorChange}
+							title={
+								input.order.operator === 'asc'
+									? 'Ascending Order'
+									: 'Descending Order'
+							}
 						>
 							<option value='asc'>ASC</option>
 							<option value='desc'>DESC</option>
@@ -340,13 +400,22 @@ const AdvancedFilter: React.FC<Props> = ({ isFilterOpen, closeFilter }) => {
 					</div>
 				</div>
 				<div className={styles.actions}>
-					<button type='submit' className={styles.apply}>
+					<button type='submit' className={styles.apply} title='Apply Filters'>
 						Apply
 					</button>
-					<button type='button' onClick={onRemove} className={styles.remove}>
+					<button
+						type='button'
+						onClick={onRemove}
+						className={styles.remove}
+						title='Remove Filters'
+					>
 						Remove
 					</button>
-					<button type='button' onClick={closeFilter}>
+					<button
+						type='button'
+						onClick={closeFilter}
+						title='Close Advanced Filters'
+					>
 						Close
 					</button>
 				</div>

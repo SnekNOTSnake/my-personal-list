@@ -36,7 +36,7 @@ const ExplorerLeft: React.FC = () => {
 	return (
 		<div className={styles.left}>
 			<div className={styles.clear}>
-				<button onClick={onClearClick} type='button'>
+				<button onClick={onClearClick} type='button' title='Clear Active Tags'>
 					<MdDeleteOutline className={styles.icon} /> Clear
 				</button>
 			</div>
