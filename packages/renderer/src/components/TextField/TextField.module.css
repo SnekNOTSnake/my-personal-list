@@ -1,0 +1,31 @@
+.textField {
+	position: relative;
+}
+
+.textField fieldset {
+	position: absolute;
+	top: -8px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 1px solid var(--border);
+	border-radius: var(--border-radius);
+	margin: 0;
+}
+
+.textField fieldset legend {
+	white-space: nowrap;
+	color: var(--text-secondary);
+	font-size: 0.8em;
+}
+
+.textField .input {
+	position: relative;
+	z-index: 1;
+}
+
+.textField .input input {
+	border: none;
+	background-color: var(--background-light);
+	padding: 12px;
+}

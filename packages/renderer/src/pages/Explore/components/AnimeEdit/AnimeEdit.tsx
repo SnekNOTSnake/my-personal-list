@@ -4,18 +4,19 @@ import { MdOutlineCheck, MdOutlineDelete, MdOutlineClose } from 'react-icons/md'
 
 import { seriesState, seriesFilterState, seriesStats } from '@/store/series'
 import Button from '@/components/Button/Button'
-import EditMetadata from './EditMetadata'
-import EditNotes from './EditNotes'
-import EditRelations from './EditRelations'
-import EditTags from './EditTags'
 import styles from './AnimeEdit.module.css'
 import EditGenerals from './EditGenerals'
+import EditRelations from './EditRelations'
+import EditTags from './EditTags'
+import EditNotes from './EditNotes'
+import EditMetadata from './EditMetadata'
 
 type Props = { closeEdit: () => any; data: Series }
 
 const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 	const defaultInputs = {
 		jpTitle: data.jpTitle,
+		romanjiTitle: '',
 		epsNum: data.epsNum,
 		epsWatched: data.epsWatched,
 		rewatchCount: data.rewatchCount,
@@ -105,13 +106,15 @@ const EditAnimeDetails: React.FC<Props> = ({ closeEdit, data }) => {
 			<form onSubmit={onSubmit}>
 				<EditGenerals generalInfo={input} onInputChange={onInputChange} />
 				<EditMetadata metadata={input} onInputChange={onInputChange} />
-				<EditTags tagsI={input.tags} setTags={setTags} />
+				<div className={styles.group}>
+					<EditRelations
+						data={data}
+						relatedI={input.related}
+						setRelatedI={setRelated}
+					/>
+					<EditTags tagsI={input.tags} setTags={setTags} />
+				</div>
 				<EditNotes notesI={input.notes} onInputChange={onInputChange} />
-				<EditRelations
-					data={data}
-					relatedI={input.related}
-					setRelatedI={setRelated}
-				/>
 
 				<div>
 					<Button

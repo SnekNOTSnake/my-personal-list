@@ -1,0 +1,9 @@
+.editNotes {
+	margin-bottom: 24px !important;
+}
+
+.editNotes textarea {
+	height: 100px;
+	resize: vertical;
+	line-height: 1.5;
+}

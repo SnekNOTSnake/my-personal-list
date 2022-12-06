@@ -1,0 +1,105 @@
+.editRelations .addRelation {
+	display: flex;
+	position: relative;
+}
+
+.editRelations .addRelation > div:first-child {
+	flex: 0 0 100px;
+}
+
+.editRelations .addRelation > div:first-child fieldset {
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.editRelations .addRelation > div:nth-child(2) {
+	flex: 1;
+}
+
+.editRelations .addRelation > div:nth-child(2) fieldset {
+	border-left: none;
+	border-right: none;
+	border-radius: 0;
+}
+
+.editRelations .addRelation button {
+	flex: 0 0 39px;
+	background-color: var(--background-light);
+	margin: 0;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/*************
+
+POPOVER
+
+**************/
+
+.editRelations .addRelation .popover {
+	position: absolute;
+	z-index: 10;
+	top: 47px;
+	left: 0;
+	right: 0;
+	min-width: 350px;
+	height: 150px;
+	overflow-y: scroll;
+	background-color: var(--background-secondary);
+	border: 1px solid var(--border);
+	display: none;
+	border-radius: var(--border-radius);
+	padding: 8px 0;
+	user-select: none;
+}
+
+.editRelations .addRelation .popover.active {
+	display: block;
+}
+
+.editRelations .addRelation .popover li {
+	padding: 4px 16px;
+	cursor: pointer;
+	position: relative;
+}
+
+.editRelations .addRelation .popover li::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: transparent;
+}
+
+.editRelations .addRelation .popover li:hover::before {
+	background-color: var(--background-light);
+}
+
+/*************
+
+TITLES
+
+**************/
+
+.editRelations .titles ul li {
+	display: flex;
+	margin-top: 8px;
+}
+
+.editRelations .titles ul li > div {
+	border: 1px solid var(--border);
+	padding: 8px 12px;
+	flex: 1;
+}
+
+.editRelations .titles ul li > div:first-child {
+	flex: 0 0 100px;
+	border-radius: var(--border-radius) 0 0 var(--border-radius);
+	border-right: none;
+}
+
+.editRelations .titles ul li > button {
+	flex: 0 0 39px;
+	border-left: none;
+}

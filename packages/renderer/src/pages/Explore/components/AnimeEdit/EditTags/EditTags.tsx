@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import styles from './AnimeEdit.module.css'
+import TextField from '@/components/TextField'
+import styles from './EditTags.module.css'
 
 type Props = { setTags: (tags: string[]) => any; tagsI: string[] }
 
@@ -31,15 +32,16 @@ const EditTags: React.FC<Props> = ({ setTags, tagsI }) => {
 	}
 
 	return (
-		<div className={[styles.labeledInput, styles.tags].join(' ')}>
-			<div className={styles.label}>Add tags</div>
-			<input
-				type='text'
-				onKeyPress={onTagSubmit}
-				value={tagInput}
-				onChange={onTagChange}
-			/>
+		<div className={styles.editTags}>
 			<ul>
+				<li className={styles.addTag}>
+					<TextField
+						label='Add Tag'
+						onKeyPress={onTagSubmit}
+						value={tagInput}
+						onChange={onTagChange}
+					/>
+				</li>
 				{tagsI.map((tag) => (
 					<li key={tag} onClick={() => onTagRemove(tag)}>
 						{tag}

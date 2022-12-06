@@ -1,0 +1,31 @@
+.textArea {
+	position: relative;
+}
+
+.textArea fieldset {
+	position: absolute;
+	top: -7px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 1px solid var(--border);
+	border-radius: var(--border-radius);
+	margin: 0;
+}
+
+.textArea fieldset legend {
+	white-space: nowrap;
+	color: var(--text-secondary);
+	font-size: 0.8em;
+}
+
+.textArea .input {
+	position: relative;
+	z-index: 1;
+}
+
+.textArea .input textarea {
+	border: none;
+	background-color: var(--background-light);
+	padding: 12px;
+}

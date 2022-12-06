@@ -1,0 +1,28 @@
+.editGenerals .row {
+	display: flex;
+	margin-bottom: 16px;
+}
+
+.editGenerals .row > div {
+	margin-right: 16px;
+	flex: 1;
+}
+
+.editGenerals .row > div:first-child {
+	flex: 2;
+}
+
+.editGenerals .row > div:last-child {
+	margin: 0;
+}
+
+.editGenerals .row .regular {
+	display: flex;
+	align-items: flex-start;
+}
+
+.editGenerals .row .regular input {
+	width: 25px;
+	height: 25px;
+	margin-right: 8px;
+}

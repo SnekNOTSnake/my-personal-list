@@ -1,0 +1,16 @@
+.editTags ul li {
+	display: inline-flex;
+	padding: 4px 8px;
+	background-color: var(--background-secondary);
+	margin: 0 8px 8px 0;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+}
+
+.editTags ul li.addTag {
+	width: 100px;
+	display: inline-flex;
+	background-color: transparent;
+	padding: 0;
+}

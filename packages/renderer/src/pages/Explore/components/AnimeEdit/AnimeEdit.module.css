@@ -2,14 +2,12 @@
 	max-width: 768px;
 }
 
-.edit input.regular {
-	width: 25px;
-	height: 25px;
+.edit h2 {
+	margin-bottom: 24px;
 }
 
 .edit table {
 	border-collapse: collapse;
-	margin: 24px 0;
 	border-radius: var(--border-radius);
 	width: 100%;
 }
@@ -31,174 +29,19 @@
 	border: none;
 }
 
-.edit textarea {
-	height: 100px;
-	resize: vertical;
-	line-height: 1.5;
-	margin-bottom: 16px;
-}
-
-.edit .labeledInput {
-	display: flex;
-	flex-direction: column;
+.edit form > div {
 	margin-bottom: 24px;
 }
 
-.edit .label {
-	font-size: 1.1em;
-	margin-bottom: 8px;
-}
-
-.edit .tags input {
-	width: calc(33% - 8px);
-}
-
-.edit .tags ul {
-	margin-top: 12px;
-}
-
-.edit .tags li {
-	cursor: pointer;
-	user-select: none;
-	position: relative;
-	display: inline-block;
-	background-color: var(--background-secondary);
-	border-radius: var(--border-radius);
-	padding: 2px 16px;
-	margin: 0 8px 8px 0;
-}
-
-.edit .tags li::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: transparent;
-}
-
-.edit .tags li:hover::before {
-	background-color: var(--background-light);
-}
-
-.edit .relations .relationInput {
+.edit .group {
 	display: flex;
-	position: relative;
+	align-items: flex-start;
 }
 
-.edit .relations .relationInput select.relationType {
-	width: initial;
-	display: flex;
-	align-items: center;
-	margin-right: 8px;
+.edit .group > div {
+	flex: 1;
 }
 
-.edit .relations .relationInput .input {
-	position: relative;
-}
-
-.edit .relations .relationInput .seriesPopover {
-	position: absolute;
-	z-index: 10;
-	top: 50px;
-	left: 0;
-	min-width: 350px;
-	height: 150px;
-	overflow-y: scroll;
-	background-color: var(--background-secondary);
-	border: 1px solid var(--border);
-	display: none;
-	border-radius: var(--border-radius);
-	padding: 8px 0;
-	user-select: none;
-}
-
-.edit .relations .relationInput .seriesPopover.active {
-	display: block;
-}
-
-.edit .relations .relationInput .seriesPopover li {
-	padding: 4px 16px;
-	cursor: pointer;
-	position: relative;
-}
-
-.edit .relations .relationInput .seriesPopover li::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: transparent;
-}
-
-.edit .relations .relationInput .seriesPopover li:hover::before {
-	background-color: var(--background-light);
-}
-
-.edit .relations input {
-	width: 200px;
-}
-
-.edit .relations ul.titles {
-	margin-top: 12px;
-}
-
-.edit .relations .titles li > div {
-	position: relative;
-	display: inline-flex;
-	cursor: pointer;
-	background-color: var(--background-light);
-	border-radius: var(--border-radius);
-	text-transform: capitalize;
-	margin-bottom: 8px;
-}
-
-.edit .relations .titles li > div::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: transparent;
-}
-
-.edit .relations .titles li > div:hover::before {
-	background-color: var(--background-light);
-}
-
-.edit .relations .titles li .relatedType {
-	background-color: var(--background-light);
-	border-radius: var(--border-radius);
-	padding: 8px 16px;
-}
-
-.edit .relations .titles li .relatedType {
-	background-color: var(--background-light);
-	border-radius: var(--border-radius);
-	padding: 8px 16px;
-}
-
-.edit .relations .titles li .relatedName {
-	padding: 8px 16px;
-}
-
-.edit .numberInputs {
-	display: flex;
-	margin-bottom: 24px;
-}
-
-.edit .numberInputs > div {
-	flex-grow: 1;
-	margin: 0 16px 0 0;
-}
-
-.edit .numberInputs > div:last-child {
-	margin: 0;
+.edit .group > div:last-child {
+	margin-left: 16px;
 }
