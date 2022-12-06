@@ -5,6 +5,7 @@
 .details .container {
 	display: flex;
 	margin-bottom: 40px;
+	align-items: flex-start;
 }
 
 .details .container .poster {
@@ -65,6 +66,7 @@
 }
 
 .details .container .detail .watchInfo button {
+	flex-shrink: 0;
 	width: 20px;
 	height: 20px;
 	padding: 0;
