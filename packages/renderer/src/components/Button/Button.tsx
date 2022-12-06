@@ -39,7 +39,7 @@ const Button: React.FC<Props> = ({
 	classNames.push(rest.className)
 
 	return (
-		<button {...rest} className={classNames.join(' ')}>
+		<button type='button' {...rest} className={classNames.join(' ')}>
 			<Icon />
 			{children && <span>{children}</span>}
 		</button>

@@ -35,10 +35,13 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 		return filtered
 	}, [series, relatedInput, relatedI])
 
-	const onAddRelation = (path: string) => {
-		setRelatedI([...relatedI, { path, type: relatedType as any }])
+	const onRelatedFocus = () => {
+		setFocused(true)
+		setRelatedInput('')
 	}
 
+	// Related Functions
+	const onSetRelatedInput = (path: string) => setRelatedInput(path)
 	const onRemoveRelation = (path: string) => {
 		const index = relatedI.findIndex((el) => el.path === path)
 		if (index < 0) return relatedI
@@ -47,6 +50,9 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 		newRelations.splice(index, 1)
 
 		setRelatedI(newRelations)
+	}
+	const onSubmitRelation = () => {
+		setRelatedI([...relatedI, { path: relatedInput, type: relatedType as any }])
 	}
 
 	return (
@@ -61,17 +67,17 @@ const EditRelations: React.FC<Props> = ({ relatedI, setRelatedI, data }) => {
 					label='Series'
 					value={relatedInput}
 					onChange={onRelatedChange}
-					onFocus={() => setFocused(true)}
+					onFocus={onRelatedFocus}
 					onBlur={() => setTimeout(() => setFocused(false), 100)}
 				/>
-				<Button Icon={MdOutlineAdd} />
+				<Button Icon={MdOutlineAdd} type='button' onClick={onSubmitRelation} />
 
 				<div
 					className={[styles.popover, focused ? styles.active : ''].join(' ')}
 				>
 					<ul>
 						{localFilteredSeries.map((s) => (
-							<li onClick={() => onAddRelation(s.path)} key={s.path}>
+							<li onClick={() => onSetRelatedInput(s.path)} key={s.path}>
 								{s.path}
 							</li>
 						))}
