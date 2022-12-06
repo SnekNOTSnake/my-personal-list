@@ -16,7 +16,6 @@ const ExplorerRight: React.FC = () => {
 	const titlesRef = React.useRef<HTMLDivElement | null>(null)
 
 	const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false)
-	const openFilter = () => setIsFilterOpen(true)
 	const closeFilter = () => setIsFilterOpen(false)
 	const toggleFilter = () => setIsFilterOpen((prevVal) => !prevVal)
 
@@ -56,10 +55,14 @@ const ExplorerRight: React.FC = () => {
 		setSelectedSeries([path])
 	}
 
+	// Select the first filtered if selection is empty
+	useEffect(() => {
+		if (!selectedSeries.length) setSelectedSeries([filtered[0].path])
+	}, [selectedSeries.length])
+
 	// Shortcuts
 	useEffect(() => {
 		const listener = (e: KeyboardEvent) => {
-			const iFocused = document.querySelector(`.${styles.search}:focus`)
 			const focused = document.querySelector(`.${styles.right}:focus-within`)
 			if (!titlesRef.current || !inputRef.current) return
 			if (!focused && !['f', 'Escape'].includes(e.key)) return
