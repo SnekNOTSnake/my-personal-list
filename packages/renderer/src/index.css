@@ -9,15 +9,15 @@
 /* foreground is for: contrast buttons */
 
 :root {
-	--background: #fff;
-	--background-secondary: #ddd;
-	--background-light: rgba(0, 0, 0, 0.075);
-	--border: rgba(0, 0, 0, 0.15);
+	--background: #25292d;
+	--background-secondary: #191c1f;
+	--background-light: rgba(255, 255, 255, 0.1);
+	--border: rgba(255, 255, 255, 0.15);
 
-	--foreground: #1b262c;
-	--text-primary: #1b262c;
-	--text-secondary: rgba(0, 0, 0, 0.65);
-	--text-contrast: #fff;
+	--foreground: #fff;
+	--text-primary: #fff;
+	--text-secondary: rgba(255, 255, 255, 0.65);
+	--text-contrast: #1b262c;
 
 	--color-primary: #2f80ed;
 	--color-green: rgba(33, 150, 83);
@@ -30,16 +30,16 @@
 	--border-radius: 2px;
 }
 
-[data-theme='dark'] {
-	--background: #25292d;
-	--background-secondary: #191c1f;
-	--background-light: rgba(255, 255, 255, 0.1);
-	--border: rgba(255, 255, 255, 0.15);
+[data-theme='light'] {
+	--background: #fff;
+	--background-secondary: #ddd;
+	--background-light: rgba(0, 0, 0, 0.075);
+	--border: rgba(0, 0, 0, 0.15);
 
-	--foreground: #fff;
-	--text-primary: #fff;
-	--text-secondary: rgba(255, 255, 255, 0.65);
-	--text-contrast: #1b262c;
+	--foreground: #1b262c;
+	--text-primary: #1b262c;
+	--text-secondary: rgba(0, 0, 0, 0.65);
+	--text-contrast: #fff;
 }
 
 body {

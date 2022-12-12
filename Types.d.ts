@@ -1,5 +1,10 @@
 declare module '*.module.css'
 
+declare module '*.png' {
+	const value: any
+	export = value
+}
+
 interface ObjectConstructor {
 	typedKeys<T>(obj: T): Array<keyof T>
 }
