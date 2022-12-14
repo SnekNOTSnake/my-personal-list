@@ -44,7 +44,10 @@ const DoughnutChart: React.FC = () => {
 	const data = {
 		datasets: [
 			{
-				data: [stats.watchedEpisodes, stats.totalEpisodes],
+				data: [
+					stats.watchedEpisodes,
+					stats.totalEpisodes - stats.watchedEpisodes,
+				],
 				backgroundColor: ['#2f80ed', isDark ? '#fff' : '#bbb'],
 				borderWidth: 0,
 			},

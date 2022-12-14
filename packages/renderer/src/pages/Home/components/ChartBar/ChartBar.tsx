@@ -31,7 +31,9 @@ const ChartBar: React.FC = () => {
 				grid: {
 					display: false,
 					tickColor: 'transparent',
-					borderColor: borderColor,
+				},
+				border: {
+					color: borderColor,
 				},
 				ticks: {
 					color: textColor,
@@ -41,9 +43,11 @@ const ChartBar: React.FC = () => {
 				beginAtZero: true,
 				grid: {
 					color: borderColor,
-					borderDash: [2, 2],
-					borderColor: borderColor,
 					tickColor: 'transparent',
+				},
+				border: {
+					color: borderColor,
+					dash: [2, 2],
 				},
 				ticks: {
 					stepSize:
